@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Work Sans", sans-serif;
+  --font-headline: "Montserrat", sans-serif;
+
+  --color-surface: var(--surface-bright);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-inverse-surface: var(--inverse-surface);
+  --color-inverse-on-surface: var(--inverse-on-surface);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-surface-tint: var(--surface-tint);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-inverse-primary: var(--inverse-primary);
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-tertiary: var(--tertiary);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-error: var(--error);
+  --color-on-error: var(--on-error);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+  --color-background: var(--background);
+  --color-on-background: var(--on-background);
+  --color-surface-variant: var(--surface-variant);
+
+  --animate-bounce-slow: bounce-slow 3s infinite;
+}
+
+:root {
+  --surface-dim: #ded9db;
+  --surface-bright: #fef8fa;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f8f2f4;
+  --surface-container: #f2ecee;
+  --surface-container-high: #ece7e9;
+  --surface-container-highest: #e7e1e3;
+  --on-surface: #1d1b1d;
+  --on-surface-variant: #4a454b;
+  --inverse-surface: #323031;
+  --inverse-on-surface: #f5eff1;
+  --outline: #7b757c;
+  --outline-variant: #ccc4cc;
+  --surface-tint: #685970;
+  --primary: #685970;
+  --on-primary: #ffffff;
+  --primary-container: #c8b5d0;
+  --on-primary-container: #54465c;
+  --inverse-primary: #d3c0db;
+  --secondary: #715381;
+  --on-secondary: #ffffff;
+  --secondary-container: #ecc7fe;
+  --on-secondary-container: #6e507e;
+  --tertiary: #715090;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #d2acf4;
+  --on-tertiary-container: #5c3c7b;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+  --background: #fef8fa;
+  --on-background: #1d1b1d;
+  --surface-variant: #e7e1e3;
+}
+
+:root.dark {
+  --surface-dim: #1e1a22;
+  --surface-bright: #302636;
+  --surface-container-lowest: #0c090e;
+  --surface-container-low: #151118;
+  --surface-container: #1b1620;
+  --surface-container-high: #241e2a;
+  --surface-container-highest: #2d2634;
+  --on-surface: #f9f5fa;
+  --on-surface-variant: #dfd7e3;
+  --inverse-surface: #fdfafc;
+  --inverse-on-surface: #151118;
+  --outline: #a79aae;
+  --outline-variant: #564c5c;
+  --surface-tint: #dec4fc;
+  --primary: #dec4fc;
+  --on-primary: #1e0935;
+  --primary-container: #503173;
+  --on-primary-container: #f1e0ff;
+  --inverse-primary: #685970;
+  --secondary: #ecc7fe;
+  --on-secondary: #2c004a;
+  --secondary-container: #583375;
+  --on-secondary-container: #f9e2ff;
+  --tertiary: #f5bcf5;
+  --on-tertiary: #2e0036;
+  --tertiary-container: #5c2067;
+  --on-tertiary-container: #ffd5ff;
+  --error: #ffb4ab;
+  --on-error: #690005;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+  --background: #0f0c11;
+  --on-background: #f9f5fa;
+  --surface-variant: #2d2634;
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(-5%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+:root {
+  --cat-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body {
+  background-color: #E8DEE8; /* Base Pale Lilac */
+  position: relative;
+  overflow-x: hidden;
+  font-family: "Work Sans", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #0c090e;
+}
+
+/* Helper overrides for hardcoded light/dark classes when in dark mode */
+html.dark .bg-white {
+  background-color: var(--surface-container-low) !important;
+}
+
+html.dark .text-gray-900 {
+  color: var(--on-surface) !important;
+}
+
+html.dark .text-gray-800 {
+  color: var(--on-surface) !important;
+}
+
+html.dark .text-gray-700 {
+  color: var(--on-surface-variant) !important;
+}
+
+html.dark .text-gray-600 {
+  color: var(--on-surface-variant) !important;
+}
+
+html.dark .text-gray-500 {
+  color: var(--outline) !important;
+}
+
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+  border-color: var(--outline-variant) !important;
+}
+
+/* Ensure focus overrides on inputs */
+html.dark .focus\:bg-white:focus {
+  background-color: var(--surface-container-high) !important;
+}
+
+/* Skill bar overrides */
+html.dark .h-3.w-full.bg-white {
+  background-color: var(--surface-container-highest) !important;
+}
+
+/* Modal dark overrides if they use hardcoded backgrounds */
+html.dark .bg-surface-container-low\/30 {
+  background-color: rgba(27, 22, 32, 0.3) !important;
+}
+
+html.dark .bg-surface-container-low\/40 {
+  background-color: rgba(27, 22, 32, 0.4) !important;
+}
+
+html.dark .bg-green-50\/90 {
+  background-color: rgba(21, 60, 30, 0.25) !important;
+}
+
+html.dark .bg-green-50\/90 span {
+  color: #a7f3d0 !important;
+}
+
+html.dark .border-green-100 {
+  border-color: rgba(52, 211, 153, 0.2) !important;
+}
+
+/* Grain Texture Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAeMoGb_QuL97J5rWhilJBWnJX1Z_awZVKww1ouZTNKZBm2UP3l19zXAtlI4_YsQCXwVvLZVYpCohyyHvlZYKzd4yPdY5d4AM5mMipe0p6SIbZ3wkZ5t1fiNlKu9F1elPqRHEtKMDXSc0buZrZAFRgovOt_FBhaXygPxHFKtVyIjw6aHPBJmVby2PWVFH4V-siU1_PZbltaqWylFr-0Pjt-UIgk2mXO1YgYgne1ceZkTwnxg91rZ7pt6unbttjPMIGwx-5Xh496HIw);
+  filter: contrast(120%) brightness(120%);
+}
+
+.cat-pounce {
+  transition: all 0.5s var(--cat-easing);
+}
+
+.cat-pounce:hover {
+  transform: scale(1.02);
+}
+
+.cat-pounce:active {
+  transform: scale(0.95);
+}
+
+/* Wave Skill Bar */
+.wave-fill {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-fill::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  animation: wave-bar 3s linear infinite;
+}
+
+@keyframes wave-bar {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* 3D Flip Card classes */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transition: transform 0.6s var(--cat-easing);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}

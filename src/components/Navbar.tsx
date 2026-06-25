@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, ChevronDown, Languages } from 'lucide-react';
+import { Menu, X, Sun, Moon, ChevronDown, Languages, Home } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface SubMenuItem {
@@ -223,7 +223,7 @@ export default function Navbar() {
   };
 
   const navLinks: NavLinkItem[] = [
-    { label: 'Inizio', target: 'hero' },
+    { label: 'Home', target: 'hero' },
     { 
       label: 'Servizi', 
       target: 'services',
@@ -260,7 +260,7 @@ export default function Navbar() {
       </div>
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between w-full px-6 md:px-16 py-4 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between w-full px-6 lg:px-16 py-4 transition-all duration-300 ${
           isScrolled
             ? 'bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md shadow-md shadow-secondary/10'
             : 'bg-transparent'
@@ -268,13 +268,20 @@ export default function Navbar() {
       >
         <div
           onClick={() => handleScrollTo('hero')}
-          className="font-headline text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-primary cursor-pointer hover:opacity-80 transition-opacity shrink-0"
+          className="cursor-pointer hover:opacity-80 transition-opacity flex items-center gap-2 shrink-0"
         >
-          FACILISSIMO WEB
+          {/* Logo text hidden on mobile, displayed on tablets and desktop */}
+          <span className="hidden sm:inline font-headline text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold tracking-tight text-primary">
+            FACILISSIMO WEB
+          </span>
+          {/* Beautiful SVG Home Button displayed only on cellphone */}
+          <span className="sm:hidden flex items-center justify-center p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-all border border-primary/25">
+            <Home size={18} />
+          </span>
         </div>
 
         {/* Desktop navigation */}
-        <div className="hidden md:flex gap-8 items-center font-sans text-sm font-semibold tracking-wide">
+        <div className="hidden lg:flex gap-8 items-center font-sans text-sm font-semibold tracking-wide">
           {navLinks.map((link) => (
             <div
               key={link.target}
@@ -384,7 +391,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Controls (Toggle & Menu) */}
-        <div className="flex md:hidden items-center gap-2 sm:gap-3">
+        <div className="flex lg:hidden items-center gap-2 sm:gap-3">
           {/* Language Selector Mobile */}
           <div className="relative">
             <button
@@ -454,7 +461,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 150 }}
-            className="fixed inset-x-0 top-[70px] z-40 bg-surface-container-highest border-b border-outline-variant/20 p-6 shadow-xl flex flex-col gap-4 md:hidden max-h-[85vh] overflow-y-auto"
+            className="fixed inset-x-0 top-[70px] z-40 bg-surface-container-highest border-b border-outline-variant/20 p-6 shadow-xl flex flex-col gap-4 lg:hidden max-h-[85vh] overflow-y-auto"
           >
             {navLinks.map((link) => {
               const hasSub = !!link.subItems;

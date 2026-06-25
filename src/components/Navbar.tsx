@@ -259,13 +259,35 @@ export default function Navbar() {
         />
       </div>
 
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between w-full px-6 lg:px-16 py-4 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md shadow-md shadow-secondary/10'
-            : 'bg-transparent'
-        }`}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full">
+        {/* Top Info Bar */}
+        <motion.div
+          initial={false}
+          animate={{ 
+            height: isScrolled ? 0 : 'auto', 
+            opacity: isScrolled ? 0 : 1
+          }}
+          transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+          className="overflow-hidden bg-surface-container-low/95 dark:bg-surface-container-high/95 backdrop-blur-md border-b border-outline-variant/10 px-4 sm:px-6 lg:px-16 py-2 text-center select-none"
+        >
+          <div className="max-w-7xl mx-auto flex flex-col gap-0.5 sm:gap-1">
+            <h1 className="font-headline text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-primary leading-tight">
+              FACILISSIMO WEB
+            </h1>
+            <p className="font-sans text-[8px] sm:text-[9px] md:text-xs text-on-surface-variant font-medium tracking-wider uppercase leading-snug">
+              di M. Teresa Rogani — FREE LANCE WEB GRAPHIC DESIGN / LEAD GENERATION / SOLUZIONI INTEGRATE NATIVE
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Main Navigation Bar */}
+        <nav
+          className={`flex items-center justify-between w-full px-6 lg:px-16 py-4 transition-all duration-300 ${
+            isScrolled
+              ? 'bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md shadow-md shadow-secondary/10'
+              : 'bg-transparent'
+          }`}
+        >
         <div
           onClick={() => handleScrollTo('hero')}
           className="cursor-pointer hover:opacity-80 transition-opacity flex items-center gap-2 shrink-0"
@@ -453,15 +475,15 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Drawer (sitting beautifully inside fixed header, flowing with it) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{ type: 'spring', damping: 25, stiffness: 150 }}
-            className="fixed inset-x-0 top-[70px] z-40 bg-surface-container-highest border-b border-outline-variant/20 p-6 shadow-xl flex flex-col gap-4 lg:hidden max-h-[85vh] overflow-y-auto"
+            className="w-full bg-surface-container-highest border-b border-outline-variant/20 p-6 shadow-xl flex flex-col gap-4 lg:hidden max-h-[80vh] overflow-y-auto"
           >
             {navLinks.map((link) => {
               const hasSub = !!link.subItems;
@@ -525,6 +547,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+    </header>
 
       {/* Hidden container for Google Translate to load into */}
       <div id="google_translate_element" className="opacity-0 pointer-events-none absolute -z-50 w-1 h-1 overflow-hidden" />

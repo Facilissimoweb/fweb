@@ -28,6 +28,27 @@ export default function ChatWidget() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const [diagnosticResult, setDiagnosticResult] = useState<any>(null);
+  const [isDiagnosing, setIsDiagnosing] = useState(false);
+
+  const runDiagnostics = async () => {
+    setIsDiagnosing(true);
+    setDiagnosticResult(null);
+    try {
+      const res = await fetch('/api/chat/diagnostics');
+      const data = await res.json();
+      setDiagnosticResult(data);
+    } catch (err: any) {
+      setDiagnosticResult({
+        ok: false,
+        message: 'Impossibile connettersi al server per eseguire la diagnostica.',
+        advice: 'Verifica che il server sia attivo e funzionante.'
+      });
+    } finally {
+      setIsDiagnosing(false);
+    }
+  };
+
   // Initialize Speech Recognition
   useEffect(() => {
     try {
@@ -391,8 +412,67 @@ export default function ChatWidget() {
               )}
 
               {error && (
-                <div className="p-3 bg-error-container/30 border border-error/20 rounded-xl text-error text-xs font-sans">
-                  <strong>Errore:</strong> {error}
+                <div className="space-y-2">
+                  <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-800 text-xs font-sans">
+                    <strong className="block mb-1">Errore di Connessione:</strong> 
+                    <p className="leading-relaxed">{error}</p>
+                  </div>
+                  
+                  <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl font-sans">
+                    <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-2">
+                      Diagnostica Assistente AI:
+                    </span>
+                    
+                    {!diagnosticResult ? (
+                      <button
+                        type="button"
+                        onClick={runDiagnostics}
+                        disabled={isDiagnosing}
+                        className="w-full bg-primary hover:bg-secondary text-on-primary py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm active:scale-[0.98]"
+                      >
+                        {isDiagnosing ? (
+                          <>
+                            <Loader2 size={13} className="animate-spin" />
+                            Analisi in corso...
+                          </>
+                        ) : (
+                          'Verifica Chiave API Groq'
+                        )}
+                      </button>
+                    ) : (
+                      <div className="space-y-2 mt-1 text-[11px] leading-relaxed text-slate-700">
+                        <div className="flex items-center gap-1.5 font-bold">
+                          <span className={`w-2 h-2 rounded-full ${diagnosticResult.ok ? 'bg-green-500' : 'bg-red-500'}`} />
+                          <span>{diagnosticResult.ok ? 'Diagnosi Positiva' : 'Problema Rilevato'}</span>
+                        </div>
+                        
+                        <p className="text-slate-600 font-medium">
+                          {diagnosticResult.message}
+                        </p>
+                        
+                        {diagnosticResult.selected_key_name && (
+                          <div className="bg-slate-100 p-1.5 rounded border border-slate-200 font-mono text-[9px] text-slate-500 flex justify-between">
+                            <span>Variabile: {diagnosticResult.selected_key_name}</span>
+                            <span>{diagnosticResult.key_details?.prefix}...{diagnosticResult.key_details?.suffix} (L:{diagnosticResult.key_details?.length})</span>
+                          </div>
+                        )}
+
+                        {diagnosticResult.advice && (
+                          <div className="bg-amber-50 border border-amber-200/50 p-2 rounded-lg text-amber-900 text-[10px] leading-relaxed mt-1">
+                            <strong>Suggerimento:</strong> {diagnosticResult.advice}
+                          </div>
+                        )}
+                        
+                        <button
+                          type="button"
+                          onClick={() => setDiagnosticResult(null)}
+                          className="text-slate-400 hover:text-slate-600 underline font-semibold text-[10px] mt-2 block"
+                        >
+                          Ripeti / Chiudi diagnosi
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
 

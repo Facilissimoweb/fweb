@@ -53,7 +53,113 @@ async function startServer() {
 </urlset>`);
   });
 
-  // 2. Secure Groq Chat Integration API
+  // 2. Diagnostics Endpoint for Groq API Connection
+  app.get('/api/chat/diagnostics', async (req, res) => {
+    try {
+      const keysChecked: Record<string, { exists: boolean; length?: number; prefix?: string; suffix?: string }> = {};
+      const keyNames = ['GROQ_API_KEY', 'Facilissimo_Groq', 'FACILISSIMO_GROQ'];
+      
+      keyNames.forEach(name => {
+        const value = process.env[name];
+        if (value) {
+          keysChecked[name] = {
+            exists: true,
+            length: value.length,
+            prefix: value.substring(0, 4),
+            suffix: value.substring(Math.max(0, value.length - 4))
+          };
+        } else {
+          keysChecked[name] = { exists: false };
+        }
+      });
+
+      // Search all keys containing "groq" or values starting with "gsk_"
+      const otherKeys: string[] = [];
+      Object.keys(process.env).forEach(key => {
+        if (!keyNames.includes(key)) {
+          const val = process.env[key];
+          if (key.toLowerCase().includes('groq') || (val && val.startsWith('gsk_'))) {
+            otherKeys.push(key);
+            keysChecked[key] = {
+              exists: true,
+              length: val ? val.length : 0,
+              prefix: val ? val.substring(0, 4) : '',
+              suffix: val ? val.substring(Math.max(0, val.length - 4)) : ''
+            };
+          }
+        }
+      });
+
+      // Find the key we would actually use
+      let selectedKey = process.env.GROQ_API_KEY || process.env.Facilissimo_Groq || process.env.FACILISSIMO_GROQ;
+      let selectedKeyName = process.env.GROQ_API_KEY ? 'GROQ_API_KEY' : (process.env.Facilissimo_Groq ? 'Facilissimo_Groq' : (process.env.FACILISSIMO_GROQ ? 'FACILISSIMO_GROQ' : ''));
+      
+      if (!selectedKey && otherKeys.length > 0) {
+        selectedKeyName = otherKeys[0];
+        selectedKey = process.env[selectedKeyName];
+      }
+
+      if (!selectedKey) {
+        return res.json({
+          ok: false,
+          error_code: 'NO_API_KEY',
+          message: 'Nessuna chiave API Groq rilevata nelle variabili d\'ambiente.',
+          keys_checked: keysChecked,
+          advice: 'Assicurati di aver aggiunto "Facilissimo_Groq" o "GROQ_API_KEY" nella scheda Secrets delle impostazioni (Settings) dell\'applet in AI Studio, e poi clicca su "Restart Dev Server" per caricarla.'
+        });
+      }
+
+      // Try a real quick connection to Groq with 1 token max to verify validity
+      try {
+        const testResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${selectedKey}`
+          },
+          body: JSON.stringify({
+            model: 'llama-3.1-8b-instant',
+            messages: [{ role: 'user', content: 'hi' }],
+            max_tokens: 1
+          })
+        });
+
+        if (testResponse.ok) {
+          return res.json({
+            ok: true,
+            message: 'La connessione a Groq funziona perfettamente!',
+            selected_key_name: selectedKeyName,
+            key_details: {
+              length: selectedKey.length,
+              prefix: selectedKey.substring(0, 4),
+              suffix: selectedKey.substring(Math.max(0, selectedKey.length - 4))
+            }
+          });
+        } else {
+          const errText = await testResponse.text();
+          return res.json({
+            ok: false,
+            error_code: 'GROQ_API_ERROR',
+            status: testResponse.status,
+            message: `Groq ha rifiutato la chiave API. Dettaglio: ${errText}`,
+            selected_key_name: selectedKeyName,
+            advice: 'La chiave API inserita potrebbe non essere valida, scaduta, o mancare di credito sul portale console.groq.com. Verifica la correttezza dei caratteri copiate.'
+          });
+        }
+      } catch (err: any) {
+        return res.json({
+          ok: false,
+          error_code: 'FETCH_ERROR',
+          message: `Impossibile contattare i server di Groq: ${err.message}`,
+          advice: 'Si è verificato un errore di rete durante il tentativo di connessione con Groq.'
+        });
+      }
+    } catch (e: any) {
+      return res.status(500).json({ ok: false, error: e.message });
+    }
+  });
+
+  // 3. Secure Groq Chat Integration API
   app.post('/api/chat', async (req, res) => {
     try {
       const { messages } = req.body;
@@ -78,7 +184,7 @@ async function startServer() {
 
       if (!apiKey) {
         return res.status(500).json({
-          error: 'Servizio di chat temporaneamente non configurato. Immettere la chiave API con il nome "Facilissimo_Groq" o "GROQ_API_KEY" nelle impostazioni (Settings).'
+          error: 'Servizio di chat temporaneamente non configurato. Immettere la chiave API con il nome "Facilissimo_Groq" o "GROQ_API_KEY" nelle impostazioni (Settings) dell\'applicazione.'
         });
       }
 
@@ -104,37 +210,64 @@ Ogni tua risposta deve rispettare tassativamente questa struttura sintattica:
 Mantieni uno stile professionale, accogliente, diretto, semplice ed estremamente chiaro, senza analogie feline o tribali. Rispondi sempre in lingua italiana.`
       };
 
-      // Query Groq Cloud API
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-          model: 'llama-3.3-70b-versatile',
-          messages: [systemMessage, ...messages],
-          temperature: 0.7,
-          max_tokens: 1024
-        })
-      });
+      // Ordered list of candidate models on Groq to attempt, for high availability and graceful fallback
+      const candidateModels = [
+        'llama-3.3-70b-versatile',
+        'llama-3.3-70b-specdec',
+        'llama-3.1-70b-versatile',
+        'llama-3.1-8b-instant',
+        'mixtral-8x7b-32768'
+      ];
 
-      if (!response.ok) {
-        const errText = await response.text();
-        console.error('Groq API Error Response:', errText);
+      let lastError = null;
+      let assistantReply = null;
+
+      // Query Groq Cloud API with fallbacks
+      for (const modelName of candidateModels) {
         try {
-          const errObj = JSON.parse(errText);
-          if (errObj.error && errObj.error.message) {
-            return res.status(response.status).json({ error: `Errore Groq: ${errObj.error.message}` });
+          console.log(`Attempting chat completion with model: ${modelName}`);
+          const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+              model: modelName,
+              messages: [systemMessage, ...messages],
+              temperature: 0.7,
+              max_tokens: 1024
+            })
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            assistantReply = data.choices?.[0]?.message?.content;
+            if (assistantReply) {
+              console.log(`Success using model ${modelName}`);
+              break; // Success! Exit loop
+            }
+          } else {
+            const errText = await response.text();
+            console.warn(`Model ${modelName} failed with status ${response.status}:`, errText);
+            lastError = `Status ${response.status}: ${errText}`;
           }
-        } catch (e) {}
-        return res.status(response.status).json({ error: `Errore servizio Groq: ${response.statusText} - ${errText}` });
+        } catch (err: any) {
+          console.warn(`Model ${modelName} threw network error:`, err.message);
+          lastError = err.message;
+        }
       }
 
-      const data = await response.json();
-      const assistantReply = data.choices?.[0]?.message?.content || 'Nessuna risposta disponibile.';
-      
-      return res.json({ reply: assistantReply });
+      if (assistantReply) {
+        return res.json({ reply: assistantReply });
+      }
+
+      // If we got here, all models failed
+      console.error('All Groq candidate models failed. Last error:', lastError);
+      return res.status(502).json({
+        error: `Tutti i modelli Groq disponibili hanno fallito l'esecuzione. Dettaglio ultimo errore: ${lastError || 'Nessun dettaglio disponibile.'}`
+      });
+
     } catch (error: any) {
       console.error('Server Chat Endpoint Error:', error);
       return res.status(500).json({ error: 'Errore interno nel proxy server della chat.' });

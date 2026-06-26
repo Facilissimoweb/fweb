@@ -108,42 +108,37 @@ export default function Portfolio() {
                 className="masonry-item animate-hover"
                 onClick={() => setSelectedItemId(item.id)}
               >
-                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-md bg-white border border-outline-variant/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(113,83,129,0.2)] hover:border-primary/20 dark:hover:border-primary-container/30">
-                  <img
-                    alt={item.title}
-                    referrerPolicy="no-referrer"
-                    className="w-full transform group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] object-cover"
-                    src={item.image}
-                    title={item.altText}
-                  />
-                  {/* Visual Indicator Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/60 to-black/20 opacity-0 group-hover:opacity-100 group-hover:backdrop-blur-[3px] transition-all duration-500 flex flex-col justify-between p-8">
-                    <span className="self-end bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full tracking-wider uppercase">
-                      Vedi Dettagli Tecnici
-                    </span>
-                    <div className="text-white">
-                      <h4 className="font-headline text-2xl font-bold tracking-wide">
-                        {item.title}
-                      </h4>
-                      <p className="font-sans text-xs opacity-90 tracking-widest uppercase mt-1.5">
-                        {item.category === 'Web' ? 'Web Experience' : 'Branding & Design'}
-                      </p>
-                    </div>
+                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-md bg-white dark:bg-surface-dim border border-outline-variant/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(113,83,129,0.2)] hover:border-primary/20 dark:hover:border-primary-container/30">
+                  <div className="relative overflow-hidden aspect-[4/3]">
+                    <img
+                      alt={item.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] object-cover"
+                      src={item.image}
+                      title={item.altText}
+                    />
+                    {/* Visual Indicator Overlay on Hover */}
+                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
-                  {/* Fallback indicator for mobile screens (static ribbon at the bottom) */}
-                  <div className="p-5 md:hidden flex justify-between items-center bg-surface-container/30 border-t border-outline-variant/10">
+                  {/* Clean Content & Button Section (Visible on all screens) */}
+                  <div className="p-6 bg-white dark:bg-surface-container border-t border-outline-variant/10 flex flex-col gap-4">
                     <div>
-                      <h4 className="font-headline text-base font-bold text-on-surface">
+                      <span className="font-sans text-[10px] text-secondary dark:text-primary-container font-extrabold tracking-widest uppercase mb-1 block">
+                        {item.category === 'Web' ? 'Web Experience' : 'Branding & Design'}
+                      </span>
+                      <h4 className="font-headline text-lg sm:text-xl font-bold text-on-surface tracking-tight">
                         {item.title}
                       </h4>
-                      <p className="font-sans text-[10px] text-on-surface-variant tracking-wider uppercase">
-                        {item.category === 'Web' ? 'Web Experience' : 'Branding'}
-                      </p>
                     </div>
-                    <span className="text-[10px] font-bold text-secondary flex items-center gap-1">
-                      Dettagli <ArrowRight size={12} />
-                    </span>
+
+                    {/* Button Details */}
+                    <div className="w-full">
+                      <span className="w-full bg-[#11052C] dark:bg-[#1C103F] group-hover:bg-primary text-white text-center py-3 px-5 rounded-2xl font-headline font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                        DETTAGLI
+                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </motion.div>

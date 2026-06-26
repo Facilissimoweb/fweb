@@ -56,7 +56,7 @@ export default function Portfolio() {
   const activeItem = PORTFOLIO_ITEMS.find((item) => item.id === selectedItemId);
 
   return (
-    <section id="portfolio" className="py-24 bg-background relative">
+    <section id="portfolio" className="py-24 bg-background relative scroll-mt-[110px]">
       <div className="max-w-7xl mx-auto px-6 md:px-16">
         {/* Header and Filter Buttons */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">

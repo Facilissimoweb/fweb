@@ -269,14 +269,7 @@ export default function Navbar() {
     setIsOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -284,17 +277,10 @@ export default function Navbar() {
     setIsOpen(false);
     setActiveSubmenu(null);
     
-    // First, scroll to the parent section with offset
+    // First, scroll to the parent section
     const element = document.getElementById(target);
     if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
     
     // Then dispatch the custom event to open the details modal

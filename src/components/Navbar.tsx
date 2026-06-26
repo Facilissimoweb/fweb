@@ -62,6 +62,8 @@ const WhatsAppIcon = ({ size = 20, className = "" }: { size?: number; className?
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showTopBar, setShowTopBar] = useState(true);
+  const lastScrollYRef = useRef(0);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState('it');
 
@@ -136,12 +138,30 @@ export default function Navbar() {
   });
 
   useEffect(() => {
+    lastScrollYRef.current = window.scrollY;
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 50);
+      
+      // Se si scrolla verso l'alto o si è vicini all'inizio, mostra la Top Bar
+      if (currentScrollY <= 50) {
+        setShowTopBar(true);
+      } else if (currentScrollY > lastScrollYRef.current + 8) {
+        // Scroll verso il basso di almeno 8px -> nascondi
+        setShowTopBar(false);
+      } else if (currentScrollY < lastScrollYRef.current - 8) {
+        // Scroll verso l'alto di almeno 8px -> mostra
+        setShowTopBar(true);
+      }
+
+      lastScrollYRef.current = Math.max(0, currentScrollY);
       
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
-        const progress = (window.scrollY / totalHeight) * 100;
+        const progress = (currentScrollY / totalHeight) * 100;
         setScrollProgress(progress);
       } else {
         setScrollProgress(0);
@@ -340,8 +360,8 @@ export default function Navbar() {
         <motion.div
           initial={false}
           animate={{ 
-            height: isScrolled ? 0 : 'auto', 
-            opacity: isScrolled ? 0 : 1
+            height: showTopBar ? 'auto' : 0, 
+            opacity: showTopBar ? 1 : 0
           }}
           transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
           className="overflow-hidden bg-surface-container-low/95 dark:bg-surface-container-high/95 backdrop-blur-md border-b border-outline-variant/10 px-4 sm:px-6 lg:px-16 py-2 text-center select-none"

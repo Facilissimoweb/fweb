@@ -87,15 +87,15 @@ export default function App() {
         <div className="pointer-events-auto group relative">
           <button
             onClick={() => setIsHighContrast(!isHighContrast)}
-            className={`p-3.5 rounded-full shadow-xl transition-all duration-300 flex items-center justify-center border cursor-pointer ${
+            className={`p-3.5 rounded-full shadow-xl transition-all duration-300 flex items-center justify-center border-2 cursor-pointer ${
               isHighContrast
                 ? 'bg-black text-white border-white scale-110 shadow-black/40'
-                : 'bg-white text-primary border-primary/20 hover:border-primary/40 hover:scale-105 shadow-secondary/10 dark:bg-surface-container-high dark:text-primary-container'
+                : 'bg-white text-black border-neutral-950 hover:bg-neutral-100 hover:scale-105 shadow-md'
             }`}
             aria-label="Attiva alto contrasto per accessibilità WCAG AA"
             title="Accessibilità: Alto Contrasto (WCAG AA)"
           >
-            <Accessibility size={22} className={isHighContrast ? 'animate-pulse text-white' : 'text-primary dark:text-primary-container'} />
+            <Accessibility size={24} className={isHighContrast ? 'animate-pulse text-white' : 'text-neutral-950 font-bold'} />
           </button>
           
           {/* Elegant Tooltip / Badge */}

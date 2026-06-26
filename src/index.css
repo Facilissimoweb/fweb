@@ -5,14 +5,16 @@
   --font-sans: "Work Sans", sans-serif;
   --font-headline: "Montserrat", sans-serif;
 
-  --font-size-xs: 0.875rem;
-  --font-size-sm: 1.03125rem;
-  --font-size-base: 1.15625rem;
-  --font-size-lg: 1.28125rem;
-  --font-size-xl: 1.40625rem;
-  --font-size-2xl: 1.6875rem;
-  --font-size-3xl: 2.0625rem;
-  --font-size-4xl: 2.625rem;
+  --text-xs: 1.05rem;
+  --text-sm: 1.2rem;
+  --text-base: 1.35rem;
+  --text-lg: 1.55rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.1rem;
+  --text-3xl: 2.6rem;
+  --text-4xl: 3.2rem;
+  --text-5xl: 4.0rem;
+  --text-6xl: 5.0rem;
 
   --color-surface: var(--surface-bright);
   --color-surface-dim: var(--surface-dim);

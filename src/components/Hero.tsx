@@ -39,13 +39,27 @@ export default function Hero() {
 
   const handleScrollToServices = () => {
     const el = document.getElementById('services');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const headerOffset = 110;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + (window.scrollY || window.pageYOffset) - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const handleScrollToConsulenze = () => {
     const el = document.getElementById('services');
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 110;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + (window.scrollY || window.pageYOffset) - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
       // Dispatch event to automatically open 'consulenze'
       setTimeout(() => {
         const event = new CustomEvent('open-service', { detail: 'consulenze' });
@@ -56,7 +70,15 @@ export default function Hero() {
 
   const handleScrollToPortfolio = () => {
     const el = document.getElementById('portfolio');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const headerOffset = 110;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + (window.scrollY || window.pageYOffset) - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (

@@ -40,7 +40,13 @@ export default function Portfolio() {
         setSelectedItemId(customEvent.detail);
         const element = document.getElementById('portfolio');
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          const headerOffset = 110;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + (window.scrollY || window.pageYOffset) - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
         }
       }
     };

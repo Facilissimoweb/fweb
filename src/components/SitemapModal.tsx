@@ -13,7 +13,14 @@ export default function SitemapModal({ isOpen, onClose, onOpenPrivacy, onOpenCoo
     onClose();
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 110;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + (window.scrollY || window.pageYOffset) - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 

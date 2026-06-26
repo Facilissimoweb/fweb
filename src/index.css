@@ -305,6 +305,7 @@ body::before {
 
 /* Light Mode High Contrast */
 html.high-contrast {
+  font-size: 118% !important;
   --surface-dim: #f0f0f0;
   --surface-bright: #ffffff;
   --surface-container-lowest: #ffffff;
@@ -339,6 +340,7 @@ html.high-contrast {
 
 /* Dark Mode High Contrast */
 html.high-contrast.dark {
+  font-size: 118% !important;
   --surface-dim: #111111;
   --surface-bright: #000000;
   --surface-container-lowest: #000000;

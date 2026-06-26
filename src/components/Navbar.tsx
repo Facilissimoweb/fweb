@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone, MessageSquare, Accessibility } from 'lucide-react';
+import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone, MessageSquare, PersonStanding } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface SubMenuItem {
@@ -342,7 +342,7 @@ export default function Navbar() {
     { id: 'whatsapp', label: 'whatsapp', icon: WhatsAppIcon, action: () => { window.open('https://wa.me/393793603321', '_blank', 'noopener,noreferrer'); } },
     { id: 'email', label: 'scrivimi', icon: Mail, action: () => { window.location.href = 'mailto:facilissimoweb.mc@gmail.com'; } },
     { id: 'chat', label: 'chat ai', icon: MessageSquare, action: () => { window.dispatchEvent(new CustomEvent('toggle-chat-widget')); } },
-    { id: 'accessibility', label: 'leggibile', icon: Accessibility, action: () => { window.dispatchEvent(new CustomEvent('toggle-high-contrast')); } },
+    { id: 'accessibility', label: 'leggibile', icon: PersonStanding, action: () => { window.dispatchEvent(new CustomEvent('toggle-high-contrast')); } },
   ];
 
   return (

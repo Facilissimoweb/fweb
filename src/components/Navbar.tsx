@@ -491,7 +491,7 @@ export default function Navbar() {
                             handleScrollTo(link.target);
                           }
                         }}
-                        className={`text-left text-2xl sm:text-3xl font-bold tracking-tight font-headline transition-colors select-none cursor-pointer focus:outline-none flex-grow ${
+                        className={`text-left text-lg sm:text-xl font-bold tracking-tight font-headline transition-colors select-none cursor-pointer focus:outline-none flex-grow ${
                           isActive ? 'text-primary' : 'text-on-surface hover:text-primary'
                         }`}
                       >

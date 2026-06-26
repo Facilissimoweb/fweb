@@ -269,7 +269,14 @@ export default function Navbar() {
     setIsOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -277,10 +284,17 @@ export default function Navbar() {
     setIsOpen(false);
     setActiveSubmenu(null);
     
-    // First, scroll to the parent section
+    // First, scroll to the parent section with offset
     const element = document.getElementById(target);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
     
     // Then dispatch the custom event to open the details modal
@@ -599,28 +613,28 @@ export default function Navbar() {
               const hasSub = !!link.subItems;
               const isExpanded = mobileExpanded[link.target];
               return (
-                <div key={link.target} className="flex flex-col">
+                <div key={link.target} className="flex flex-col border-b border-outline-variant/10 last:border-0 pb-1">
                   <div className="flex items-center justify-between">
                     <button
-                      onClick={() => {
-                        if (hasSub) {
-                          setMobileExpanded(prev => ({ ...prev, [link.target]: !prev[link.target] }));
-                        } else {
-                          handleScrollTo(link.target);
-                        }
-                      }}
-                      className="text-left py-3 px-4 rounded-xl text-on-surface font-semibold hover:bg-surface-container-high transition-colors flex-grow flex items-center justify-between select-none cursor-pointer focus:outline-none"
+                      onClick={() => handleScrollTo(link.target)}
+                      className="text-left py-3 px-4 rounded-xl text-on-surface font-semibold hover:bg-surface-container-high hover:text-primary transition-colors flex-grow select-none cursor-pointer focus:outline-none"
                     >
                       <span>{link.label}</span>
-                      {hasSub && (
+                    </button>
+                    {hasSub && (
+                      <button
+                        onClick={() => setMobileExpanded(prev => ({ ...prev, [link.target]: !prev[link.target] }))}
+                        className="p-3 text-on-surface-variant hover:text-secondary hover:bg-surface-container-high rounded-xl transition-colors cursor-pointer focus:outline-none"
+                        aria-label={`Espandi sotto-menù ${link.label}`}
+                      >
                         <ChevronDown 
                           size={18} 
                           className={`transition-transform duration-200 ${
                             isExpanded ? 'rotate-180 text-secondary' : 'text-on-surface-variant/70'
                           }`} 
                         />
-                      )}
-                    </button>
+                      </button>
+                    )}
                   </div>
                   
                   {hasSub && (
@@ -633,19 +647,10 @@ export default function Navbar() {
                           transition={{ duration: 0.15, ease: 'easeOut' }}
                           className="overflow-hidden pl-6 pr-4 flex flex-col gap-1 border-l-2 border-secondary-container/30 ml-4 mb-2"
                         >
-                          {[
-                            { label: `Tutti i ${link.label}`, id: link.target, type: 'section' as any },
-                            ...(link.subItems || [])
-                          ].map((sub) => (
+                          {(link.subItems || []).map((sub) => (
                             <button
                               key={sub.id}
-                              onClick={() => {
-                                if (sub.type === 'section') {
-                                  handleScrollTo(link.target);
-                                } else {
-                                  handleSubItemClick(sub.id, sub.type, link.target);
-                                }
-                              }}
+                              onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
                               className="text-left py-2.5 px-3 rounded-lg text-xs font-semibold text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors cursor-pointer"
                             >
                               {sub.label}

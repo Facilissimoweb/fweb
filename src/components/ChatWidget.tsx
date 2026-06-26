@@ -273,11 +273,11 @@ export default function ChatWidget() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 30 }}
+            exit={{ opacity: 0, scale: 0.95, y: 30 }}
             transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-            className="fixed bottom-[80px] md:bottom-[88px] right-4 left-4 md:left-auto md:right-6 md:w-[410px] h-[580px] max-h-[calc(100vh-170px)] bg-white border border-outline-variant/30 rounded-[32px] shadow-2xl z-[95] flex flex-col overflow-hidden text-on-surface"
+            className="fixed inset-0 md:inset-auto md:bottom-[88px] md:right-6 md:w-[410px] md:h-[580px] md:max-h-[calc(100vh-170px)] bg-white dark:bg-surface-dim border-0 md:border border-outline-variant/30 rounded-none md:rounded-[32px] shadow-2xl z-[120] flex flex-col overflow-hidden text-on-surface"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-primary to-secondary p-4 text-white flex items-center justify-between shadow-md shrink-0">
@@ -319,7 +319,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Message Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-surface-container-low/30 scrollbar-thin">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-surface-container-low/30 dark:bg-surface-container-high/10 scrollbar-thin">
               {messages.map((msg, i) => (
                 <div
                   key={i}
@@ -330,7 +330,7 @@ export default function ChatWidget() {
                       className={`rounded-[22px] p-3.5 font-sans ${
                         msg.role === 'user'
                           ? 'bg-primary text-on-primary rounded-tr-none shadow-sm'
-                          : 'bg-white text-on-surface border border-outline-variant/15 shadow-sm rounded-tl-none'
+                          : 'bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface border border-outline-variant/15 dark:border-outline-variant/10 shadow-sm rounded-tl-none'
                       }`}
                     >
                       {msg.role === 'user' ? (
@@ -347,7 +347,7 @@ export default function ChatWidget() {
                         className={`absolute -right-7 top-2 p-1.5 rounded-full shadow-sm border transition-all cursor-pointer ${
                           speakingIndex === i
                             ? 'bg-primary text-on-primary border-primary animate-pulse'
-                            : 'bg-white text-on-surface-variant border-outline-variant/20 hover:text-primary hover:border-primary/50'
+                            : 'bg-white dark:bg-surface-container-highest text-on-surface-variant dark:text-on-surface-variant/90 border-outline-variant/20 dark:border-outline-variant/10 hover:text-primary hover:border-primary/50'
                         }`}
                         title={speakingIndex === i ? 'Ferma lettura' : 'Ascolta risposta'}
                       >
@@ -369,7 +369,7 @@ export default function ChatWidget() {
                       <button
                         key={idx}
                         onClick={() => handleSuggestClick(sug)}
-                        className="text-left font-sans text-xs font-semibold text-secondary hover:text-primary bg-white border border-secondary/15 hover:border-secondary/30 rounded-full px-3 py-1.5 shadow-sm hover:shadow-md transition-all cursor-pointer"
+                        className="text-left font-sans text-xs font-semibold text-secondary hover:text-primary bg-white dark:bg-surface-container-highest border border-secondary/15 dark:border-outline-variant/15 hover:border-secondary/30 dark:hover:border-primary/30 rounded-full px-3 py-1.5 shadow-sm hover:shadow-md transition-all cursor-pointer"
                       >
                         {sug}
                       </button>
@@ -380,9 +380,9 @@ export default function ChatWidget() {
 
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-white border border-outline-variant/20 shadow-sm rounded-[20px] rounded-tl-none p-3.5 flex items-center gap-2">
+                  <div className="bg-white dark:bg-surface-container-high border border-outline-variant/20 dark:border-outline-variant/10 shadow-sm rounded-[20px] rounded-tl-none p-3.5 flex items-center gap-2">
                     <Loader2 className="animate-spin text-secondary w-4 h-4" />
-                    <span className="font-sans text-xs text-on-surface-variant">Facilissimo Web sta riflettendo...</span>
+                    <span className="font-sans text-xs text-on-surface-variant dark:text-on-surface-variant/90">Facilissimo Web sta riflettendo...</span>
                   </div>
                 </div>
               )}
@@ -402,7 +402,7 @@ export default function ChatWidget() {
                 e.preventDefault();
                 handleSendMessage();
               }}
-              className="p-3 bg-white border-t border-outline-variant/10 flex items-center gap-2 shrink-0"
+              className="p-3 bg-white dark:bg-surface-container-low border-t border-outline-variant/10 dark:border-outline-variant/15 flex items-center gap-2 shrink-0"
             >
               <button
                 type="button"
@@ -410,7 +410,7 @@ export default function ChatWidget() {
                 className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all cursor-pointer border ${
                   isListening
                     ? 'bg-error text-white border-error animate-pulse'
-                    : 'bg-surface-container border-outline-variant/10 text-on-surface hover:bg-surface-container-high'
+                    : 'bg-surface-container border-outline-variant/10 text-on-surface hover:bg-surface-container-high dark:bg-surface-container-high dark:border-outline-variant/15 dark:text-on-surface'
                 }`}
                 title={isListening ? 'Interrompi dettatura' : 'Dettatura vocale (Microfono)'}
               >
@@ -423,7 +423,7 @@ export default function ChatWidget() {
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder={isListening ? 'Ascolto...' : 'Scrivi un messaggio...'}
                 disabled={isLoading}
-                className="flex-1 bg-surface-container py-3 px-4 rounded-xl font-sans text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-primary/50 text-on-surface disabled:opacity-60"
+                className="flex-1 bg-surface-container py-3 px-4 rounded-xl font-sans text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-primary/50 text-on-surface dark:bg-surface-container-high dark:text-on-surface disabled:opacity-60"
               />
               
               <button

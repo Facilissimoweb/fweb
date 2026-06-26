@@ -355,7 +355,7 @@ export default function Navbar() {
         />
       </div>
 
-      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full">
+      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full pointer-events-none">
         {/* Top Info Bar */}
         <motion.div
           initial={false}
@@ -364,7 +364,7 @@ export default function Navbar() {
             opacity: showTopBar ? 1 : 0
           }}
           transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-          className="overflow-hidden bg-surface-container-low/95 dark:bg-surface-container-high/95 backdrop-blur-md border-b border-outline-variant/10 px-4 sm:px-6 lg:px-16 py-2 text-center select-none"
+          className="overflow-hidden bg-surface-container-low/95 dark:bg-surface-container-high/95 backdrop-blur-md border-b border-outline-variant/10 px-4 sm:px-6 lg:px-16 py-2 text-center select-none pointer-events-auto"
         >
           <div className="max-w-7xl mx-auto flex flex-col gap-0.5 sm:gap-1">
             <h1 className="font-headline text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-primary leading-tight">
@@ -378,7 +378,7 @@ export default function Navbar() {
 
         {/* Main Navigation Bar */}
         <nav
-          className={`flex items-center justify-between w-full px-6 md:px-16 py-4 transition-all duration-300 ${
+          className={`flex items-center justify-between w-full px-6 md:px-16 py-4 transition-all duration-300 pointer-events-auto ${
             isScrolled || isOpen
               ? 'bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md shadow-secondary/5 border-b border-outline-variant/10'
               : 'bg-transparent'

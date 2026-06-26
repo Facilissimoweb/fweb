@@ -269,19 +269,6 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating Chat Bubble */}
-      <div className="fixed bottom-6 right-6 max-lg:bottom-[92px] max-lg:right-4 z-[95]">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-2xl hover:bg-secondary cursor-pointer transition-all duration-300 cat-pounce ${
-            isOpen ? 'rotate-90 bg-inverse-surface' : ''
-          }`}
-          aria-label="Apri Assistente AI"
-        >
-          {isOpen ? <X size={24} /> : <MessageSquare size={24} className="animate-bounce-slow" />}
-        </button>
-      </div>
-
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
@@ -290,7 +277,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
             transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-            className="fixed bottom-[88px] max-lg:bottom-[158px] right-4 left-4 md:left-auto md:right-6 md:w-[410px] h-[580px] max-h-[calc(100vh-170px)] bg-white border border-outline-variant/30 rounded-[32px] shadow-2xl z-[95] flex flex-col overflow-hidden text-on-surface"
+            className="fixed bottom-[80px] md:bottom-[88px] right-4 left-4 md:left-auto md:right-6 md:w-[410px] h-[580px] max-h-[calc(100vh-170px)] bg-white border border-outline-variant/30 rounded-[32px] shadow-2xl z-[95] flex flex-col overflow-hidden text-on-surface"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-primary to-secondary p-4 text-white flex items-center justify-between shadow-md shrink-0">

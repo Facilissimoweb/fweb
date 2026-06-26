@@ -447,6 +447,26 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
+          {/* Accessibility Toggle Desktop */}
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('toggle-high-contrast'))}
+            className="p-2.5 rounded-full bg-surface-container-high hover:bg-surface-container-highest border border-outline-variant/15 text-primary hover:text-secondary cursor-pointer active:scale-90 transition-all shadow-sm"
+            aria-label="Accessibilità"
+            title="Accessibilità: Alto Contrasto (WCAG AA)"
+          >
+            <Accessibility size={18} />
+          </button>
+
+          {/* Chat Toggle Desktop */}
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('toggle-chat-widget'))}
+            className="p-2.5 rounded-full bg-surface-container-high hover:bg-surface-container-highest border border-outline-variant/15 text-primary hover:text-secondary cursor-pointer active:scale-90 transition-all shadow-sm"
+            aria-label="Apri Assistente AI"
+            title="Chat Assistente AI"
+          >
+            <MessageSquare size={18} />
+          </button>
+
           {/* Theme Toggle Desktop */}
           <button
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
@@ -603,22 +623,19 @@ export default function Navbar() {
     </header>
 
     {/* Elegant Color-Harmonized Bottom Navigation Bar */}
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md h-[64px] flex lg:hidden items-center justify-between px-2 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border border-outline-variant/15 rounded-[22px] shadow-[0_8px_30px_rgba(113,83,129,0.12)] select-none">
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-sm h-[56px] flex lg:hidden items-center justify-between px-2 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border border-outline-variant/10 rounded-full shadow-md shadow-secondary/10 select-none">
       {footerTabs.map((tab) => {
         const Icon = tab.icon;
         return (
           <button
             key={tab.id}
             onClick={tab.action}
-            className="flex-1 h-full flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary dark:hover:text-primary active:scale-90 transition-all cursor-pointer focus:outline-none"
+            className="flex-1 h-full flex items-center justify-center text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors cursor-pointer focus:outline-none"
             aria-label={tab.label}
           >
-            <div className="p-1 rounded-full hover:bg-primary/10 transition-colors">
-              <Icon size={19} className="stroke-[2.2]" />
+            <div className="p-2 rounded-full hover:bg-primary/10 active:bg-primary/20 transition-colors duration-200">
+              <Icon size={20} className="stroke-[2.2]" />
             </div>
-            <span className="text-[9px] font-bold tracking-wide uppercase text-on-surface-variant/80">
-              {tab.label}
-            </span>
           </button>
         );
       })}

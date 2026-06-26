@@ -98,7 +98,7 @@ export default function Hero() {
 
       {/* High-End Frosted Glass Container to isolate text and ensure maximum legibility */}
       <div className="mt-6 md:mt-10 backdrop-blur-md bg-surface/70 dark:bg-surface-container-low/70 border border-outline-variant/15 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-full max-w-sm sm:max-w-xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-primary/20">
-        <h1 className="font-headline text-3xl sm:text-4xl md:text-6xl font-black text-primary tracking-tight leading-none uppercase">
+        <h1 className="font-headline text-[1.8rem] min-[380px]:text-[2.2rem] sm:text-4xl md:text-6xl font-black text-primary tracking-tight leading-none uppercase break-words select-none">
           Facilissimo<br />Web
         </h1>
         <p className="font-sans text-sm sm:text-lg md:text-xl text-on-surface-variant max-w-md mx-auto lowercase tracking-wide font-medium">

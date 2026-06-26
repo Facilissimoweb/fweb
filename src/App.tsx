@@ -95,7 +95,12 @@ export default function App() {
             aria-label="Attiva alto contrasto per accessibilità WCAG AA"
             title="Accessibilità: Alto Contrasto (WCAG AA)"
           >
-            <Accessibility size={24} className={isHighContrast ? 'animate-pulse text-white' : 'text-neutral-950 font-bold'} />
+            <Accessibility 
+              size={24} 
+              style={{ color: isHighContrast ? '#ffffff' : '#000000', stroke: isHighContrast ? '#ffffff' : '#000000' }} 
+              className={isHighContrast ? 'animate-pulse text-white' : 'text-black'} 
+              strokeWidth={3} 
+            />
           </button>
           
           {/* Elegant Tooltip / Badge */}

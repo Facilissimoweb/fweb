@@ -192,10 +192,13 @@ export default function Services() {
                   ))}
                 </div>
 
-                {/* Card CTA Link */}
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-secondary hover:text-primary transition-colors group-hover:underline mt-auto">
-                  Scopri di più <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </span>
+                {/* Card CTA Button */}
+                <div className="w-full mt-auto pt-4">
+                  <span className="w-full bg-[#11052C] dark:bg-[#1C103F] group-hover:bg-primary text-white text-center py-3 px-5 rounded-2xl font-headline font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                    SCOPRI DI PIÙ
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </div>
               </motion.div>
             );
           })}

@@ -128,13 +128,7 @@ export default function Services() {
         setSelectedServiceId(customEvent.detail);
         const element = document.getElementById('services');
         if (element) {
-          const headerOffset = 110;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + (window.scrollY || window.pageYOffset) - headerOffset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+          element.scrollIntoView({ behavior: 'smooth' });
         }
       }
     };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, ChevronDown, Languages, Home } from 'lucide-react';
+import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Cpu, PieChart, User, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface SubMenuItem {
@@ -86,6 +86,7 @@ export default function Navbar() {
     }
   };
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState('hero');
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -112,6 +113,37 @@ export default function Navbar() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = ['hero', 'services', 'portfolio', 'about', 'blog'];
+    const observerOptions = {
+      root: null,
+      rootMargin: '-25% 0px -40% 0px',
+      threshold: 0.05,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.unobserve(el);
+      });
+    };
   }, []);
 
   useEffect(() => {
@@ -248,6 +280,16 @@ export default function Navbar() {
     { label: 'Chi Sono', target: 'about' },
     { label: 'Blog', target: 'blog' },
   ];
+
+  const mobileTabs = [
+    { id: 'hero', label: 'Home', icon: Home },
+    { id: 'services', label: 'Servizi', icon: Cpu },
+    { id: 'portfolio', label: 'Proposte', icon: PieChart },
+    { id: 'about', label: 'Chi Sono', icon: User },
+    { id: 'blog', label: 'Blog', icon: Clock },
+  ];
+
+  const activeIndex = Math.max(0, mobileTabs.findIndex(t => t.id === activeSection));
 
   return (
     <>
@@ -548,6 +590,93 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </header>
+
+    {/* Animated Bottom Navigation (Figma Liquid Curve Style) */}
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md h-[64px] flex lg:hidden select-none filter drop-shadow-[0_10px_30px_rgba(0,0,0,0.4)]">
+      {/* Background container with smooth slide-notch SVG */}
+      <div className="absolute inset-0 flex items-center pointer-events-none z-0">
+        {/* Left spacer cap */}
+        <div className="w-4 h-full bg-neutral-950 dark:bg-black rounded-l-[24px] shrink-0" />
+        
+        {/* Variable left spacer */}
+        <motion.div 
+          layout 
+          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+          className="h-full bg-neutral-950 dark:bg-black" 
+          style={{ flex: activeIndex }} 
+        />
+        
+        {/* SVG Notch Container */}
+        <div className="w-[85px] h-full relative shrink-0 -mt-[1px]">
+          <svg 
+            className="w-full h-full text-neutral-950 dark:text-black fill-current" 
+            viewBox="0 0 85 64" 
+            preserveAspectRatio="none"
+          >
+            <path d="M 0,0 L 12,0 C 22,0 24,20 42.5,20 C 61,20 63,0 73,0 L 85,0 L 85,64 L 0,64 Z" />
+          </svg>
+          
+          {/* Floating active circle inside the notch! */}
+          <motion.div 
+            layoutId="activeCircleMobile"
+            transition={{ type: 'spring', stiffness: 380, damping: 24 }}
+            className="absolute top-[-16px] left-1/2 -translate-x-1/2 w-12 h-12 bg-lime-400 rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(163,230,53,0.4)] border-2 border-neutral-950 dark:border-black z-10"
+          >
+            {(() => {
+              const ActiveIcon = mobileTabs[activeIndex].icon;
+              return <ActiveIcon size={20} className="text-black stroke-[2.5]" />;
+            })()}
+          </motion.div>
+        </div>
+        
+        {/* Variable right spacer */}
+        <motion.div 
+          layout 
+          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+          className="h-full bg-neutral-950 dark:bg-black" 
+          style={{ flex: 4 - activeIndex }} 
+        />
+        
+        {/* Right spacer cap */}
+        <div className="w-4 h-full bg-neutral-950 dark:bg-black rounded-r-[24px] shrink-0" />
+      </div>
+
+      {/* Foreground buttons - fixed positions for tap stability */}
+      <div className="absolute inset-x-2 inset-y-0 z-10 flex justify-between items-center px-2">
+        {mobileTabs.map((tab, idx) => {
+          const Icon = tab.icon;
+          const isActive = idx === activeIndex;
+          
+          return (
+            <button
+              key={tab.id}
+              onClick={() => handleScrollTo(tab.id)}
+              className="w-[60px] h-full flex flex-col items-center justify-center relative cursor-pointer focus:outline-none"
+              aria-label={tab.label}
+            >
+              <div className="flex flex-col items-center justify-center">
+                <motion.div
+                  animate={{
+                    scale: isActive ? 0 : 1,
+                    opacity: isActive ? 0 : 0.65,
+                    y: isActive ? -12 : 0
+                  }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                >
+                  <Icon size={20} className="text-white" />
+                </motion.div>
+                
+                {!isActive && (
+                  <span className="text-[9px] text-white/50 mt-1 scale-90 font-semibold tracking-wide lowercase">
+                    {tab.label}
+                  </span>
+                )}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
 
       {/* Hidden container for Google Translate to load into */}
       <div id="google_translate_element" className="opacity-0 pointer-events-none absolute -z-50 w-1 h-1 overflow-hidden" />

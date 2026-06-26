@@ -83,7 +83,7 @@ export default function App() {
       <ChatWidget />
 
       {/* Floating Accessibility Controls for WCAG AA High Contrast */}
-      <div id="accessibility-controls" className="fixed bottom-6 left-6 z-50 flex flex-col gap-2 pointer-events-none">
+      <div id="accessibility-controls" className="fixed bottom-6 left-6 max-lg:bottom-[92px] max-lg:left-4 z-50 flex flex-col gap-2 pointer-events-none">
         <div className="pointer-events-auto group relative">
           <button
             onClick={() => setIsHighContrast(!isHighContrast)}

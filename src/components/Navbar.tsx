@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone, MessageSquare, Accessibility } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -102,6 +102,29 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
+  
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = (target: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setActiveSubmenu(target);
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setActiveSubmenu(null);
+    }, 150);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try {
       const saved = localStorage.getItem('erbagatta_theme');
@@ -357,53 +380,67 @@ export default function Navbar() {
 
         {/* Desktop navigation */}
         <div className="hidden lg:flex gap-8 items-center font-sans text-sm font-semibold tracking-wide">
-          {navLinks.map((link) => (
-            <div
-              key={link.target}
-              className="relative"
-              onMouseEnter={() => link.subItems && setActiveSubmenu(link.target)}
-              onMouseLeave={() => link.subItems && setActiveSubmenu(null)}
-            >
-              <button
-                onClick={() => handleScrollTo(link.target)}
-                className="text-on-surface-variant hover:text-secondary hover:scale-105 transition-all cursor-pointer flex items-center gap-1 py-2"
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.target;
+            return (
+              <div
+                key={link.target}
+                className="relative"
+                onMouseEnter={() => link.subItems ? handleMouseEnter(link.target) : handleMouseEnter('')}
+                onMouseLeave={() => handleMouseLeave()}
               >
-                {link.label}
-                {link.subItems && (
-                  <ChevronDown 
-                    size={14} 
-                    className={`transition-transform duration-300 ${
-                      activeSubmenu === link.target ? 'rotate-180 text-secondary' : 'text-on-surface-variant/50'
-                    }`} 
-                  />
-                )}
-              </button>
-
-              {link.subItems && (
-                <AnimatePresence>
-                  {activeSubmenu === link.target && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute left-0 mt-1 w-64 bg-surface dark:bg-surface-container-high rounded-[24px] p-2 border border-outline-variant/15 shadow-xl z-50 flex flex-col gap-1"
-                    >
-                      {link.subItems.map((sub) => (
-                        <button
-                          key={sub.id}
-                          onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
-                          className="w-full text-left px-4 py-2.5 rounded-xl text-xs font-semibold text-on-surface-variant hover:text-secondary hover:bg-secondary/5 dark:hover:bg-secondary/10 transition-all cursor-pointer"
-                        >
-                          {sub.label}
-                        </button>
-                      ))}
-                    </motion.div>
+                <button
+                  onClick={() => handleScrollTo(link.target)}
+                  className={`transition-colors duration-150 cursor-pointer flex items-center gap-1 py-2 relative focus:outline-none select-none ${
+                    isActive
+                      ? 'text-primary font-bold'
+                      : 'text-on-surface-variant hover:text-secondary'
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  {link.subItems && (
+                    <ChevronDown 
+                      size={14} 
+                      className={`transition-transform duration-200 ${
+                        activeSubmenu === link.target ? 'rotate-180 text-secondary' : 'text-on-surface-variant/50'
+                      }`} 
+                    />
                   )}
-                </AnimatePresence>
-              )}
-            </div>
-          ))}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </button>
+
+                {link.subItems && (
+                  <AnimatePresence>
+                    {activeSubmenu === link.target && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                        transition={{ duration: 0.12, ease: 'easeOut' }}
+                        className="absolute left-0 mt-1 w-64 bg-surface dark:bg-surface-container-high rounded-[24px] p-2 border border-outline-variant/15 shadow-xl z-50 flex flex-col gap-1"
+                      >
+                        {link.subItems.map((sub) => (
+                          <button
+                            key={sub.id}
+                            onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
+                            className="w-full text-left px-4 py-2.5 rounded-xl text-xs font-semibold text-on-surface-variant hover:text-secondary hover:bg-secondary/5 dark:hover:bg-secondary/10 transition-colors duration-100 cursor-pointer"
+                          >
+                            {sub.label}
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </div>
+            );
+          })}
 
           {/* Language Selector Desktop */}
           <div className="relative">
@@ -555,7 +592,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 150 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
             className="w-full bg-surface-container-highest border-b border-outline-variant/20 p-6 shadow-xl flex flex-col gap-4 lg:hidden max-h-[80vh] overflow-y-auto"
           >
             {navLinks.map((link) => {
@@ -565,24 +602,25 @@ export default function Navbar() {
                 <div key={link.target} className="flex flex-col">
                   <div className="flex items-center justify-between">
                     <button
-                      onClick={() => handleScrollTo(link.target)}
-                      className="text-left py-3 px-4 rounded-xl text-on-surface font-semibold hover:bg-surface-container-high transition-colors flex-grow"
+                      onClick={() => {
+                        if (hasSub) {
+                          setMobileExpanded(prev => ({ ...prev, [link.target]: !prev[link.target] }));
+                        } else {
+                          handleScrollTo(link.target);
+                        }
+                      }}
+                      className="text-left py-3 px-4 rounded-xl text-on-surface font-semibold hover:bg-surface-container-high transition-colors flex-grow flex items-center justify-between select-none cursor-pointer focus:outline-none"
                     >
-                      {link.label}
-                    </button>
-                    {hasSub && (
-                      <button
-                        onClick={() => setMobileExpanded(prev => ({ ...prev, [link.target]: !prev[link.target] }))}
-                        className="p-3 text-primary hover:bg-surface-container-high rounded-xl transition-colors"
-                      >
+                      <span>{link.label}</span>
+                      {hasSub && (
                         <ChevronDown 
                           size={18} 
-                          className={`transition-transform duration-300 ${
+                          className={`transition-transform duration-200 ${
                             isExpanded ? 'rotate-180 text-secondary' : 'text-on-surface-variant/70'
                           }`} 
                         />
-                      </button>
-                    )}
+                      )}
+                    </button>
                   </div>
                   
                   {hasSub && (
@@ -592,14 +630,23 @@ export default function Navbar() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.25, ease: 'easeInOut' }}
+                          transition={{ duration: 0.15, ease: 'easeOut' }}
                           className="overflow-hidden pl-6 pr-4 flex flex-col gap-1 border-l-2 border-secondary-container/30 ml-4 mb-2"
                         >
-                          {link.subItems?.map((sub) => (
+                          {[
+                            { label: `Tutti i ${link.label}`, id: link.target, type: 'section' as any },
+                            ...(link.subItems || [])
+                          ].map((sub) => (
                             <button
                               key={sub.id}
-                              onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
-                              className="text-left py-2.5 px-3 rounded-lg text-xs font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors"
+                              onClick={() => {
+                                if (sub.type === 'section') {
+                                  handleScrollTo(link.target);
+                                } else {
+                                  handleSubItemClick(sub.id, sub.type, link.target);
+                                }
+                              }}
+                              className="text-left py-2.5 px-3 rounded-lg text-xs font-semibold text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors cursor-pointer"
                             >
                               {sub.label}
                             </button>

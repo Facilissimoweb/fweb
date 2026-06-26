@@ -31,6 +31,16 @@ export default function App() {
   });
 
   useEffect(() => {
+    const handleToggleContrast = () => {
+      setIsHighContrast((prev) => !prev);
+    };
+    window.addEventListener('toggle-high-contrast', handleToggleContrast);
+    return () => {
+      window.removeEventListener('toggle-high-contrast', handleToggleContrast);
+    };
+  }, []);
+
+  useEffect(() => {
     try {
       if (isHighContrast) {
         document.documentElement.classList.add('high-contrast');

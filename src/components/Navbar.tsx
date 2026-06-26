@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone } from 'lucide-react';
+import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone, MessageSquare, Accessibility } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface SubMenuItem {
@@ -101,7 +101,6 @@ export default function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('hero');
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
-  const [activeContactIndex, setActiveContactIndex] = useState(1);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try {
@@ -295,10 +294,12 @@ export default function Navbar() {
     { label: 'Blog', target: 'blog' },
   ];
 
-  const contactTabs = [
-    { id: 'phone', label: 'telefono', icon: Phone, href: 'tel:+393793603321' },
-    { id: 'whatsapp', label: 'whatsapp', icon: WhatsAppIcon, href: 'https://wa.me/393793603321' },
-    { id: 'email', label: 'scrivimi', icon: Mail, href: 'mailto:facilissimoweb.mc@gmail.com' },
+  const footerTabs = [
+    { id: 'phone', label: 'telefono', icon: Phone, action: () => { window.location.href = 'tel:+393793603321'; } },
+    { id: 'whatsapp', label: 'whatsapp', icon: WhatsAppIcon, action: () => { window.open('https://wa.me/393793603321', '_blank', 'noopener,noreferrer'); } },
+    { id: 'email', label: 'scrivimi', icon: Mail, action: () => { window.location.href = 'mailto:facilissimoweb.mc@gmail.com'; } },
+    { id: 'chat', label: 'chat ai', icon: MessageSquare, action: () => { window.dispatchEvent(new CustomEvent('toggle-chat-widget')); } },
+    { id: 'accessibility', label: 'leggibile', icon: Accessibility, action: () => { window.dispatchEvent(new CustomEvent('toggle-high-contrast')); } },
   ];
 
   return (
@@ -601,100 +602,26 @@ export default function Navbar() {
       </AnimatePresence>
     </header>
 
-    {/* Animated Bottom Navigation (Figma Liquid Curve Style - Harmonized Contact Bar) */}
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm h-[64px] flex lg:hidden select-none filter drop-shadow-[0_8px_25px_rgba(40,20,50,0.35)]">
-      {/* Background container with smooth slide-notch SVG */}
-      <div className="absolute inset-0 flex items-center pointer-events-none z-0">
-        {/* Left spacer cap */}
-        <div className="w-5 h-full bg-[#54465c] dark:bg-[#1a1122] rounded-l-[24px] shrink-0" />
-        
-        {/* Variable left spacer */}
-        <motion.div 
-          layout 
-          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-          className="h-full bg-[#54465c] dark:bg-[#1a1122]" 
-          style={{ flex: activeContactIndex }} 
-        />
-        
-        {/* SVG Notch Container */}
-        <div className="w-[85px] h-full relative shrink-0 -mt-[1px]">
-          <svg 
-            className="w-full h-full text-[#54465c] dark:text-[#1a1122] fill-current" 
-            viewBox="0 0 85 64" 
-            preserveAspectRatio="none"
+    {/* Elegant Color-Harmonized Bottom Navigation Bar */}
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md h-[64px] flex lg:hidden items-center justify-between px-2 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border border-outline-variant/15 rounded-[22px] shadow-[0_8px_30px_rgba(113,83,129,0.12)] select-none">
+      {footerTabs.map((tab) => {
+        const Icon = tab.icon;
+        return (
+          <button
+            key={tab.id}
+            onClick={tab.action}
+            className="flex-1 h-full flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary dark:hover:text-primary active:scale-90 transition-all cursor-pointer focus:outline-none"
+            aria-label={tab.label}
           >
-            <path d="M 0,0 L 12,0 C 22,0 24,20 42.5,20 C 61,20 63,0 73,0 L 85,0 L 85,64 L 0,64 Z" />
-          </svg>
-          
-          {/* Floating active circle inside the notch! */}
-          <motion.div 
-            layoutId="activeCircleMobile"
-            transition={{ type: 'spring', stiffness: 380, damping: 24 }}
-            className="absolute top-[-16px] left-1/2 -translate-x-1/2 w-12 h-12 bg-[#ecc7fe] dark:bg-[#dec4fc] rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(236,199,254,0.45)] border-2 border-[#54465c] dark:border-[#1a1122] z-10"
-          >
-            {(() => {
-              const ActiveIcon = contactTabs[activeContactIndex].icon;
-              return <ActiveIcon size={20} className="text-[#2e004a] dark:text-[#1e0935] stroke-[2.5]" />;
-            })()}
-          </motion.div>
-        </div>
-        
-        {/* Variable right spacer */}
-        <motion.div 
-          layout 
-          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-          className="h-full bg-[#54465c] dark:bg-[#1a1122]" 
-          style={{ flex: 2 - activeContactIndex }} 
-        />
-        
-        {/* Right spacer cap */}
-        <div className="w-5 h-full bg-[#54465c] dark:bg-[#1a1122] rounded-r-[24px] shrink-0" />
-      </div>
-
-      {/* Foreground buttons - fixed positions for tap stability */}
-      <div className="absolute inset-x-3 inset-y-0 z-10 flex justify-between items-center px-4">
-        {contactTabs.map((tab, idx) => {
-          const Icon = tab.icon;
-          const isActive = idx === activeContactIndex;
-          
-          return (
-            <button
-              key={tab.id}
-              onClick={() => {
-                setActiveContactIndex(idx);
-                setTimeout(() => {
-                  if (tab.href.startsWith('https://')) {
-                    window.open(tab.href, '_blank', 'noopener,noreferrer');
-                  } else {
-                    window.location.href = tab.href;
-                  }
-                }, 280);
-              }}
-              className="w-[72px] h-full flex flex-col items-center justify-center relative cursor-pointer focus:outline-none"
-              aria-label={tab.label}
-            >
-              <div className="flex flex-col items-center justify-center">
-                <motion.div
-                  animate={{
-                    scale: isActive ? 0 : 1,
-                    opacity: isActive ? 0 : 0.75,
-                    y: isActive ? -12 : 0
-                  }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                >
-                  <Icon size={20} className="text-[#f1e0ff]" />
-                </motion.div>
-                
-                {!isActive && (
-                  <span className="text-[9px] text-[#f1e0ff]/55 mt-1 scale-90 font-semibold tracking-wide lowercase">
-                    {tab.label}
-                  </span>
-                )}
-              </div>
-            </button>
-          );
-        })}
-      </div>
+            <div className="p-1 rounded-full hover:bg-primary/10 transition-colors">
+              <Icon size={19} className="stroke-[2.2]" />
+            </div>
+            <span className="text-[9px] font-bold tracking-wide uppercase text-on-surface-variant/80">
+              {tab.label}
+            </span>
+          </button>
+        );
+      })}
     </div>
 
       {/* Hidden container for Google Translate to load into */}

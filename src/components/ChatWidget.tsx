@@ -9,6 +9,16 @@ interface ChatMessage {
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleToggleChat = () => {
+      setIsOpen((prev) => !prev);
+    };
+    window.addEventListener('toggle-chat-widget', handleToggleChat);
+    return () => {
+      window.removeEventListener('toggle-chat-widget', handleToggleChat);
+    };
+  }, []);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',

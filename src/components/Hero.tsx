@@ -71,7 +71,7 @@ export default function Hero() {
       {/* Parallax Background Cover with Gradient Blend & Subtle Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <img 
-          src="/src/assets/images/web_design_hero_1782380129253.jpg"
+          src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1920&q=80"
           alt="Facilissimo Web Design Hero Background"
           className="absolute inset-0 w-full h-[120%] object-cover object-center transition-transform duration-75 ease-out"
           style={{

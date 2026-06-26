@@ -5,6 +5,15 @@
   --font-sans: "Work Sans", sans-serif;
   --font-headline: "Montserrat", sans-serif;
 
+  --font-size-xs: 0.875rem;
+  --font-size-sm: 1.03125rem;
+  --font-size-base: 1.15625rem;
+  --font-size-lg: 1.28125rem;
+  --font-size-xl: 1.40625rem;
+  --font-size-2xl: 1.6875rem;
+  --font-size-3xl: 2.0625rem;
+  --font-size-4xl: 2.625rem;
+
   --color-surface: var(--surface-bright);
   --color-surface-dim: var(--surface-dim);
   --color-surface-bright: var(--surface-bright);
@@ -286,4 +295,183 @@ body::before {
 
 .flip-card-back {
   transform: rotateY(180deg);
+}
+
+/* ==========================================
+   HIGH CONTRAST MODE (WCAG AA ACCESSIBILITY)
+   ========================================== */
+
+/* Light Mode High Contrast */
+html.high-contrast {
+  --surface-dim: #f0f0f0;
+  --surface-bright: #ffffff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #ffffff;
+  --surface-container: #eaeaea;
+  --surface-container-high: #e0e0e0;
+  --surface-container-highest: #d5d5d5;
+  --on-surface: #000000 !important;
+  --on-surface-variant: #000000 !important;
+  --inverse-surface: #000000;
+  --inverse-on-surface: #ffffff;
+  --outline: #000000 !important;
+  --outline-variant: #000000 !important;
+  --surface-tint: #000000;
+  --primary: #110022 !important;
+  --on-primary: #ffffff !important;
+  --primary-container: #110022 !important;
+  --on-primary-container: #ffffff !important;
+  --inverse-primary: #ffffff;
+  --secondary: #110022 !important;
+  --on-secondary: #ffffff !important;
+  --secondary-container: #110022 !important;
+  --on-secondary-container: #ffffff !important;
+  --tertiary: #110022 !important;
+  --on-tertiary: #ffffff !important;
+  --tertiary-container: #110022 !important;
+  --on-tertiary-container: #ffffff !important;
+  --background: #ffffff;
+  --on-background: #000000 !important;
+  --surface-variant: #e0e0e0;
+}
+
+/* Dark Mode High Contrast */
+html.high-contrast.dark {
+  --surface-dim: #111111;
+  --surface-bright: #000000;
+  --surface-container-lowest: #000000;
+  --surface-container-low: #000000;
+  --surface-container: #111111;
+  --surface-container-high: #222222;
+  --surface-container-highest: #333333;
+  --on-surface: #ffffff !important;
+  --on-surface-variant: #ffffff !important;
+  --inverse-surface: #ffffff;
+  --inverse-on-surface: #000000;
+  --outline: #ffffff !important;
+  --outline-variant: #ffffff !important;
+  --surface-tint: #ffffff;
+  --primary: #ffffff !important;
+  --on-primary: #000000 !important;
+  --primary-container: #ffffff !important;
+  --on-primary-container: #000000 !important;
+  --inverse-primary: #000000;
+  --secondary: #ffffff !important;
+  --on-secondary: #000000 !important;
+  --secondary-container: #ffffff !important;
+  --on-secondary-container: #000000 !important;
+  --tertiary: #ffffff !important;
+  --on-tertiary: #000000 !important;
+  --tertiary-container: #ffffff !important;
+  --on-tertiary-container: #000000 !important;
+  --background: #000000;
+  --on-background: #ffffff !important;
+  --surface-variant: #222222;
+}
+
+/* Force text and background rules when high-contrast is active */
+html.high-contrast body {
+  background-color: var(--background) !important;
+  color: var(--on-background) !important;
+}
+
+/* Helper overrides for hardcoded Tailwind text colors to ensure perfect contrast */
+html.high-contrast .text-gray-500,
+html.high-contrast .text-gray-600,
+html.high-contrast .text-gray-700,
+html.high-contrast .text-gray-800,
+html.high-contrast .text-gray-900,
+html.high-contrast .text-neutral-500,
+html.high-contrast .text-neutral-600,
+html.high-contrast .text-neutral-700,
+html.high-contrast .text-neutral-800,
+html.high-contrast .text-neutral-900,
+html.high-contrast .text-on-surface-variant,
+html.high-contrast .text-primary,
+html.high-contrast .text-secondary {
+  color: #000000 !important;
+}
+
+html.high-contrast.dark .text-gray-300,
+html.high-contrast.dark .text-gray-400,
+html.high-contrast.dark .text-gray-500,
+html.high-contrast.dark .text-gray-600,
+html.high-contrast.dark .text-gray-700,
+html.high-contrast.dark .text-neutral-300,
+html.high-contrast.dark .text-neutral-400,
+html.high-contrast.dark .text-neutral-500,
+html.high-contrast.dark .text-on-surface-variant,
+html.high-contrast.dark .text-primary,
+html.high-contrast.dark .text-secondary {
+  color: #ffffff !important;
+}
+
+/* Ensure borders are highly visible */
+html.high-contrast .border,
+html.high-contrast .border-t,
+html.high-contrast .border-b,
+html.high-contrast .border-l,
+html.high-contrast .border-r,
+html.high-contrast [class*="border-gray-"],
+html.high-contrast [class*="border-neutral-"],
+html.high-contrast [class*="border-outline-"] {
+  border-color: #000000 !important;
+}
+
+html.high-contrast.dark .border,
+html.high-contrast.dark .border-t,
+html.high-contrast.dark .border-b,
+html.high-contrast.dark .border-l,
+html.high-contrast.dark .border-r,
+html.high-contrast.dark [class*="border-gray-"],
+html.high-contrast.dark [class*="border-neutral-"],
+html.high-contrast.dark [class*="border-outline-"] {
+  border-color: #ffffff !important;
+}
+
+/* Buttons and interactive elements in high-contrast mode */
+html.high-contrast button:not([disabled]),
+html.high-contrast a:not([disabled]) {
+  outline-offset: 2px;
+}
+
+html.high-contrast button:not([disabled]):focus-visible,
+html.high-contrast a:not([disabled]):focus-visible {
+  outline: 3px solid #000000 !important;
+}
+
+html.high-contrast.dark button:not([disabled]):focus-visible,
+html.high-contrast.dark a:not([disabled]):focus-visible {
+  outline: 3px solid #ffffff !important;
+}
+
+/* Overrides for background colors in high contrast */
+html.high-contrast .bg-white,
+html.high-contrast .bg-surface-container,
+html.high-contrast .bg-surface-container-low,
+html.high-contrast .bg-surface-container-high,
+html.high-contrast .bg-surface-container-highest {
+  background-color: #ffffff !important;
+}
+
+html.high-contrast.dark .bg-white,
+html.high-contrast.dark .bg-surface-container,
+html.high-contrast.dark .bg-surface-container-low,
+html.high-contrast.dark .bg-surface-container-high,
+html.high-contrast.dark .bg-surface-container-highest,
+html.high-contrast.dark .bg-surface {
+  background-color: #000000 !important;
+}
+
+/* Override input placeholder colors for legibility */
+html.high-contrast input::placeholder,
+html.high-contrast textarea::placeholder {
+  color: #333333 !important;
+  opacity: 1 !important;
+}
+
+html.high-contrast.dark input::placeholder,
+html.high-contrast.dark textarea::placeholder {
+  color: #cccccc !important;
+  opacity: 1 !important;
 }

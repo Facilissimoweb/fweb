@@ -56,8 +56,8 @@ export default function Portfolio() {
   const activeItem = PORTFOLIO_ITEMS.find((item) => item.id === selectedItemId);
 
   return (
-    <section id="portfolio" className="py-24 bg-background relative scroll-mt-[110px] pl-[59px] pr-[15px]">
-      <div className="w-full">
+    <section id="portfolio" className="py-24 bg-background relative scroll-mt-[110px] pl-12 md:pl-0">
+      <div className="max-w-7xl mx-auto px-6 md:px-16">
         {/* Header and Filter Buttons */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div>
@@ -65,7 +65,7 @@ export default function Portfolio() {
               Le Proposte d'Élite
             </h2>
             <div className="h-1 w-20 bg-secondary rounded-full mb-3"></div>
-            <p className="font-sans text-base text-on-surface-variant max-w-[1800px]">
+            <p className="font-sans text-base text-on-surface-variant max-w-lg">
               Una selezione delle mie proposte e soluzioni digitali d'eccellenza. Clicca su ciascun progetto per rivelare i segreti tecnici e i dettagli dello sviluppo.
             </p>
           </div>
@@ -134,7 +134,7 @@ export default function Portfolio() {
 
                     {/* Button Details */}
                     <div className="w-full">
-                      <span className="w-full bg-[#11052C] dark:bg-[#1C103F] group-hover:bg-primary text-white text-center py-3 rounded-2xl font-headline font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                      <span className="w-full bg-[#11052C] dark:bg-[#1C103F] group-hover:bg-primary text-white text-center py-3 px-5 rounded-2xl font-headline font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
                         DETTAGLI
                         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                       </span>
@@ -162,7 +162,7 @@ export default function Portfolio() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 40 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="bg-white rounded-[40px] w-full max-w-[1800px] max-h-[90vh] md:max-h-[85vh] shadow-2xl overflow-hidden flex flex-col relative text-on-surface"
+              className="bg-white rounded-[40px] w-full max-w-3xl max-h-[90vh] md:max-h-[85vh] shadow-2xl overflow-hidden flex flex-col relative text-on-surface"
             >
               {/* Close Button */}
               <div className="absolute top-6 right-6 z-20">
@@ -195,7 +195,7 @@ export default function Portfolio() {
                     className="w-full h-full object-cover"
                     src={activeItem.image}
                   />
-                  <div className="absolute top-4 left-4 bg-black/50 text-white text-[11px] font-sans font-medium py-1 rounded-full backdrop-blur-sm">
+                  <div className="absolute top-4 left-4 bg-black/50 text-white text-[11px] font-sans font-medium px-3 py-1 rounded-full backdrop-blur-sm">
                     {activeItem.category === 'Web' ? 'Sito Web / Interfaccia' : 'Logo & Grafica Vettoriale'}
                   </div>
                 </div>
@@ -260,13 +260,13 @@ export default function Portfolio() {
                         activeItem.techStack.map((tech, idx) => (
                           <span
                             key={idx}
-                            className="bg-primary/5 text-primary border border-primary/10 py-1.5 rounded-full text-xs font-semibold tracking-wide"
+                            className="bg-primary/5 text-primary border border-primary/10 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide"
                           >
                             {tech}
                           </span>
                         ))
                       ) : (
-                        <span className="bg-primary/5 text-primary border border-primary/10 py-1.5 rounded-full text-xs font-semibold">
+                        <span className="bg-primary/5 text-primary border border-primary/10 px-3.5 py-1.5 rounded-full text-xs font-semibold">
                           Figma, Adobe Illustrator
                         </span>
                       )}
@@ -302,7 +302,7 @@ export default function Portfolio() {
                       }
                       target="_blank"
                       rel="noreferrer"
-                      className="bg-green-600 hover:bg-green-700 text-white font-semibold text-xs md:text-sm py-3.5 rounded-full flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md hover:shadow-lg cursor-pointer"
+                      className="bg-green-600 hover:bg-green-700 text-white font-semibold text-xs md:text-sm px-6 py-3.5 rounded-full flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md hover:shadow-lg cursor-pointer"
                     >
                       <MessageCircle size={18} />
                       {activeItem.id === 'social-leads-generation' ? 'Attiva Conversioni su WhatsApp' : 'Discuti questa Proposta'}
@@ -310,7 +310,7 @@ export default function Portfolio() {
 
                     <button
                       onClick={() => setSelectedItemId(null)}
-                      className="bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs md:text-sm py-3.5 rounded-full transition-all cursor-pointer text-center"
+                      className="bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs md:text-sm px-6 py-3.5 rounded-full transition-all cursor-pointer text-center"
                     >
                       Chiudi
                     </button>

@@ -10,7 +10,7 @@ export default function Footer({ onOpenPrivacy, onOpenCookie, onOpenSitemap }: F
   };
 
   return (
-    <footer className="bg-surface-container-low dark:bg-surface-dim border-t border-outline-variant/10 flex flex-col items-center gap-6 py-12 px-4 text-center mt-20 pl-[59px] pr-[15px]">
+    <footer className="bg-surface-container-low dark:bg-surface-dim border-t border-outline-variant/10 flex flex-col items-center gap-6 py-12 px-6 text-center mt-20 pl-12 md:pl-0">
       {/* Small Logo */}
       <div
         onClick={handleScrollToTop}

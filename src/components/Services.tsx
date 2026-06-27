@@ -140,15 +140,15 @@ export default function Services() {
   const activeDetails = selectedServiceId ? SERVICE_DETAILS[selectedServiceId] : null;
 
   return (
-    <section id="services" className="py-24 bg-surface-container-low relative scroll-mt-[110px] pl-[59px] pr-[15px]">
-      <div className="w-full">
+    <section id="services" className="py-24 bg-surface-container-low relative scroll-mt-[110px] pl-12 md:pl-0">
+      <div className="max-w-7xl mx-auto px-6 md:px-16">
         {/* Title */}
         <div className="text-center mb-16">
           <h2 className="font-headline text-3xl md:text-4xl font-semibold text-primary mb-4">
             Servizi su Misura
           </h2>
           <div className="h-1 w-20 bg-secondary mx-auto rounded-full mb-3"></div>
-          <p className="font-sans text-sm md:text-base text-on-surface-variant max-w-[1800px] mx-auto lowercase tracking-wide">
+          <p className="font-sans text-sm md:text-base text-on-surface-variant max-w-xl mx-auto lowercase tracking-wide">
             clicca su una scheda per svelare l'approccio nel dettaglio ed attivare il servizio.
           </p>
         </div>
@@ -194,7 +194,7 @@ export default function Services() {
 
                 {/* Card CTA Button */}
                 <div className="w-full mt-auto pt-4">
-                  <span className="w-full bg-[#11052C] dark:bg-[#1C103F] group-hover:bg-primary text-white text-center py-3 rounded-2xl font-headline font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                  <span className="w-full bg-[#11052C] dark:bg-[#1C103F] group-hover:bg-primary text-white text-center py-3 px-5 rounded-2xl font-headline font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
                     SCOPRI DI PIÙ
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -220,7 +220,7 @@ export default function Services() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 40 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="bg-white rounded-[40px] w-full max-w-[1800px] max-h-[90vh] md:max-h-[85vh] shadow-2xl overflow-hidden flex flex-col relative text-on-surface"
+              className="bg-white rounded-[40px] w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] shadow-2xl overflow-hidden flex flex-col relative text-on-surface"
             >
               {/* Top Bar / Close Button */}
               <div className="absolute top-6 right-6 z-20">
@@ -315,7 +315,7 @@ export default function Services() {
                       href={activeDetails.ctaLink}
                       target="_blank"
                       rel="noreferrer"
-                      className="bg-green-600 hover:bg-green-700 text-white font-semibold text-xs md:text-sm py-3.5 rounded-full flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md hover:shadow-lg cursor-pointer"
+                      className="bg-green-600 hover:bg-green-700 text-white font-semibold text-xs md:text-sm px-6 py-3.5 rounded-full flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md hover:shadow-lg cursor-pointer"
                     >
                       <MessageCircle size={18} />
                       {activeDetails.ctaText}
@@ -323,7 +323,7 @@ export default function Services() {
                     
                     <button
                       onClick={() => setSelectedServiceId(null)}
-                      className="bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs md:text-sm py-3.5 rounded-full transition-all cursor-pointer text-center"
+                      className="bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs md:text-sm px-6 py-3.5 rounded-full transition-all cursor-pointer text-center"
                     >
                       Chiudi Dettagli
                     </button>

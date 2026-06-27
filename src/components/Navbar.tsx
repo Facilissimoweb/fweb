@@ -1,4 +1,3 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef, ElementType } from 'react';
 import { Menu, X, Sun, Moon, ChevronDown, Home, Mail, Phone, MessageSquare, PersonStanding, Briefcase, FolderOpen, User, Newspaper } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -14,7 +13,6 @@ interface NavLinkItem {
   target: string;
   icon: ElementType;
   subItems?: SubMenuItem[];
-  isRoute?: boolean;
 }
 
 interface LangItem {
@@ -62,36 +60,7 @@ const WhatsAppIcon = ({ size = 20, className = "" }: { size?: number; className?
   </svg>
 );
 
-const PanoramaIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12Z" stroke="url(#nav_panorama_grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M12 18V12L16 10" stroke="url(#nav_panorama_grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="12" cy="12" r="3" stroke="url(#nav_panorama_grad)" strokeWidth="2"/>
-    <defs>
-      <linearGradient id="nav_panorama_grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#A855F7"/>
-        <stop offset="1" stopColor="#EC4899"/>
-      </linearGradient>
-    </defs>
-  </svg>
-);
-
-const ROIIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2V22M12 2L15 5M12 2L9 5" stroke="url(#nav_roi_grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M18 12H6M18 12L15 9M18 12L15 15M6 12L9 9M6 12L9 15" stroke="url(#nav_roi_grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <defs>
-      <linearGradient id="nav_roi_grad" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#3B82F6"/>
-        <stop offset="1" stopColor="#10B981"/>
-      </linearGradient>
-    </defs>
-  </svg>
-);
-
 export default function Navbar() {
-  const navigate = useNavigate();
-  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showTopBar, setShowTopBar] = useState(true);
@@ -336,32 +305,14 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleScrollTo = (target: string, isRoute: boolean = false) => {
+  const handleScrollTo = (id: string) => {
     setIsOpen(false);
     setMobileSidebarSubmenu(null);
-
-    if (isRoute) {
-      navigate(target);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    if (location.pathname !== '/') {
-      navigate('/');
-      // Wait for navigation and layout to settle. Increased timeout for reliability.
-      setTimeout(() => {
-        const element = document.getElementById(target);
-        if (element) {
-          const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      }, 300);
-    } else {
-      const element = document.getElementById(target);
-      if (element) {
-        const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
+    const element = document.getElementById(id);
+    if (element) {
+      // Use a slightly larger scroll offset for better visibility
+      const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 
@@ -370,32 +321,19 @@ export default function Navbar() {
     setActiveSubmenu(null);
     setMobileSidebarSubmenu(null);
     
-    if (location.pathname !== '/') {
-      navigate('/');
-      // Increased timeout to allow Home page to mount and elements to be positioned.
-      setTimeout(() => {
-        const element = document.getElementById(target);
-        if (element) {
-          const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-        // Additional delay before triggering the modal to ensure scroll is stable.
-        setTimeout(() => {
-          const eventName = type === 'service' ? 'open-service' : 'open-proposal';
-          window.dispatchEvent(new CustomEvent(eventName, { detail: id }));
-        }, 500);
-      }, 300);
-    } else {
-      const element = document.getElementById(target);
-      if (element) {
-        const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-      setTimeout(() => {
-        const eventName = type === 'service' ? 'open-service' : 'open-proposal';
-        window.dispatchEvent(new CustomEvent(eventName, { detail: id }));
-      }, 500);
+    // First, scroll to the parent section with offset
+    const element = document.getElementById(target);
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
+
+    // Then dispatch the custom event to open the details modal
+    // Increased delay slightly to ensure scroll has started/stabilized
+    setTimeout(() => {
+      const eventName = type === 'service' ? 'open-service' : 'open-proposal';
+      window.dispatchEvent(new CustomEvent(eventName, { detail: id }));
+    }, 450);
   };
 
   const navLinks: NavLinkItem[] = [
@@ -425,8 +363,6 @@ export default function Navbar() {
     },
     { label: 'Chi Sono', target: 'about', icon: User },
     { label: 'Blog', target: 'blog', icon: Newspaper },
-    { label: 'Panorama', target: '/panorama', icon: PanoramaIcon, isRoute: true },
-    { label: 'ROI', target: '/roi-simulator', icon: ROIIcon, isRoute: true },
   ];
 
   const footerTabs = [
@@ -437,29 +373,16 @@ export default function Navbar() {
     { id: 'accessibility', label: 'leggibile', icon: PersonStanding, action: () => { window.dispatchEvent(new CustomEvent('toggle-high-contrast')); } },
   ];
 
-  const sidebarVisible = true; // Sidebar is always visible now
-
   return (
     <>
-      {/* Vertical Sidebar - Primary Navigation */}
+      {/* Vertical Sidebar for Mobile/Tablet */}
       <div
         ref={sidebarRef}
-        className={`fixed left-0 top-1/2 -translate-y-1/2 z-[60] w-11 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-lg border border-l-0 border-outline-variant/20 flex flex-col items-center py-4 gap-2 pointer-events-auto shadow-[10px_0_30px_rgba(0,0,0,0.1)] rounded-r-[28px] transition-transform duration-300 ${isOpen ? '-translate-x-full' : 'translate-x-0'}`}
+        className="fixed left-0 top-[12%] bottom-[12%] z-[60] w-12 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-lg border border-l-0 border-outline-variant/20 flex flex-col items-center py-8 gap-6 md:hidden pointer-events-auto shadow-[10px_0_30px_rgba(0,0,0,0.1)] rounded-r-[32px]"
       >
-        {/* Hamburger Toggle at the top of sidebar */}
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-8.5 h-8.5 rounded-[12px] flex items-center justify-center text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all cursor-pointer mb-1"
-          aria-label="Apri Menu"
-        >
-          <Menu size={18} className="stroke-[2.2]" />
-        </button>
-
-        <div className="w-5 h-[1px] bg-outline-variant/20 mb-1" />
-
         {navLinks.map((link) => {
           const Icon = link.icon;
-          const isActive = link.isRoute ? location.pathname === link.target : activeSection === link.target;
+          const isActive = activeSection === link.target;
           const hasSub = !!link.subItems;
 
           return (
@@ -469,18 +392,18 @@ export default function Navbar() {
                   if (hasSub) {
                     setMobileSidebarSubmenu(mobileSidebarSubmenu === link.target ? null : link.target);
                   } else {
-                    handleScrollTo(link.target, link.isRoute);
+                    handleScrollTo(link.target);
                     setMobileSidebarSubmenu(null);
                   }
                 }}
-                className={`w-8.5 h-8.5 rounded-[12px] flex items-center justify-center transition-all duration-300 relative cursor-pointer active:scale-90 ${
+                className={`w-10 h-10 rounded-[14px] flex items-center justify-center transition-all duration-300 relative cursor-pointer active:scale-90 ${
                   isActive
                     ? 'bg-primary text-on-primary shadow-lg shadow-primary/20 scale-110'
                     : 'text-on-surface-variant hover:bg-primary/10 hover:text-primary'
                 }`}
                 aria-label={link.label}
               >
-                <Icon size={16} className="stroke-[2.2]" />
+                <Icon size={18} className="stroke-[2.2]" />
                 {hasSub && (
                   <div className={`absolute -right-0.5 -bottom-0.5 w-2.5 h-2.5 rounded-full border border-surface bg-secondary transition-transform duration-300 ${mobileSidebarSubmenu === link.target ? 'rotate-180' : ''}`}>
                     <ChevronDown size={6} className="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
@@ -517,20 +440,20 @@ export default function Navbar() {
         })}
 
         {/* Separator */}
-        <div className="w-5 h-[1px] bg-outline-variant/20 my-0" />
+        <div className="w-6 h-[1px] bg-outline-variant/20 my-1" />
 
         {/* Theme Toggle in Sidebar */}
         <button
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-          className="w-8 h-8 rounded-[11px] flex items-center justify-center text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all cursor-pointer active:scale-90"
+          className="w-10 h-10 rounded-[14px] flex items-center justify-center text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all cursor-pointer active:scale-90"
         >
-          {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
         </button>
 
         {/* Language in Sidebar (Simplified) */}
         <button
           onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-          className="w-8 h-8 rounded-[11px] flex items-center justify-center bg-surface-container-low border border-outline-variant/20 text-[9px] font-black cursor-pointer active:scale-90"
+          className="w-10 h-10 rounded-[14px] flex items-center justify-center bg-surface-container-low border border-outline-variant/20 text-xs font-black cursor-pointer active:scale-90"
         >
           {LANGUAGES.find(l => l.code === currentLang)?.flag || '🇮🇹'}
         </button>
@@ -542,7 +465,7 @@ export default function Navbar() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
-              className="absolute left-12 bottom-0 w-48 bg-surface dark:bg-surface-container-high rounded-[24px] p-2 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1 max-h-[60vh] overflow-y-auto"
+              className="absolute left-14 bottom-0 w-48 bg-surface dark:bg-surface-container-high rounded-[24px] p-2 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1 max-h-[60vh] overflow-y-auto"
             >
               {LANGUAGES.map((lang) => (
                 <button
@@ -593,7 +516,145 @@ export default function Navbar() {
           </div>
         </motion.div>
 
-        {/* Horizontal Navigation Bar - REMOVED AS REQUESTED */}
+        {/* Main Navigation Bar */}
+        <nav
+          className={`flex items-center justify-between w-full px-6 md:px-16 py-4 transition-[background-color,border-color,box-shadow,padding] duration-300 pointer-events-auto ${
+            isScrolled || isOpen
+              ? 'bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md shadow-secondary/5 border-b border-outline-variant/10'
+              : 'bg-transparent'
+          } ${/* Hidden on mobile/tablet because of the sidebar */ 'hidden md:flex'}`}
+        >
+          {/* Circular Home Button on the Left */}
+          <button
+            onClick={() => {
+              setIsOpen(false);
+              handleScrollTo('hero');
+            }}
+            className="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container transition-[background-color,transform] text-on-surface cursor-pointer shadow-sm focus:outline-none"
+            aria-label="Home"
+          >
+            <Home size={18} className="stroke-[2.2]" />
+          </button>
+
+          {/* Desktop Textual Menu */}
+          <div className="hidden md:flex items-center gap-8 ml-8">
+            {navLinks.map((link) => (
+              <div
+                key={link.target}
+                className="relative"
+                onMouseEnter={() => handleMouseEnter(link.target)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <button
+                  onClick={() => handleScrollTo(link.target)}
+                  className={`flex items-center gap-1.5 text-sm font-bold tracking-tight transition-colors cursor-pointer focus:outline-none ${
+                    activeSection === link.target ? 'text-primary' : 'text-on-surface hover:text-primary'
+                  }`}
+                >
+                  {link.label}
+                  {link.subItems && (
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-300 ${
+                        activeSubmenu === link.target ? 'rotate-180' : ''
+                      }`}
+                    />
+                  )}
+                </button>
+
+                {link.subItems && (
+                  <AnimatePresence>
+                    {activeSubmenu === link.target && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-0 mt-4 w-56 bg-surface/95 dark:bg-surface-container-high/95 backdrop-blur-md rounded-[20px] p-2 border border-outline-variant/20 shadow-2xl z-50 flex flex-col gap-1"
+                      >
+                        {link.subItems.map((sub) => (
+                          <button
+                            key={sub.id}
+                            onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
+                            className="w-full text-left px-4 py-2.5 rounded-xl text-xs font-semibold text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all cursor-pointer"
+                          >
+                            {sub.label}
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Right Side Controls */}
+          <div className="flex items-center gap-3 ml-auto">
+            {/* Language Selector */}
+            <div className="relative">
+              <button
+                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                onBlur={() => setTimeout(() => setLangDropdownOpen(false), 250)}
+                className="flex items-center gap-1.5 h-12 px-4 rounded-full border border-outline-variant/30 bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm text-xs font-extrabold uppercase select-none focus:outline-none"
+                title="Cambia lingua"
+              >
+                <span className="text-base leading-none">
+                  {LANGUAGES.find(l => l.code === currentLang)?.flag || '🇮🇹'}
+                </span>
+                <span className="text-[11px] font-extrabold tracking-wide text-on-surface">
+                  {currentLang.split('-')[0]}
+                </span>
+              </button>
+
+              <AnimatePresence>
+                {langDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 mt-2 w-48 bg-surface dark:bg-surface-container-high rounded-[20px] p-1.5 border border-outline-variant/20 shadow-2xl z-50 flex flex-col gap-0.5 max-h-80 overflow-y-auto"
+                  >
+                    {LANGUAGES.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => changeLanguage(lang.code)}
+                        className={`w-full text-left px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-all cursor-pointer ${
+                          currentLang === lang.code
+                            ? 'bg-primary/10 text-primary'
+                            : 'text-on-surface-variant hover:bg-secondary/5 dark:hover:bg-secondary/10 hover:text-secondary'
+                        }`}
+                      >
+                        <span className="text-base leading-none">{lang.flag}</span>
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Theme Toggle Button */}
+            <button
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              className="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm focus:outline-none"
+              aria-label="Cambia tema"
+              title={theme === 'light' ? 'Passa alla modalità scura' : 'Passa alla modalità chiara'}
+            >
+              {theme === 'light' ? <Moon size={18} className="stroke-[2.2]" /> : <Sun size={18} className="stroke-[2.2]" />}
+            </button>
+
+            {/* Hamburger/Close Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="w-12 h-12 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-all cursor-pointer focus:outline-none"
+              aria-label="Toggle Menu"
+            >
+              {isOpen ? <X size={24} className="stroke-[2.2]" /> : <Menu size={24} className="stroke-[2.2]" />}
+            </button>
+          </div>
+        </nav>
       </header>
 
       {/* Full-screen Overlay Hamburger Drawer Menu */}
@@ -606,20 +667,11 @@ export default function Navbar() {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="fixed inset-0 bg-surface/98 dark:bg-surface-dim/98 backdrop-blur-md z-40 overflow-y-auto px-6 sm:px-12 pt-36 pb-32 flex flex-col justify-start"
           >
-            <div className="max-w-xl mx-auto w-full flex flex-col gap-4 mt-8 relative">
-              {/* Close Button for Full Menu */}
-              <button
-                onClick={() => setIsOpen(false)}
-                className="absolute -top-16 right-0 w-12 h-12 rounded-full flex items-center justify-center bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer"
-                aria-label="Chiudi Menu"
-              >
-                <X size={24} className="stroke-[2.2]" />
-              </button>
-
+            <div className="max-w-xl mx-auto w-full flex flex-col gap-4 mt-8">
               {navLinks.map((link) => {
                 const hasSub = !!link.subItems;
                 const isExpanded = !!mobileExpanded[link.target];
-                const isActive = link.isRoute ? location.pathname === link.target : activeSection === link.target;
+                const isActive = activeSection === link.target;
 
                 return (
                   <div key={link.target} className="flex flex-col border-b border-outline-variant/15 pb-2">
@@ -629,7 +681,7 @@ export default function Navbar() {
                           if (hasSub) {
                             setMobileExpanded(prev => ({ ...prev, [link.target]: !prev[link.target] }));
                           } else {
-                            handleScrollTo(link.target, link.isRoute);
+                            handleScrollTo(link.target);
                           }
                         }}
                         className={`text-left text-lg sm:text-xl font-bold tracking-tight font-headline transition-colors select-none cursor-pointer focus:outline-none flex-grow ${

@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone, MessageSquare, PersonStanding } from 'lucide-react';
+import { useState, useEffect, useRef, ElementType } from 'react';
+import { Menu, X, Sun, Moon, ChevronDown, Home, Mail, Phone, MessageSquare, PersonStanding, Briefcase, FolderOpen, User, Newspaper } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface SubMenuItem {
@@ -11,6 +11,7 @@ interface SubMenuItem {
 interface NavLinkItem {
   label: string;
   target: string;
+  icon: ElementType;
   subItems?: SubMenuItem[];
 }
 
@@ -103,9 +104,25 @@ export default function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('hero');
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [mobileSidebarSubmenu, setMobileSidebarSubmenu] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
+  const sidebarRef = useRef<HTMLDivElement>(null);
   
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        setMobileSidebarSubmenu(null);
+        setLangDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleMouseEnter = (target: string) => {
     if (timeoutRef.current) {
@@ -299,6 +316,7 @@ export default function Navbar() {
   const handleSubItemClick = (id: string, type: 'service' | 'proposal', target: string) => {
     setIsOpen(false);
     setActiveSubmenu(null);
+    setMobileSidebarSubmenu(null);
     
     // First, scroll to the parent section
     const element = document.getElementById(target);
@@ -314,10 +332,11 @@ export default function Navbar() {
   };
 
   const navLinks: NavLinkItem[] = [
-    { label: 'Home', target: 'hero' },
+    { label: 'Home', target: 'hero', icon: Home },
     { 
       label: 'Servizi', 
       target: 'services',
+      icon: Briefcase,
       subItems: [
         { label: 'Web Design', id: 'web-design', type: 'service' },
         { label: 'Branding', id: 'branding', type: 'service' },
@@ -328,6 +347,7 @@ export default function Navbar() {
     { 
       label: 'Proposte', 
       target: 'portfolio',
+      icon: FolderOpen,
       subItems: [
         { label: 'Lux Aura (Web)', id: 'lux-aura', type: 'proposal' },
         { label: 'Tribal Identity (Logo)', id: 'tribal-identity', type: 'proposal' },
@@ -336,8 +356,8 @@ export default function Navbar() {
         { label: "Social Lead's Gen.", id: 'social-leads-generation', type: 'proposal' }
       ]
     },
-    { label: 'Chi Sono', target: 'about' },
-    { label: 'Blog', target: 'blog' },
+    { label: 'Chi Sono', target: 'about', icon: User },
+    { label: 'Blog', target: 'blog', icon: Newspaper },
   ];
 
   const footerTabs = [
@@ -350,6 +370,115 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Vertical Sidebar for Mobile/Tablet */}
+      <div ref={sidebarRef} className="fixed left-0 top-0 bottom-0 z-[60] w-16 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border-r border-outline-variant/10 flex flex-col items-center py-8 gap-6 md:hidden pointer-events-auto shadow-2xl">
+        {navLinks.map((link) => {
+          const Icon = link.icon;
+          const isActive = activeSection === link.target;
+          const hasSub = !!link.subItems;
+
+          return (
+            <div key={link.target} className="relative group">
+              <button
+                onClick={() => {
+                  if (hasSub) {
+                    setMobileSidebarSubmenu(mobileSidebarSubmenu === link.target ? null : link.target);
+                  } else {
+                    handleScrollTo(link.target);
+                    setMobileSidebarSubmenu(null);
+                  }
+                }}
+                className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-300 relative ${
+                  isActive
+                    ? 'bg-primary text-on-primary shadow-lg shadow-primary/20 scale-110'
+                    : 'text-on-surface-variant hover:bg-primary/10 hover:text-primary'
+                }`}
+                aria-label={link.label}
+              >
+                <Icon size={22} className="stroke-[2.2]" />
+                {hasSub && (
+                  <div className={`absolute -right-1 -bottom-1 w-3 h-3 rounded-full border-2 border-surface bg-secondary transition-transform duration-300 ${mobileSidebarSubmenu === link.target ? 'rotate-180' : ''}`}>
+                    <ChevronDown size={8} className="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                  </div>
+                )}
+              </button>
+
+              {/* Lateral Submenu Expansion */}
+              <AnimatePresence>
+                {mobileSidebarSubmenu === link.target && link.subItems && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20, scale: 0.95 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -20, scale: 0.95 }}
+                    className="absolute left-20 top-0 w-64 bg-surface/95 dark:bg-surface-container-high/95 backdrop-blur-xl rounded-[24px] p-3 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1.5"
+                  >
+                    <div className="px-4 py-2 mb-1 border-b border-outline-variant/10">
+                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">{link.label}</p>
+                    </div>
+                    {link.subItems.map((sub) => (
+                      <button
+                        key={sub.id}
+                        onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
+                        className="w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all active:scale-[0.98]"
+                      >
+                        {sub.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+
+        {/* Separator */}
+        <div className="w-8 h-[1px] bg-outline-variant/20 my-2" />
+
+        {/* Theme Toggle in Sidebar */}
+        <button
+          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          className="w-11 h-11 rounded-2xl flex items-center justify-center text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all"
+        >
+          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+        </button>
+
+        {/* Language in Sidebar (Simplified) */}
+        <button
+          onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+          className="w-11 h-11 rounded-2xl flex items-center justify-center bg-surface-container-low border border-outline-variant/20 text-xs font-black"
+        >
+          {LANGUAGES.find(l => l.code === currentLang)?.flag || '🇮🇹'}
+        </button>
+
+        {/* Language Dropdown for Sidebar */}
+        <AnimatePresence>
+          {langDropdownOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="absolute left-20 bottom-8 w-48 bg-surface dark:bg-surface-container-high rounded-[24px] p-2 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1 max-h-[60vh] overflow-y-auto"
+            >
+              {LANGUAGES.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => {
+                    changeLanguage(lang.code);
+                    setLangDropdownOpen(false);
+                  }}
+                  className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-3 transition-all ${
+                    currentLang === lang.code ? 'bg-primary/10 text-primary' : 'text-on-surface-variant hover:bg-secondary/5'
+                  }`}
+                >
+                  <span>{lang.flag}</span>
+                  <span>{lang.label}</span>
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
       {/* Subtle Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-primary/10 dark:bg-primary-container/10 z-[100] pointer-events-none">
         <div 
@@ -358,7 +487,7 @@ export default function Navbar() {
         />
       </div>
 
-      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full pointer-events-none">
+      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full pointer-events-none pl-16 md:pl-0">
         {/* Top Info Bar */}
         <motion.div
           initial={false}
@@ -385,7 +514,7 @@ export default function Navbar() {
             isScrolled || isOpen
               ? 'bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md shadow-secondary/5 border-b border-outline-variant/10'
               : 'bg-transparent'
-          }`}
+          } ${/* Hidden on mobile/tablet because of the sidebar */ 'hidden md:flex'}`}
         >
           {/* Circular Home Button on the Left */}
           <button

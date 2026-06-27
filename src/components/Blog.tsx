@@ -324,8 +324,8 @@ export default function Blog() {
   };
 
   return (
-    <section id="blog" className="py-24 bg-surface-container-low dark:bg-surface-container-lowest relative border-t border-b border-outline-variant/10 scroll-mt-[110px] pl-[59px] pr-[15px]">
-      <div className="w-full">
+    <section id="blog" className="py-24 bg-surface-container-low dark:bg-surface-container-lowest relative border-t border-b border-outline-variant/10 scroll-mt-[110px] pl-12 md:pl-0">
+      <div className="max-w-7xl mx-auto px-6 md:px-16">
         
         {/* Title Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
@@ -337,11 +337,11 @@ export default function Blog() {
               Il Taccuino delle Idee
             </h2>
             <div className="h-1 w-20 bg-secondary rounded-full mb-3"></div>
-            <p className="font-sans text-base text-on-surface-variant max-w-[1800px] leading-relaxed">
+            <p className="font-sans text-base text-on-surface-variant max-w-xl leading-relaxed">
               Condivido la mia visione sul Web Design sartoriale, sulla Brand Identity felina e su come conquistare Google senza perdere l'eleganza estetica.
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-outline border border-outline-variant/20 rounded-full py-2 bg-background/50 backdrop-blur-sm shadow-sm">
+          <div className="flex items-center gap-2 text-xs font-mono text-outline border border-outline-variant/20 rounded-full px-4 py-2 bg-background/50 backdrop-blur-sm shadow-sm">
             <CheckCircle size={14} className="text-green-500 animate-pulse" />
             <span>SEO PRONTO PER L'INDICIZZAZIONE</span>
           </div>
@@ -389,7 +389,7 @@ export default function Blog() {
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover transform group-hover:scale-108 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
                   />
-                  <div className="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-semibold py-1.5 rounded-full uppercase tracking-wider">
+                  <div className="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">
                     {post.category}
                   </div>
                 </div>
@@ -422,7 +422,7 @@ export default function Blog() {
                     {/* Tags Preview */}
                     <div className="flex gap-1.5 overflow-hidden">
                       {post.tags.slice(0, 2).map(tag => (
-                        <span key={tag} className="text-[9px] font-mono font-semibold bg-surface-container text-on-surface-variant py-1 rounded">
+                        <span key={tag} className="text-[9px] font-mono font-semibold bg-surface-container text-on-surface-variant px-2 py-1 rounded">
                           #{tag}
                         </span>
                       ))}
@@ -465,7 +465,7 @@ export default function Blog() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 50 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="bg-background dark:bg-surface-container rounded-[40px] w-full max-w-[1800px] max-h-[92vh] md:max-h-[85vh] shadow-2xl overflow-hidden flex flex-col relative text-on-surface border border-outline-variant/15"
+              className="bg-background dark:bg-surface-container rounded-[40px] w-full max-w-4xl max-h-[92vh] md:max-h-[85vh] shadow-2xl overflow-hidden flex flex-col relative text-on-surface border border-outline-variant/15"
             >
               {/* Close Button sticky top right */}
               <div className="absolute top-6 right-6 z-20">
@@ -484,14 +484,14 @@ export default function Blog() {
                 {/* Article Header Metadata */}
                 <div className="space-y-4 pb-6 border-b border-outline-variant/15">
                   <div className="flex flex-wrap gap-2 items-center text-xs font-sans text-on-surface-variant/70">
-                    <span className="bg-primary/10 text-primary dark:bg-primary-container/20 dark:text-primary-container font-semibold py-1 rounded-full uppercase tracking-widest text-[10px]">
+                    <span className="bg-primary/10 text-primary dark:bg-primary-container/20 dark:text-primary-container font-semibold px-3 py-1 rounded-full uppercase tracking-widest text-[10px]">
                       {activePost.category}
                     </span>
                     <span className="flex items-center gap-1 ml-2">
                       <Calendar size={13} className="text-secondary" />
                       {activePost.date}
                     </span>
-                    <span className="flex items-center gap-1 ml-2 bg-secondary/10 text-secondary border border-secondary/10 py-0.5 rounded-full text-[10px] font-semibold">
+                    <span className="flex items-center gap-1 ml-2 bg-secondary/10 text-secondary border border-secondary/10 px-2 py-0.5 rounded-full text-[10px] font-semibold">
                       <Clock size={11} />
                       {calculateReadingTime(activePost)}
                     </span>
@@ -503,7 +503,7 @@ export default function Blog() {
 
                   <div className="flex gap-2 flex-wrap">
                     {activePost.tags.map(tag => (
-                      <span key={tag} className="flex items-center gap-1 text-[10px] font-mono font-semibold bg-surface-container text-on-surface-variant py-1 rounded-full border border-outline-variant/10">
+                      <span key={tag} className="flex items-center gap-1 text-[10px] font-mono font-semibold bg-surface-container text-on-surface-variant px-3 py-1 rounded-full border border-outline-variant/10">
                         <Tag size={10} className="text-secondary" />
                         #{tag}
                       </span>
@@ -525,7 +525,7 @@ export default function Blog() {
                 </div>
 
                 {/* Article Body Content blocks */}
-                <div className="space-y-6 max-w-[1800px] text-on-surface-variant font-sans text-sm md:text-base leading-relaxed">
+                <div className="space-y-6 max-w-none text-on-surface-variant font-sans text-sm md:text-base leading-relaxed">
                   {activePost.contentBlocks.map((block, index) => {
                     switch (block.type) {
                       case 'heading':
@@ -570,7 +570,7 @@ export default function Blog() {
                       <Search size={14} />
                       PREDISPOSIZIONE SEO & METADATI (ATTIVI)
                     </span>
-                    <span className="text-[10px] bg-green-500/10 text-green-500 border border-green-500/20 py-0.5 rounded-full font-semibold font-mono">
+                    <span className="text-[10px] bg-green-500/10 text-green-500 border border-green-500/20 px-2 py-0.5 rounded-full font-semibold font-mono">
                       VALIDATO SCHEMA.ORG
                     </span>
                   </div>
@@ -581,7 +581,7 @@ export default function Blog() {
                     </div>
                     <div className="space-y-2">
                       <p><strong className="text-primary font-semibold uppercase block text-[10px] opacity-70">Focus Keywords:</strong> {activePost.seo.focusKeywords.join(', ')}</p>
-                      <p><strong className="text-primary font-semibold uppercase block text-[10px] opacity-70">Canonical Slug URL:</strong> <code className="bg-surface-container text-secondary/50 py-0.5 rounded text-[11px]">https://facilissimoweb.com/blog/{activePost.seo.slug}</code></p>
+                      <p><strong className="text-primary font-semibold uppercase block text-[10px] opacity-70">Canonical Slug URL:</strong> <code className="bg-surface-container text-secondary px-1.5 py-0.5 rounded text-[11px]">https://facilissimoweb.com/blog/{activePost.seo.slug}</code></p>
                     </div>
                   </div>
                 </div>
@@ -597,7 +597,7 @@ export default function Blog() {
                       {/* Like button inside article */}
                       <button
                         onClick={(e) => handleLike(activePost.id, e)}
-                        className={`flex items-center gap-1 py-2 rounded-full border text-xs cursor-pointer ${
+                        className={`flex items-center gap-1 px-4 py-2 rounded-full border text-xs cursor-pointer ${
                           likedPosts[activePost.id]
                             ? 'bg-red-500/10 border-red-500/25 text-red-500 font-semibold'
                             : 'bg-background hover:bg-surface-container border-outline-variant/20 text-on-surface-variant'
@@ -654,7 +654,7 @@ export default function Blog() {
                       href={`https://wa.me/393793603321?text=Ciao%20Maria%20Teresa,%20ho%20letto%20il%20tuo%20articolo%20${encodeURIComponent(activePost.title)}%20e%20vorrei%20consulenza%20per%20un%20progetto`}
                       target="_blank"
                       rel="noreferrer"
-                      className="bg-primary text-on-primary font-bold text-xs py-3.5 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-95 transition-all cursor-pointer w-full sm:w-auto"
+                      className="bg-primary text-on-primary font-bold text-xs px-6 py-3.5 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-95 transition-all cursor-pointer w-full sm:w-auto"
                     >
                       <MessageCircle size={16} />
                       Parla con me su WhatsApp
@@ -667,7 +667,7 @@ export default function Blog() {
                 <div className="flex justify-end pt-4 border-t border-outline-variant/10">
                   <button
                     onClick={() => setSelectedPostId(null)}
-                    className="bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs md:text-sm py-3 rounded-full transition-all cursor-pointer"
+                    className="bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs md:text-sm px-6 py-3 rounded-full transition-all cursor-pointer"
                   >
                     Torna all'Archivio
                   </button>

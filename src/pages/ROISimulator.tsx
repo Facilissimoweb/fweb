@@ -41,7 +41,7 @@ export default function ROISimulator() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="max-w-[1600px] w-full"
+        className="max-w-[1800px] w-full"
       >
         <div className="text-center mb-12">
           <div className="flex flex-col gap-1 mb-4">
@@ -56,7 +56,7 @@ export default function ROISimulator() {
             Calcola il Tuo <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">ROI</span>
           </h1>
-          <p className="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed font-medium">
+          <p className="text-lg md:text-xl text-on-surface-variant max-w-[1800px] mx-auto leading-relaxed font-medium">
             Regola i parametri per visualizzare diversi scenari e potenzialità del tuo business.
           </p>
         </div>

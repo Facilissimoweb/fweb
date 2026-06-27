@@ -14,8 +14,8 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-24 bg-background overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-16">
+    <section className="pl-[59px] pr-[15px] py-24 bg-background overflow-hidden">
+      <div className="max-w-[1800px] mx-auto md:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

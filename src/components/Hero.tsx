@@ -162,22 +162,22 @@ export default function Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        className="backdrop-blur-md bg-surface/70 dark:bg-surface-container-low/70 border border-outline-variant/15 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-8 sm:p-12 md:p-16 rounded-3xl md:rounded-[48px] w-full max-w-5xl mx-auto space-y-6 md:space-y-8 z-10 transition-all duration-300 hover:border-primary/20 text-center"
+        className="backdrop-blur-md bg-surface/70 dark:bg-surface-container-low/70 border border-outline-variant/15 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-8 sm:p-12 md:p-16 rounded-3xl md:rounded-[48px] w-full max-w-[1800px] mx-auto space-y-6 md:space-y-8 z-10 transition-all duration-300 hover:border-primary/20 text-center"
       >
         <motion.h1 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="font-headline text-[1.8rem] min-[380px]:text-[2.2rem] sm:text-4xl md:text-6xl font-black text-primary tracking-tight leading-none uppercase break-words select-none"
+          className="font-headline text-[1.8rem] min-[380px]:text-[2.2rem] sm:text-4xl md:text-6xl font-black text-primary tracking-tight leading-none uppercase whitespace-nowrap select-none"
         >
-          Facilissimo<br />Web
+          Facilissimo Web
         </motion.h1>
         
         <motion.p 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
-          className="font-sans text-sm sm:text-lg md:text-xl text-on-surface-variant max-w-md mx-auto lowercase tracking-wide font-medium"
+          className="font-sans text-sm sm:text-lg md:text-xl text-on-surface-variant max-w-[1800px] mx-auto lowercase tracking-wide font-medium"
         >
           freelance web designer
         </motion.p>
@@ -193,7 +193,7 @@ export default function Hero() {
             whileTap={{ scale: 0.96 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             onClick={handleScrollToServices}
-            className="inline-block bg-primary text-on-primary px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full font-headline text-xs sm:text-sm font-bold shadow-lg cursor-pointer hover:bg-secondary transition-colors relative overflow-hidden group w-full sm:w-auto"
+            className="inline-block bg-primary text-on-primary py-2.5 sm:px-8 sm:py-3.5 rounded-full font-headline text-xs sm:text-sm font-bold shadow-lg cursor-pointer hover:bg-secondary transition-colors relative overflow-hidden group w-full sm:w-auto"
           >
             <span className="relative z-10 font-bold uppercase tracking-wider">Servizi</span>
             <div className="absolute inset-0 bg-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -204,7 +204,7 @@ export default function Hero() {
             whileTap={{ scale: 0.96 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             onClick={handleScrollToPortfolio}
-            className="inline-block bg-secondary text-on-secondary px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full font-headline text-xs sm:text-sm font-bold shadow-lg cursor-pointer hover:bg-primary transition-colors relative overflow-hidden group w-full sm:w-auto"
+            className="inline-block bg-secondary text-on-secondary py-2.5 sm:px-8 sm:py-3.5 rounded-full font-headline text-xs sm:text-sm font-bold shadow-lg cursor-pointer hover:bg-primary transition-colors relative overflow-hidden group w-full sm:w-auto"
           >
             <span className="relative z-10 font-bold uppercase tracking-wider">Proposte</span>
             <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -215,7 +215,7 @@ export default function Hero() {
             whileTap={{ scale: 0.96 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             onClick={handleScrollToConsulenze}
-            className="inline-block bg-surface-container border border-outline-variant/30 text-on-surface px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full font-headline text-xs sm:text-sm font-bold shadow-md cursor-pointer hover:bg-primary hover:text-on-primary hover:border-transparent transition-colors relative overflow-hidden group w-full sm:w-auto"
+            className="inline-block bg-surface-container border border-outline-variant/30 text-on-surface py-2.5 sm:px-8 sm:py-3.5 rounded-full font-headline text-xs sm:text-sm font-bold shadow-md cursor-pointer hover:bg-primary hover:text-on-primary hover:border-transparent transition-colors relative overflow-hidden group w-full sm:w-auto"
           >
             <span className="relative z-10 font-bold uppercase tracking-wider">Consulenze</span>
             <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

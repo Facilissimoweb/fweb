@@ -29,7 +29,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-24 bg-surface-container-highest scroll-mt-[110px] pl-[59px] pr-[15px]">
-      <div className="max-w-[1600px] mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20">
+      <div className="max-w-[1800px] mx-auto  grid grid-cols-1 lg:grid-cols-2 gap-20">
         {/* Left Column: Info */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -110,7 +110,7 @@ export default function Contact() {
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 placeholder=" "
-                className="w-full bg-surface-container border-none rounded-2xl py-4 px-6 font-sans text-base text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all peer outline-none"
+                className="w-full bg-surface-container border-none rounded-2xl py-4 font-sans text-base text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all peer outline-none"
               />
               <label
                 htmlFor="name"
@@ -129,7 +129,7 @@ export default function Contact() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder=" "
-                className="w-full bg-surface-container border-none rounded-2xl py-4 px-6 font-sans text-base text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all peer outline-none"
+                className="w-full bg-surface-container border-none rounded-2xl py-4 font-sans text-base text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all peer outline-none"
               />
               <label
                 htmlFor="email"
@@ -148,7 +148,7 @@ export default function Contact() {
                 value={messaggio}
                 onChange={(e) => setMessaggio(e.target.value)}
                 placeholder=" "
-                className="w-full bg-surface-container border-none rounded-2xl py-4 px-6 font-sans text-base text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all peer outline-none resize-none"
+                className="w-full bg-surface-container border-none rounded-2xl py-4 font-sans text-base text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all peer outline-none resize-none"
               />
               <label
                 htmlFor="message"

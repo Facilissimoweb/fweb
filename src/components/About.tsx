@@ -4,7 +4,7 @@ import { SKILLS } from '../data';
 export default function About() {
   return (
     <section id="about" className="py-24 bg-surface-container overflow-hidden scroll-mt-[110px] pl-[59px] pr-[15px]">
-      <div className="max-w-[1600px] mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-[1800px] mx-auto  grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Left: Beautiful Designer Portrait */}
         <div className="relative flex justify-center">
           <motion.div

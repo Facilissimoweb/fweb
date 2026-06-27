@@ -27,7 +27,7 @@ export default function Panorama() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl w-full"
+        className="max-w-[1800px] w-full"
       >
         <div className="text-center mb-12">
           <div className="flex flex-col gap-1 mb-4">
@@ -42,7 +42,7 @@ export default function Panorama() {
             Compila il Tuo <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Panorama</span>
           </h1>
-          <p className="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed font-medium">
+          <p className="text-lg md:text-xl text-on-surface-variant max-w-[1800px] mx-auto leading-relaxed font-medium">
             Ottieni una visione chiara del tuo business digitale. Inserisci i tuoi dati per ricevere una strategia su misura.
           </p>
         </div>

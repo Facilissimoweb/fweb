@@ -23,7 +23,7 @@ export default function Panorama() {
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-surface-dim pt-40 pb-24 px-6 pl-16 md:px-12 md:pl-24 flex flex-col items-center">
+    <div className="min-h-screen bg-background dark:bg-surface-dim pt-40 pb-24 pl-[59px] pr-[15px] flex flex-col items-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function Panorama() {
           </p>
         </div>
 
-        <div className="bg-surface/40 dark:bg-surface-dim/40 backdrop-blur-2xl border border-outline-variant/30 rounded-[40px] p-8 sm:p-12 shadow-2xl relative overflow-hidden group">
+        <div className="bg-surface/40 dark:bg-surface-dim/40 backdrop-blur-2xl border border-outline-variant/30 rounded-[40px] p-8 sm:p-12 md:p-16 shadow-2xl relative overflow-hidden group">
           {/* Decorative gradients */}
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 blur-[100px] rounded-full group-hover:bg-primary/30 transition-colors" />
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-secondary/20 blur-[100px] rounded-full group-hover:bg-secondary/30 transition-colors" />

@@ -143,21 +143,24 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      const currentScrollY = Math.max(0, window.scrollY);
       setIsScrolled(currentScrollY > 50);
       
+      const diff = currentScrollY - lastScrollYRef.current;
+
       // Se si scrolla verso l'alto o si è vicini all'inizio, mostra la Top Bar
       if (currentScrollY <= 50) {
         setShowTopBar(true);
-      } else if (currentScrollY > lastScrollYRef.current + 8) {
-        // Scroll verso il basso di almeno 8px -> nascondi
+        lastScrollYRef.current = currentScrollY;
+      } else if (diff > 8) {
+        // Scroll verso il basso di almeno 8px accumulati -> nascondi
         setShowTopBar(false);
-      } else if (currentScrollY < lastScrollYRef.current - 8) {
-        // Scroll verso l'alto di almeno 8px -> mostra
+        lastScrollYRef.current = currentScrollY;
+      } else if (diff < -8) {
+        // Scroll verso l'alto di almeno 8px accumulati -> mostra
         setShowTopBar(true);
+        lastScrollYRef.current = currentScrollY;
       }
-
-      lastScrollYRef.current = Math.max(0, currentScrollY);
       
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
@@ -378,7 +381,7 @@ export default function Navbar() {
 
         {/* Main Navigation Bar */}
         <nav
-          className={`flex items-center justify-between w-full px-6 md:px-16 py-4 transition-all duration-300 pointer-events-auto ${
+          className={`flex items-center justify-between w-full px-6 md:px-16 py-4 transition-[background-color,border-color,box-shadow,padding] duration-300 pointer-events-auto ${
             isScrolled || isOpen
               ? 'bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md shadow-secondary/5 border-b border-outline-variant/10'
               : 'bg-transparent'
@@ -390,14 +393,67 @@ export default function Navbar() {
               setIsOpen(false);
               handleScrollTo('hero');
             }}
-            className="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container transition-all text-on-surface cursor-pointer shadow-sm focus:outline-none"
+            className="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container transition-[background-color,transform] text-on-surface cursor-pointer shadow-sm focus:outline-none"
             aria-label="Home"
           >
             <Home size={18} className="stroke-[2.2]" />
           </button>
 
+          {/* Desktop Textual Menu */}
+          <div className="hidden md:flex items-center gap-8 ml-8">
+            {navLinks.map((link) => (
+              <div
+                key={link.target}
+                className="relative"
+                onMouseEnter={() => handleMouseEnter(link.target)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <button
+                  onClick={() => handleScrollTo(link.target)}
+                  className={`flex items-center gap-1.5 text-sm font-bold tracking-tight transition-colors cursor-pointer focus:outline-none ${
+                    activeSection === link.target ? 'text-primary' : 'text-on-surface hover:text-primary'
+                  }`}
+                >
+                  {link.label}
+                  {link.subItems && (
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-300 ${
+                        activeSubmenu === link.target ? 'rotate-180' : ''
+                      }`}
+                    />
+                  )}
+                </button>
+
+                {link.subItems && (
+                  <AnimatePresence>
+                    {activeSubmenu === link.target && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-0 mt-4 w-56 bg-surface/95 dark:bg-surface-container-high/95 backdrop-blur-md rounded-[20px] p-2 border border-outline-variant/20 shadow-2xl z-50 flex flex-col gap-1"
+                      >
+                        {link.subItems.map((sub) => (
+                          <button
+                            key={sub.id}
+                            onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
+                            className="w-full text-left px-4 py-2.5 rounded-xl text-xs font-semibold text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all cursor-pointer"
+                          >
+                            {sub.label}
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </div>
+            ))}
+          </div>
+
           {/* Right Side Controls */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 ml-auto">
             {/* Language Selector */}
             <div className="relative">
               <button
@@ -472,7 +528,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-surface/98 dark:bg-surface-dim/98 backdrop-blur-xl z-40 overflow-y-auto px-6 sm:px-12 pt-36 pb-32 flex flex-col justify-start"
+            className="fixed inset-0 bg-surface/98 dark:bg-surface-dim/98 backdrop-blur-md z-40 overflow-y-auto px-6 sm:px-12 pt-36 pb-32 flex flex-col justify-start"
           >
             <div className="max-w-xl mx-auto w-full flex flex-col gap-4 mt-8">
               {navLinks.map((link) => {
@@ -506,7 +562,7 @@ export default function Navbar() {
                         >
                           <ChevronDown 
                             size={22} 
-                            className={`transition-transform duration-250 ${
+                          className={`transition-transform duration-300 ${
                               isExpanded ? 'rotate-180 text-primary' : 'text-on-surface-variant/60'
                             }`} 
                           />

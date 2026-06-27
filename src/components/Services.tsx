@@ -140,8 +140,8 @@ export default function Services() {
   const activeDetails = selectedServiceId ? SERVICE_DETAILS[selectedServiceId] : null;
 
   return (
-    <section id="services" className="py-24 bg-surface-container-low relative scroll-mt-[110px] pl-12">
-      <div className="max-w-7xl mx-auto px-6 md:px-16">
+    <section id="services" className="py-24 bg-surface-container-low relative scroll-mt-[110px] pl-[59px] pr-[15px]">
+      <div className="max-w-[1600px] mx-auto px-4">
         {/* Title */}
         <div className="text-center mb-16">
           <h2 className="font-headline text-3xl md:text-4xl font-semibold text-primary mb-4">

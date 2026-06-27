@@ -324,8 +324,8 @@ export default function Blog() {
   };
 
   return (
-    <section id="blog" className="py-24 bg-surface-container-low dark:bg-surface-container-lowest relative border-t border-b border-outline-variant/10 scroll-mt-[110px] pl-12">
-      <div className="max-w-7xl mx-auto px-6 md:px-16">
+    <section id="blog" className="py-24 bg-surface-container-low dark:bg-surface-container-lowest relative border-t border-b border-outline-variant/10 scroll-mt-[110px] pl-[59px] pr-[15px]">
+      <div className="max-w-[1600px] mx-auto px-4">
         
         {/* Title Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">

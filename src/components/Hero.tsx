@@ -107,7 +107,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden pl-12"
+      className="relative min-h-screen pt-32 pb-20 flex flex-col items-center justify-center overflow-hidden pl-[59px] pr-[15px]"
     >
       {/* Parallax Background Cover with Gradient Blend & Subtle Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
@@ -145,14 +145,14 @@ export default function Hero() {
             ease: 'easeInOut'
           }
         }}
-        className="relative cursor-pointer transition-transform duration-200 ease-out perspective-1000 z-10"
+        className="relative cursor-pointer transition-transform duration-200 ease-out perspective-1000 z-10 mb-8 md:mb-12"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={tiltStyle}
       >
         <img
           alt="FACILISSIMO WEB Logo"
-          className="w-40 sm:w-56 md:w-96 max-h-[22vh] object-contain drop-shadow-[0_45px_45px_rgba(113,83,129,0.45)] select-none pointer-events-none hover:brightness-105 transition-all"
+          className="w-48 sm:w-64 md:w-[500px] max-h-[30vh] object-contain drop-shadow-[0_45px_45px_rgba(113,83,129,0.45)] select-none pointer-events-none hover:brightness-105 transition-all"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBos-jXdjS_tI-hPLWgL2uWCIJI6jUT2uojWh8eCaDMeP1J4jhLQVAGOn8z-EJKps4SVmpJfSPv50P5w1ThqCBS7XGkwvhxIkofnLulVgXXPV6LKlwJkWvrwoTxcXrYLPxBLMPrZ2PPqMuHxOTy19duxmnqph0L6pX0XsuR9zNWtI-siKPZjsHrHNFG_kAIsHXYgYVdjlz2-4OotE4R-H-eDa8xZiqwDdqYTV25f87_UMQSMuWE-HPYmDL3v9XTZJYePhGQtwDim5o"
         />
       </motion.div>
@@ -162,7 +162,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        className="mt-6 md:mt-10 backdrop-blur-md bg-surface/70 dark:bg-surface-container-low/70 border border-outline-variant/15 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-[calc(100%-1rem)] max-w-sm sm:max-w-xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-primary/20"
+        className="backdrop-blur-md bg-surface/70 dark:bg-surface-container-low/70 border border-outline-variant/15 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-8 sm:p-12 md:p-16 rounded-3xl md:rounded-[48px] w-full max-w-5xl mx-auto space-y-6 md:space-y-8 z-10 transition-all duration-300 hover:border-primary/20 text-center"
       >
         <motion.h1 
           initial={{ opacity: 0, y: 15 }}

@@ -28,8 +28,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-surface-container-highest scroll-mt-[110px] pl-12">
-      <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-20">
+    <section id="contact" className="py-24 bg-surface-container-highest scroll-mt-[110px] pl-[59px] pr-[15px]">
+      <div className="max-w-[1600px] mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20">
         {/* Left Column: Info */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}

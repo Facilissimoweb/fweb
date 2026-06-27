@@ -37,11 +37,11 @@ export default function ROISimulator() {
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-surface-dim pt-40 pb-24 px-6 pl-16 md:px-12 md:pl-24 flex flex-col items-center">
+    <div className="min-h-screen bg-background dark:bg-surface-dim pt-40 pb-24 pl-[59px] pr-[15px] flex flex-col items-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="max-w-6xl w-full"
+        className="max-w-[1600px] w-full"
       >
         <div className="text-center mb-12">
           <div className="flex flex-col gap-1 mb-4">

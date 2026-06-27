@@ -324,7 +324,7 @@ export default function Blog() {
   };
 
   return (
-    <section id="blog" className="py-24 bg-surface-container-low dark:bg-surface-container-lowest relative border-t border-b border-outline-variant/10 scroll-mt-[110px] pl-12 md:pl-0">
+    <section id="blog" className="py-24 bg-surface-container-low dark:bg-surface-container-lowest relative border-t border-b border-outline-variant/10 scroll-mt-[110px] pl-12">
       <div className="max-w-7xl mx-auto px-6 md:px-16">
         
         {/* Title Header */}

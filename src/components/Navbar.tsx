@@ -307,9 +307,12 @@ export default function Navbar() {
 
   const handleScrollTo = (id: string) => {
     setIsOpen(false);
+    setMobileSidebarSubmenu(null);
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Use a slightly larger scroll offset for better visibility
+      const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 
@@ -318,17 +321,19 @@ export default function Navbar() {
     setActiveSubmenu(null);
     setMobileSidebarSubmenu(null);
     
-    // First, scroll to the parent section
+    // First, scroll to the parent section with offset
     const element = document.getElementById(target);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
     
     // Then dispatch the custom event to open the details modal
+    // Increased delay slightly to ensure scroll has started/stabilized
     setTimeout(() => {
       const eventName = type === 'service' ? 'open-service' : 'open-proposal';
       window.dispatchEvent(new CustomEvent(eventName, { detail: id }));
-    }, 300);
+    }, 450);
   };
 
   const navLinks: NavLinkItem[] = [
@@ -371,15 +376,9 @@ export default function Navbar() {
   return (
     <>
       {/* Vertical Sidebar for Mobile/Tablet */}
-      <motion.div
+      <div
         ref={sidebarRef}
-        initial={false}
-        animate={{
-          x: showTopBar ? 0 : -80,
-          opacity: showTopBar ? 1 : 0
-        }}
-        transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-        className="fixed left-0 top-[15%] bottom-[15%] z-[60] w-12 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border border-l-0 border-outline-variant/20 flex flex-col items-center py-6 gap-5 md:hidden pointer-events-auto shadow-2xl rounded-r-[28px]"
+        className="fixed left-0 top-[12%] bottom-[12%] z-[60] w-12 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-lg border border-l-0 border-outline-variant/20 flex flex-col items-center py-8 gap-6 md:hidden pointer-events-auto shadow-[10px_0_30px_rgba(0,0,0,0.1)] rounded-r-[32px]"
       >
         {navLinks.map((link) => {
           const Icon = link.icon;
@@ -397,7 +396,7 @@ export default function Navbar() {
                     setMobileSidebarSubmenu(null);
                   }
                 }}
-                className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 relative ${
+                className={`w-10 h-10 rounded-[14px] flex items-center justify-center transition-all duration-300 relative cursor-pointer active:scale-90 ${
                   isActive
                     ? 'bg-primary text-on-primary shadow-lg shadow-primary/20 scale-110'
                     : 'text-on-surface-variant hover:bg-primary/10 hover:text-primary'
@@ -446,15 +445,15 @@ export default function Navbar() {
         {/* Theme Toggle in Sidebar */}
         <button
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-          className="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all"
+          className="w-10 h-10 rounded-[14px] flex items-center justify-center text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all cursor-pointer active:scale-90"
         >
-          {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
         </button>
 
         {/* Language in Sidebar (Simplified) */}
         <button
           onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-          className="w-9 h-9 rounded-xl flex items-center justify-center bg-surface-container-low border border-outline-variant/20 text-xs font-black"
+          className="w-10 h-10 rounded-[14px] flex items-center justify-center bg-surface-container-low border border-outline-variant/20 text-xs font-black cursor-pointer active:scale-90"
         >
           {LANGUAGES.find(l => l.code === currentLang)?.flag || '🇮🇹'}
         </button>
@@ -486,7 +485,7 @@ export default function Navbar() {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
 
       {/* Subtle Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-primary/10 dark:bg-primary-container/10 z-[100] pointer-events-none">
@@ -496,7 +495,7 @@ export default function Navbar() {
         />
       </div>
 
-      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full pointer-events-none pl-12 md:pl-0">
+      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full pointer-events-none">
         {/* Top Info Bar */}
         <motion.div
           initial={false}

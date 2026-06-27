@@ -83,7 +83,7 @@ export default function App() {
   }, [isHighContrast]);
 
   return (
-    <div className="text-on-surface bg-background min-h-screen relative overflow-x-hidden selection:bg-secondary/20 selection:text-secondary pl-12 md:pl-0">
+    <div className="text-on-surface bg-background min-h-screen relative overflow-x-hidden selection:bg-secondary/20 selection:text-secondary">
       {/* Page Loader */}
       <Loader />
 

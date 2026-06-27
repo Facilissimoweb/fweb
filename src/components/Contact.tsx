@@ -28,7 +28,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-surface-container-highest scroll-mt-[110px]">
+    <section id="contact" className="py-24 bg-surface-container-highest scroll-mt-[110px] pl-12 md:pl-0">
       <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-20">
         {/* Left Column: Info */}
         <motion.div

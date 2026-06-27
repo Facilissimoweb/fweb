@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 
 export default function Hero() {
+  const navigate = useNavigate();
   const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
   const [scrollY, setScrollY] = useState(0);
 
@@ -38,38 +40,74 @@ export default function Hero() {
   };
 
   const handleScrollToServices = () => {
-    const el = document.getElementById('services');
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById('services');
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }, 300);
+    } else {
+      const el = document.getElementById('services');
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
     }
   };
 
   const handleScrollToConsulenze = () => {
-    const el = document.getElementById('services');
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
-      // Dispatch event to automatically open 'consulenze'
+    if (window.location.pathname !== '/') {
+      navigate('/');
       setTimeout(() => {
-        const event = new CustomEvent('open-service', { detail: 'consulenze' });
-        window.dispatchEvent(event);
-      }, 450);
+        const el = document.getElementById('services');
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+          setTimeout(() => {
+            const event = new CustomEvent('open-service', { detail: 'consulenze' });
+            window.dispatchEvent(event);
+          }, 500);
+        }
+      }, 300);
+    } else {
+      const el = document.getElementById('services');
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+        setTimeout(() => {
+          const event = new CustomEvent('open-service', { detail: 'consulenze' });
+          window.dispatchEvent(event);
+        }, 500);
+      }
     }
   };
 
   const handleScrollToPortfolio = () => {
-    const el = document.getElementById('portfolio');
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById('portfolio');
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }, 300);
+    } else {
+      const el = document.getElementById('portfolio');
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
     }
   };
 
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 text-center relative pt-20 pb-8 md:pt-32 md:pb-20 overflow-hidden scroll-mt-[110px] pl-12 md:pl-0"
+      className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden pl-12"
     >
       {/* Parallax Background Cover with Gradient Blend & Subtle Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">

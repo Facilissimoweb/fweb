@@ -37,19 +37,27 @@ export default function ROISimulator() {
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-6 sm:px-10 flex flex-col items-center">
+    <div className="min-h-screen bg-background dark:bg-surface-dim pt-40 pb-24 px-6 pl-16 md:px-12 md:pl-24 flex flex-col items-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className="max-w-6xl w-full"
       >
         <div className="text-center mb-12">
-          <h2 className="text-secondary font-headline text-sm font-black uppercase tracking-[0.3em] mb-2">Simulatore ROI & Strategia</h2>
-          <h1 className="text-4xl sm:text-5xl font-headline font-black text-on-surface mb-6 leading-tight">
-            Calcola il Tuo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Potenziale</span>
+          <div className="flex flex-col gap-1 mb-4">
+            <h2 className="font-headline text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-secondary leading-tight">
+              SIMULATORE STRATEGICO
+            </h2>
+            <p className="font-sans text-[8px] sm:text-[9px] md:text-xs text-on-surface-variant font-medium tracking-wider uppercase leading-snug">
+              PROIETTA IL POTENZIALE RITORNO DEL TUO INVESTIMENTO
+            </p>
+          </div>
+          <h1 className="text-4xl md:text-7xl font-headline font-black text-on-surface mb-8 tracking-tight leading-[0.9]">
+            Calcola il Tuo <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">ROI</span>
           </h1>
-          <p className="text-on-surface-variant max-w-2xl mx-auto text-lg">
-            Sperimenta con i parametri per capire quanto può rendere il tuo investimento in pubblicità e lead generation.
+          <p className="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed font-medium">
+            Regola i parametri per visualizzare diversi scenari e potenzialità del tuo business.
           </p>
         </div>
 

@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
-import TopNavbar from './components/TopNavbar';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import CookieBanner from './components/CookieBanner';
@@ -54,7 +53,6 @@ export default function App() {
     <Router>
       <div className="text-on-surface bg-background min-h-screen relative overflow-x-hidden selection:bg-secondary/20 selection:text-secondary">
         <Loader />
-        <TopNavbar />
         <Navbar />
 
         <main>

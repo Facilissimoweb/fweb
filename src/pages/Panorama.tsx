@@ -23,19 +23,27 @@ export default function Panorama() {
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-6 sm:px-10 flex flex-col items-center">
+    <div className="min-h-screen bg-background dark:bg-surface-dim pt-40 pb-24 px-6 pl-16 md:px-12 md:pl-24 flex flex-col items-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-4xl w-full"
       >
         <div className="text-center mb-12">
-          <h2 className="text-primary font-headline text-sm font-black uppercase tracking-[0.3em] mb-2">Strumento di Analisi</h2>
-          <h1 className="text-4xl sm:text-5xl font-headline font-black text-on-surface mb-6 leading-tight">
-            Compila il Tuo <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Panorama</span>
+          <div className="flex flex-col gap-1 mb-4">
+            <h2 className="font-headline text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-primary leading-tight">
+              STRUMENTO DI ANALISI
+            </h2>
+            <p className="font-sans text-[8px] sm:text-[9px] md:text-xs text-on-surface-variant font-medium tracking-wider uppercase leading-snug">
+              CONSULENZA PERSONALIZZATA SULLA TUA PRESENZA ONLINE
+            </p>
+          </div>
+          <h1 className="text-4xl md:text-7xl font-headline font-black text-on-surface mb-8 tracking-tight leading-[0.9]">
+            Compila il Tuo <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Panorama</span>
           </h1>
-          <p className="text-on-surface-variant max-w-2xl mx-auto text-lg">
-            Ottieni una visione chiara del tuo business digitale. Inserisci i tuoi dati per ricevere una consulenza personalizzata sulla tua presenza online.
+          <p className="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed font-medium">
+            Ottieni una visione chiara del tuo business digitale. Inserisci i tuoi dati per ricevere una strategia su misura.
           </p>
         </div>
 

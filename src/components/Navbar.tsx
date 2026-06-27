@@ -371,7 +371,16 @@ export default function Navbar() {
   return (
     <>
       {/* Vertical Sidebar for Mobile/Tablet */}
-      <div ref={sidebarRef} className="fixed left-0 top-0 bottom-0 z-[60] w-16 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border-r border-outline-variant/10 flex flex-col items-center py-8 gap-6 md:hidden pointer-events-auto shadow-2xl">
+      <motion.div
+        ref={sidebarRef}
+        initial={false}
+        animate={{
+          x: showTopBar ? 0 : -80,
+          opacity: showTopBar ? 1 : 0
+        }}
+        transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+        className="fixed left-0 top-[15%] bottom-[15%] z-[60] w-12 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border border-l-0 border-outline-variant/20 flex flex-col items-center py-6 gap-5 md:hidden pointer-events-auto shadow-2xl rounded-r-[28px]"
+      >
         {navLinks.map((link) => {
           const Icon = link.icon;
           const isActive = activeSection === link.target;
@@ -388,17 +397,17 @@ export default function Navbar() {
                     setMobileSidebarSubmenu(null);
                   }
                 }}
-                className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-300 relative ${
+                className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 relative ${
                   isActive
                     ? 'bg-primary text-on-primary shadow-lg shadow-primary/20 scale-110'
                     : 'text-on-surface-variant hover:bg-primary/10 hover:text-primary'
                 }`}
                 aria-label={link.label}
               >
-                <Icon size={22} className="stroke-[2.2]" />
+                <Icon size={18} className="stroke-[2.2]" />
                 {hasSub && (
-                  <div className={`absolute -right-1 -bottom-1 w-3 h-3 rounded-full border-2 border-surface bg-secondary transition-transform duration-300 ${mobileSidebarSubmenu === link.target ? 'rotate-180' : ''}`}>
-                    <ChevronDown size={8} className="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                  <div className={`absolute -right-0.5 -bottom-0.5 w-2.5 h-2.5 rounded-full border border-surface bg-secondary transition-transform duration-300 ${mobileSidebarSubmenu === link.target ? 'rotate-180' : ''}`}>
+                    <ChevronDown size={6} className="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                   </div>
                 )}
               </button>
@@ -407,10 +416,10 @@ export default function Navbar() {
               <AnimatePresence>
                 {mobileSidebarSubmenu === link.target && link.subItems && (
                   <motion.div
-                    initial={{ opacity: 0, x: -20, scale: 0.95 }}
+                    initial={{ opacity: 0, x: -10, scale: 0.95 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: -20, scale: 0.95 }}
-                    className="absolute left-20 top-0 w-64 bg-surface/95 dark:bg-surface-container-high/95 backdrop-blur-xl rounded-[24px] p-3 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1.5"
+                    exit={{ opacity: 0, x: -10, scale: 0.95 }}
+                    className="absolute left-14 top-0 w-60 bg-surface/95 dark:bg-surface-container-high/95 backdrop-blur-xl rounded-[24px] p-3 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1.5"
                   >
                     <div className="px-4 py-2 mb-1 border-b border-outline-variant/10">
                       <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">{link.label}</p>
@@ -432,20 +441,20 @@ export default function Navbar() {
         })}
 
         {/* Separator */}
-        <div className="w-8 h-[1px] bg-outline-variant/20 my-2" />
+        <div className="w-6 h-[1px] bg-outline-variant/20 my-1" />
 
         {/* Theme Toggle in Sidebar */}
         <button
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-          className="w-11 h-11 rounded-2xl flex items-center justify-center text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all"
+          className="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all"
         >
-          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
         </button>
 
         {/* Language in Sidebar (Simplified) */}
         <button
           onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-          className="w-11 h-11 rounded-2xl flex items-center justify-center bg-surface-container-low border border-outline-variant/20 text-xs font-black"
+          className="w-9 h-9 rounded-xl flex items-center justify-center bg-surface-container-low border border-outline-variant/20 text-xs font-black"
         >
           {LANGUAGES.find(l => l.code === currentLang)?.flag || '🇮🇹'}
         </button>
@@ -454,10 +463,10 @@ export default function Navbar() {
         <AnimatePresence>
           {langDropdownOpen && (
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="absolute left-20 bottom-8 w-48 bg-surface dark:bg-surface-container-high rounded-[24px] p-2 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1 max-h-[60vh] overflow-y-auto"
+              exit={{ opacity: 0, x: -10 }}
+              className="absolute left-14 bottom-0 w-48 bg-surface dark:bg-surface-container-high rounded-[24px] p-2 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1 max-h-[60vh] overflow-y-auto"
             >
               {LANGUAGES.map((lang) => (
                 <button
@@ -477,7 +486,7 @@ export default function Navbar() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
 
       {/* Subtle Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-primary/10 dark:bg-primary-container/10 z-[100] pointer-events-none">
@@ -487,7 +496,7 @@ export default function Navbar() {
         />
       </div>
 
-      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full pointer-events-none pl-16 md:pl-0">
+      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full pointer-events-none pl-12 md:pl-0">
         {/* Top Info Bar */}
         <motion.div
           initial={false}

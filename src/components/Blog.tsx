@@ -418,7 +418,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                 transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
                 key={post.id}
                 onClick={() => setSelectedPostId(post.id)}
-                className="group flex flex-col h-full rounded-[32px] overflow-hidden shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] border-2 border-[#DDF247] cursor-pointer transition-all duration-500 hover:-translate-y-2 relative min-h-[480px]"
+                className="group flex flex-col h-full rounded-[32px] overflow-hidden shadow-[0_0_20px_rgba(185,250,60,0.15)] hover:shadow-[0_0_35px_rgba(185,250,60,0.45)] border-2 border-[#B9FA3C] cursor-pointer transition-all duration-500 hover:-translate-y-2 relative min-h-[480px]"
               >
                 {/* Background Image */}
                 <img
@@ -437,20 +437,20 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4 text-xs font-sans text-slate-200">
                         <span className="flex items-center gap-1 bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                          <Calendar size={13} className="text-[#DDF247]" />
+                          <Calendar size={13} className="text-[#B9FA3C]" />
                           {post.date}
                         </span>
                         <span className="flex items-center gap-1 bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                          <Clock size={13} className="text-[#DDF247]" />
+                          <Clock size={13} className="text-[#B9FA3C]" />
                           {calculateReadingTime(post)}
                         </span>
                       </div>
-                      <div className="bg-[#DDF247] text-black text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
+                      <div className="bg-[#B9FA3C] text-black text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
                         {post.category}
                       </div>
                     </div>
 
-                    <h3 className="font-headline text-lg sm:text-xl font-bold text-white group-hover:text-[#DDF247] transition-colors line-clamp-2 leading-snug">
+                    <h3 className="font-headline text-lg sm:text-xl font-bold text-white group-hover:text-[#B9FA3C] transition-colors line-clamp-2 leading-snug">
                       {post.title}
                     </h3>
 
@@ -460,7 +460,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                   </div>
 
                   {/* Card Footer Actions */}
-                  <div className="border-t border-[#DDF247]/30 pt-4 flex items-center justify-between mt-auto bg-black/10 backdrop-blur-sm -mx-6 -mb-6 p-4 md:-mx-8 md:-mb-8 md:p-6">
+                  <div className="border-t border-[#B9FA3C]/30 pt-4 flex items-center justify-between mt-auto bg-black/10 backdrop-blur-sm -mx-6 -mb-6 p-4 md:-mx-8 md:-mb-8 md:p-6">
                     {/* Tags Preview */}
                     <div className="flex gap-1.5 overflow-hidden">
                       {post.tags.slice(0, 2).map(tag => (
@@ -474,12 +474,12 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                     <div className="flex items-center gap-3">
                       <button 
                         onClick={(e) => handleLike(post.id, e)}
-                        className={`flex items-center gap-1 text-xs cursor-pointer ${likedPosts[post.id] ? 'text-[#DDF247] font-semibold' : 'text-slate-200 hover:text-[#DDF247]'} transition-colors`}
+                        className={`flex items-center gap-1 text-xs cursor-pointer ${likedPosts[post.id] ? 'text-[#B9FA3C] font-semibold' : 'text-slate-200 hover:text-[#B9FA3C]'} transition-colors`}
                       >
-                        <Heart size={14} className={likedPosts[post.id] ? 'fill-current text-[#DDF247]' : ''} />
+                        <Heart size={14} className={likedPosts[post.id] ? 'fill-current text-[#B9FA3C]' : ''} />
                         <span>{likes[post.id]}</span>
                       </button>
-                      <span className="text-xs font-semibold text-[#DDF247] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                      <span className="text-xs font-semibold text-[#B9FA3C] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                         Leggi <ArrowRight size={13} />
                       </span>
                     </div>
@@ -507,7 +507,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 50 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="bg-white/80 dark:bg-[#1C122C]/85 backdrop-blur-xl rounded-[40px] w-full max-w-4xl max-h-[92vh] md:max-h-[85vh] shadow-[0_0_50px_rgba(221,242,71,0.35)] overflow-hidden flex flex-col relative text-on-surface border-2 border-[#DDF247]"
+              className="bg-white/80 dark:bg-[#04045E]/85 backdrop-blur-xl rounded-[40px] w-full max-w-4xl max-h-[92vh] md:max-h-[85vh] shadow-[0_0_50px_rgba(185,250,60,0.35)] overflow-hidden flex flex-col relative text-on-surface border-2 border-[#B9FA3C]"
             >
               {/* Close Button sticky top right */}
               <div className="absolute top-6 right-6 z-20">

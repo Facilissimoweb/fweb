@@ -122,15 +122,15 @@ export default function Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        className="mt-6 md:mt-10 backdrop-blur-[24px] bg-[#E8DEE8]/30 dark:bg-[#dec4fc]/15 border border-[#E8DEE8]/45 dark:border-[#dec4fc]/20 shadow-[0_24px_60px_-15px_rgba(113,83,129,0.15)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-full max-w-sm sm:max-w-xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-[#DDF247]/40"
+        className="mt-6 md:mt-10 backdrop-blur-[24px] bg-[#E8DEE8]/30 dark:bg-[#dec4fc]/15 border border-[#E8DEE8]/45 dark:border-[#dec4fc]/20 shadow-[0_24px_60px_-15px_rgba(113,83,129,0.15)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-full max-w-sm sm:max-w-2xl md:max-w-3xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-[#DDF247]/40"
       >
         <motion.h1 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="font-headline text-[1.8rem] min-[380px]:text-[2.2rem] sm:text-4xl md:text-6xl font-black text-primary tracking-tight leading-none uppercase break-words select-none"
+          className="font-headline text-[2.6rem] min-[380px]:text-[3.2rem] sm:text-6xl md:text-8xl lg:text-[6.5rem] font-black text-primary tracking-tighter leading-none uppercase break-words select-none"
         >
-          Facilissimo<br />Web
+          FACILISSIMO<br />WEB ///
         </motion.h1>
         
         <motion.p 

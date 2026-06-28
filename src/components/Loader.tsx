@@ -25,7 +25,7 @@ export default function Loader() {
   return (
     <div
       id="loader"
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gradient-to-br from-surface to-[#e8dee8] transition-opacity duration-800 ${
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gradient-to-br from-surface to-white dark:to-surface-dim transition-opacity duration-800 ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >

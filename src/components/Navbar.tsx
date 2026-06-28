@@ -382,7 +382,7 @@ export default function Navbar() {
       {/* Subtle Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-primary/10 dark:bg-primary-container/10 z-[100] pointer-events-none">
         <div 
-          className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-75 ease-out rounded-r-full shadow-[0_1px_6px_rgba(113,83,129,0.3)]" 
+          className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-75 ease-out rounded-r-full shadow-[0_1px_6px_rgba(255,255,255,0.4)]" 
           style={{ width: `${scrollProgress}%` }}
         />
       </div>

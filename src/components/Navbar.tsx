@@ -410,10 +410,10 @@ export default function Navbar() {
 
         {/* Main Navigation Bar */}
         <nav
-          className={`flex items-center justify-between w-full px-6 md:px-16 py-2.5 transition-all duration-300 pointer-events-auto ${
+          className={`flex items-center justify-between w-full px-6 md:px-16 py-2.5 transition-all duration-300 pointer-events-auto border-b-2 ${
             isScrolled || isOpen
-              ? 'bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md shadow-secondary/5 border-b border-outline-variant/10'
-              : 'bg-transparent'
+              ? 'bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md shadow-secondary/5 border-[#DDF247]'
+              : 'bg-transparent border-transparent'
           }`}
         >
           {/* Circular Home Button on the Left */}
@@ -590,7 +590,7 @@ export default function Navbar() {
       </AnimatePresence>
 
       {/* Elegant Color-Harmonized Bottom Navigation Bar */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-xs h-[48px] flex items-center justify-between px-1.5 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border border-outline-variant/20 rounded-full shadow-lg shadow-secondary/15 select-none">
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-xs h-[48px] flex items-center justify-between px-1.5 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border-2 border-[#DDF247] rounded-full shadow-lg shadow-secondary/15 select-none">
         {footerTabs.map((tab) => {
           const Icon = tab.icon;
           return (
@@ -600,11 +600,11 @@ export default function Navbar() {
               whileHover={{ scale: 1.15, y: -2 }}
               whileTap={{ scale: 0.85 }}
               transition={{ type: 'spring', stiffness: 450, damping: 15 }}
-              className="flex-1 h-full flex items-center justify-center text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors cursor-pointer focus:outline-none"
+              className="flex-1 h-full flex items-center justify-center text-[#DDF247] hover:text-primary dark:hover:text-white transition-colors cursor-pointer focus:outline-none"
               aria-label={tab.label}
             >
               <div className="p-1.5 rounded-full hover:bg-primary/10 active:bg-primary/20 transition-all duration-200">
-                <Icon size={17} className="stroke-[2.2]" />
+                <Icon size={17} className="stroke-[2.2] text-[#DDF247]" />
               </div>
             </motion.button>
           );

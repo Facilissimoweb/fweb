@@ -51,6 +51,10 @@ export default function App() {
   const [isCookieOpen, setIsCookieOpen] = useState(false);
   const [isSitemapOpen, setIsSitemapOpen] = useState(false);
 
+  const [currentView, setCurrentView] = useState<'home' | 'blog'>(() => {
+    return typeof window !== 'undefined' && window.location.hash.startsWith('#blog') ? 'blog' : 'home';
+  });
+
   const [isHighContrast, setIsHighContrast] = useState(() => {
     try {
       return localStorage.getItem('erbagatta_high_contrast') === 'true';
@@ -58,6 +62,19 @@ export default function App() {
       return false;
     }
   });
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const isBlog = window.location.hash.startsWith('#blog');
+      setCurrentView(isBlog ? 'blog' : 'home');
+      if (isBlog) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   useEffect(() => {
     const handleToggleContrast = () => {
@@ -90,35 +107,39 @@ export default function App() {
       {/* Top App Bar Navigation */}
       <Navbar />
 
-      {/* Hero Section */}
-      <Hero />
+      {currentView === 'home' ? (
+        <>
+          {/* Hero Section */}
+          <Hero />
 
-      {/* Services Section */}
-      <Services />
+          {/* Services Section */}
+          <Services />
 
-      {/* Web Craft & Design Image Banner */}
-      <ImageBanner images={BANNER_IMAGES_WEB_CRAFT} direction="left" />
+          {/* Web Craft & Design Image Banner */}
+          <ImageBanner images={BANNER_IMAGES_WEB_CRAFT} direction="left" />
 
-      {/* Portfolio Grid */}
-      <Portfolio />
+          {/* Portfolio Grid */}
+          <Portfolio />
 
-      {/* About Section */}
-      <About />
+          {/* About Section */}
+          <About />
 
-      {/* Branding & Abstract Art Image Banner */}
-      <ImageBanner images={BANNER_IMAGES_BRAND_ART} direction="right" />
+          {/* Branding & Abstract Art Image Banner */}
+          <ImageBanner images={BANNER_IMAGES_BRAND_ART} direction="right" />
 
-      {/* Testimonials Flip Grid */}
-      <Testimonials />
+          {/* Testimonials Flip Grid */}
+          <Testimonials />
 
-      {/* Blog Section */}
-      <Blog />
+          {/* Marketing Strategy & Social Lead Generation Image Banner */}
+          <ImageBanner images={BANNER_IMAGES_SOCIAL_STRATEGY} direction="left" />
 
-      {/* Marketing Strategy & Social Lead Generation Image Banner */}
-      <ImageBanner images={BANNER_IMAGES_SOCIAL_STRATEGY} direction="left" />
-
-      {/* Contact Section */}
-      <Contact />
+          {/* Contact Section */}
+          <Contact />
+        </>
+      ) : (
+        /* Dedicated Blog Page view */
+        <Blog isPageMode={true} />
+      )}
 
       {/* Footer Section with regulatory details */}
       <Footer

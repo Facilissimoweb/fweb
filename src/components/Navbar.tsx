@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, ElementType } from 'react';
-import { Menu, X, Sun, Moon, ChevronDown, Home, Mail, Phone, MessageSquare, PersonStanding, Briefcase, FolderOpen, User, Newspaper } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone, MessageSquare, PersonStanding } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface SubMenuItem {
@@ -11,7 +11,6 @@ interface SubMenuItem {
 interface NavLinkItem {
   label: string;
   target: string;
-  icon: ElementType;
   subItems?: SubMenuItem[];
 }
 
@@ -104,25 +103,9 @@ export default function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('hero');
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
-  const [mobileSidebarSubmenu, setMobileSidebarSubmenu] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
-  const sidebarRef = useRef<HTMLDivElement>(null);
   
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
-        setMobileSidebarSubmenu(null);
-        setLangDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   const handleMouseEnter = (target: string) => {
     if (timeoutRef.current) {
@@ -160,24 +143,21 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = Math.max(0, window.scrollY);
+      const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 50);
       
-      const diff = currentScrollY - lastScrollYRef.current;
-
       // Se si scrolla verso l'alto o si è vicini all'inizio, mostra la Top Bar
       if (currentScrollY <= 50) {
         setShowTopBar(true);
-        lastScrollYRef.current = currentScrollY;
-      } else if (diff > 8) {
-        // Scroll verso il basso di almeno 8px accumulati -> nascondi
+      } else if (currentScrollY > lastScrollYRef.current + 8) {
+        // Scroll verso il basso di almeno 8px -> nascondi
         setShowTopBar(false);
-        lastScrollYRef.current = currentScrollY;
-      } else if (diff < -8) {
-        // Scroll verso l'alto di almeno 8px accumulati -> mostra
+      } else if (currentScrollY < lastScrollYRef.current - 8) {
+        // Scroll verso l'alto di almeno 8px -> mostra
         setShowTopBar(true);
-        lastScrollYRef.current = currentScrollY;
       }
+
+      lastScrollYRef.current = Math.max(0, currentScrollY);
       
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
@@ -192,6 +172,17 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    const handleHashCheck = () => {
+      if (window.location.hash.startsWith('#blog')) {
+        setActiveSection('blog');
+      }
+    };
+    window.addEventListener('hashchange', handleHashCheck);
+    handleHashCheck();
+    return () => window.removeEventListener('hashchange', handleHashCheck);
+  }, []);
+
+  useEffect(() => {
     const sections = ['hero', 'services', 'portfolio', 'about', 'blog'];
     const observerOptions = {
       root: null,
@@ -200,6 +191,10 @@ export default function Navbar() {
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      if (window.location.hash.startsWith('#blog')) {
+        setActiveSection('blog');
+        return;
+      }
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id);
@@ -307,41 +302,50 @@ export default function Navbar() {
 
   const handleScrollTo = (id: string) => {
     setIsOpen(false);
-    setMobileSidebarSubmenu(null);
-    const element = document.getElementById(id);
-    if (element) {
-      // Use a slightly larger scroll offset for better visibility
-      const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+    if (id === 'blog') {
+      window.location.hash = '#blog';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      if (window.location.hash.startsWith('#blog')) {
+        window.location.hash = `#${id}`;
+        setTimeout(() => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 150);
+      } else {
+        window.location.hash = `#${id}`;
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
     }
   };
 
   const handleSubItemClick = (id: string, type: 'service' | 'proposal', target: string) => {
     setIsOpen(false);
     setActiveSubmenu(null);
-    setMobileSidebarSubmenu(null);
     
-    // First, scroll to the parent section with offset
+    // First, scroll to the parent section
     const element = document.getElementById(target);
     if (element) {
-      const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-
+    
     // Then dispatch the custom event to open the details modal
-    // Increased delay slightly to ensure scroll has started/stabilized
     setTimeout(() => {
       const eventName = type === 'service' ? 'open-service' : 'open-proposal';
       window.dispatchEvent(new CustomEvent(eventName, { detail: id }));
-    }, 450);
+    }, 300);
   };
 
   const navLinks: NavLinkItem[] = [
-    { label: 'Home', target: 'hero', icon: Home },
+    { label: 'Home', target: 'hero' },
     { 
       label: 'Servizi', 
       target: 'services',
-      icon: Briefcase,
       subItems: [
         { label: 'Web Design', id: 'web-design', type: 'service' },
         { label: 'Branding', id: 'branding', type: 'service' },
@@ -352,7 +356,6 @@ export default function Navbar() {
     { 
       label: 'Proposte', 
       target: 'portfolio',
-      icon: FolderOpen,
       subItems: [
         { label: 'Lux Aura (Web)', id: 'lux-aura', type: 'proposal' },
         { label: 'Tribal Identity (Logo)', id: 'tribal-identity', type: 'proposal' },
@@ -361,8 +364,8 @@ export default function Navbar() {
         { label: "Social Lead's Gen.", id: 'social-leads-generation', type: 'proposal' }
       ]
     },
-    { label: 'Chi Sono', target: 'about', icon: User },
-    { label: 'Blog', target: 'blog', icon: Newspaper },
+    { label: 'Chi Sono', target: 'about' },
+    { label: 'Blog', target: 'blog' },
   ];
 
   const footerTabs = [
@@ -375,118 +378,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Vertical Sidebar for Mobile/Tablet */}
-      <div
-        ref={sidebarRef}
-        className="fixed left-0 top-[12%] bottom-[12%] z-[60] w-12 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-lg border border-l-0 border-outline-variant/20 flex flex-col items-center py-8 gap-6 md:hidden pointer-events-auto shadow-[10px_0_30px_rgba(0,0,0,0.1)] rounded-r-[32px]"
-      >
-        {navLinks.map((link) => {
-          const Icon = link.icon;
-          const isActive = activeSection === link.target;
-          const hasSub = !!link.subItems;
-
-          return (
-            <div key={link.target} className="relative group">
-              <button
-                onClick={() => {
-                  if (hasSub) {
-                    setMobileSidebarSubmenu(mobileSidebarSubmenu === link.target ? null : link.target);
-                  } else {
-                    handleScrollTo(link.target);
-                    setMobileSidebarSubmenu(null);
-                  }
-                }}
-                className={`w-10 h-10 rounded-[14px] flex items-center justify-center transition-all duration-300 relative cursor-pointer active:scale-90 ${
-                  isActive
-                    ? 'bg-primary text-on-primary shadow-lg shadow-primary/20 scale-110'
-                    : 'text-on-surface-variant hover:bg-primary/10 hover:text-primary'
-                }`}
-                aria-label={link.label}
-              >
-                <Icon size={18} className="stroke-[2.2]" />
-                {hasSub && (
-                  <div className={`absolute -right-0.5 -bottom-0.5 w-2.5 h-2.5 rounded-full border border-surface bg-secondary transition-transform duration-300 ${mobileSidebarSubmenu === link.target ? 'rotate-180' : ''}`}>
-                    <ChevronDown size={6} className="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-                  </div>
-                )}
-              </button>
-
-              {/* Lateral Submenu Expansion */}
-              <AnimatePresence>
-                {mobileSidebarSubmenu === link.target && link.subItems && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -10, scale: 0.95 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: -10, scale: 0.95 }}
-                    className="absolute left-14 top-0 w-60 bg-surface/95 dark:bg-surface-container-high/95 backdrop-blur-xl rounded-[24px] p-3 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1.5"
-                  >
-                    <div className="px-4 py-2 mb-1 border-b border-outline-variant/10">
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">{link.label}</p>
-                    </div>
-                    {link.subItems.map((sub) => (
-                      <button
-                        key={sub.id}
-                        onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
-                        className="w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all active:scale-[0.98]"
-                      >
-                        {sub.label}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-
-        {/* Separator */}
-        <div className="w-6 h-[1px] bg-outline-variant/20 my-1" />
-
-        {/* Theme Toggle in Sidebar */}
-        <button
-          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-          className="w-10 h-10 rounded-[14px] flex items-center justify-center text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all cursor-pointer active:scale-90"
-        >
-          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-        </button>
-
-        {/* Language in Sidebar (Simplified) */}
-        <button
-          onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-          className="w-10 h-10 rounded-[14px] flex items-center justify-center bg-surface-container-low border border-outline-variant/20 text-xs font-black cursor-pointer active:scale-90"
-        >
-          {LANGUAGES.find(l => l.code === currentLang)?.flag || '🇮🇹'}
-        </button>
-
-        {/* Language Dropdown for Sidebar */}
-        <AnimatePresence>
-          {langDropdownOpen && (
-            <motion.div
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -10 }}
-              className="absolute left-14 bottom-0 w-48 bg-surface dark:bg-surface-container-high rounded-[24px] p-2 border border-outline-variant/20 shadow-2xl z-[70] flex flex-col gap-1 max-h-[60vh] overflow-y-auto"
-            >
-              {LANGUAGES.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => {
-                    changeLanguage(lang.code);
-                    setLangDropdownOpen(false);
-                  }}
-                  className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-3 transition-all ${
-                    currentLang === lang.code ? 'bg-primary/10 text-primary' : 'text-on-surface-variant hover:bg-secondary/5'
-                  }`}
-                >
-                  <span>{lang.flag}</span>
-                  <span>{lang.label}</span>
-                </button>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
       {/* Subtle Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-primary/10 dark:bg-primary-container/10 z-[100] pointer-events-none">
         <div 
@@ -518,11 +409,11 @@ export default function Navbar() {
 
         {/* Main Navigation Bar */}
         <nav
-          className={`flex items-center justify-between w-full px-6 md:px-16 py-4 transition-[background-color,border-color,box-shadow,padding] duration-300 pointer-events-auto ${
+          className={`flex items-center justify-between w-full px-6 md:px-16 py-4 transition-all duration-300 pointer-events-auto ${
             isScrolled || isOpen
               ? 'bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md shadow-secondary/5 border-b border-outline-variant/10'
               : 'bg-transparent'
-          } ${/* Hidden on mobile/tablet because of the sidebar */ 'hidden md:flex'}`}
+          }`}
         >
           {/* Circular Home Button on the Left */}
           <button
@@ -530,67 +421,14 @@ export default function Navbar() {
               setIsOpen(false);
               handleScrollTo('hero');
             }}
-            className="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container transition-[background-color,transform] text-on-surface cursor-pointer shadow-sm focus:outline-none"
+            className="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container transition-all text-on-surface cursor-pointer shadow-sm focus:outline-none"
             aria-label="Home"
           >
             <Home size={18} className="stroke-[2.2]" />
           </button>
 
-          {/* Desktop Textual Menu */}
-          <div className="hidden md:flex items-center gap-8 ml-8">
-            {navLinks.map((link) => (
-              <div
-                key={link.target}
-                className="relative"
-                onMouseEnter={() => handleMouseEnter(link.target)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <button
-                  onClick={() => handleScrollTo(link.target)}
-                  className={`flex items-center gap-1.5 text-sm font-bold tracking-tight transition-colors cursor-pointer focus:outline-none ${
-                    activeSection === link.target ? 'text-primary' : 'text-on-surface hover:text-primary'
-                  }`}
-                >
-                  {link.label}
-                  {link.subItems && (
-                    <ChevronDown
-                      size={14}
-                      className={`transition-transform duration-300 ${
-                        activeSubmenu === link.target ? 'rotate-180' : ''
-                      }`}
-                    />
-                  )}
-                </button>
-
-                {link.subItems && (
-                  <AnimatePresence>
-                    {activeSubmenu === link.target && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute left-0 mt-4 w-56 bg-surface/95 dark:bg-surface-container-high/95 backdrop-blur-md rounded-[20px] p-2 border border-outline-variant/20 shadow-2xl z-50 flex flex-col gap-1"
-                      >
-                        {link.subItems.map((sub) => (
-                          <button
-                            key={sub.id}
-                            onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
-                            className="w-full text-left px-4 py-2.5 rounded-xl text-xs font-semibold text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all cursor-pointer"
-                          >
-                            {sub.label}
-                          </button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                )}
-              </div>
-            ))}
-          </div>
-
           {/* Right Side Controls */}
-          <div className="flex items-center gap-3 ml-auto">
+          <div className="flex items-center gap-3">
             {/* Language Selector */}
             <div className="relative">
               <button
@@ -606,7 +444,7 @@ export default function Navbar() {
                   {currentLang.split('-')[0]}
                 </span>
               </button>
-
+              
               <AnimatePresence>
                 {langDropdownOpen && (
                   <motion.div
@@ -665,7 +503,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-surface/98 dark:bg-surface-dim/98 backdrop-blur-md z-40 overflow-y-auto px-6 sm:px-12 pt-36 pb-32 flex flex-col justify-start"
+            className="fixed inset-0 bg-surface/98 dark:bg-surface-dim/98 backdrop-blur-xl z-40 overflow-y-auto px-6 sm:px-12 pt-36 pb-32 flex flex-col justify-start"
           >
             <div className="max-w-xl mx-auto w-full flex flex-col gap-4 mt-8">
               {navLinks.map((link) => {
@@ -699,7 +537,7 @@ export default function Navbar() {
                         >
                           <ChevronDown 
                             size={22} 
-                          className={`transition-transform duration-300 ${
+                            className={`transition-transform duration-250 ${
                               isExpanded ? 'rotate-180 text-primary' : 'text-on-surface-variant/60'
                             }`} 
                           />

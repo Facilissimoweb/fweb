@@ -40,36 +40,33 @@ export default function Hero() {
   const handleScrollToServices = () => {
     const el = document.getElementById('services');
     if (el) {
-      const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   const handleScrollToConsulenze = () => {
     const el = document.getElementById('services');
     if (el) {
-      const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth' });
       // Dispatch event to automatically open 'consulenze'
       setTimeout(() => {
         const event = new CustomEvent('open-service', { detail: 'consulenze' });
         window.dispatchEvent(event);
-      }, 450);
+      }, 500);
     }
   };
 
   const handleScrollToPortfolio = () => {
     const el = document.getElementById('portfolio');
     if (el) {
-      const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 text-center relative pt-20 pb-8 md:pt-32 md:pb-20 overflow-hidden scroll-mt-[110px] pl-12 md:pl-0"
+      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 text-center relative pt-20 pb-8 md:pt-32 md:pb-20 overflow-hidden scroll-mt-[110px]"
     >
       {/* Parallax Background Cover with Gradient Blend & Subtle Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
@@ -124,13 +121,13 @@ export default function Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        className="mt-6 md:mt-10 backdrop-blur-md bg-surface/70 dark:bg-surface-container-low/70 border border-outline-variant/15 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-[calc(100%-1rem)] max-w-sm sm:max-w-xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-primary/20"
+        className="mt-6 md:mt-10 backdrop-blur-md bg-surface/70 dark:bg-surface-container-low/70 border border-outline-variant/15 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-full max-w-sm sm:max-w-xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-primary/20"
       >
         <motion.h1 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="font-headline text-[1.8rem] min-[380px]:text-[2.2rem] sm:text-4xl md:text-6xl font-black text-primary tracking-tight leading-[0.95] md:leading-[0.9] uppercase select-none"
+          className="font-headline text-[1.8rem] min-[380px]:text-[2.2rem] sm:text-4xl md:text-6xl font-black text-primary tracking-tight leading-none uppercase break-words select-none"
         >
           Facilissimo<br />Web
         </motion.h1>

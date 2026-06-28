@@ -225,7 +225,7 @@ export const calculateReadingTime = (post: BlogPost): string => {
   return `${minutes} min lettura`;
 };
 
-export default function Blog() {
+export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const [activeCategoryFilter, setActiveCategoryFilter] = useState<string>('Tutti');
   const [likes, setLikes] = useState<Record<string, number>>({
@@ -324,28 +324,67 @@ export default function Blog() {
   };
 
   return (
-    <section id="blog" className="py-24 bg-surface-container-low dark:bg-surface-container-lowest relative border-t border-b border-outline-variant/10 scroll-mt-[110px] pl-12 md:pl-0">
+    <section id="blog" className={`relative scroll-mt-[110px] pb-24 ${isPageMode ? 'bg-surface dark:bg-surface-dim' : 'bg-surface-container-low dark:bg-surface-container-lowest py-24 border-t border-b border-outline-variant/10'}`}>
+      
+      {isPageMode && (
+        <div className="max-w-7xl mx-auto px-6 md:px-16 pt-32 pb-4">
+          <button
+            onClick={() => { window.location.hash = '#hero'; }}
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:text-primary transition-colors cursor-pointer group focus:outline-none"
+          >
+            <span className="group-hover:-translate-x-1 transition-transform">←</span> Torna alla Home
+          </button>
+        </div>
+      )}
+
+      {isPageMode && (
+        /* Blog Majestic Hero Section */
+        <div className="relative overflow-hidden pt-8 pb-16 border-b border-outline-variant/10 bg-gradient-to-b from-[#11052C]/10 via-transparent to-transparent mb-16">
+          {/* Subtle glowing blobs */}
+          <div className="absolute top-1/4 left-1/3 w-80 h-80 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[140px] pointer-events-none" />
+          
+          <div className="max-w-7xl mx-auto px-6 md:px-16 text-center space-y-6 relative z-10">
+            <span className="inline-block text-xs font-black uppercase tracking-[0.25em] text-primary bg-primary/10 border border-primary/10 px-4 py-2 rounded-full">
+              PENSIERI FELPATI &amp; IDEE DIGITALI
+            </span>
+            <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-on-surface">
+              IL TACCUINO <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">DELLE IDEE</span>
+            </h1>
+            <p className="font-sans text-base sm:text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+              Consigli pratici, analisi approfondite e riflessioni della freelance Maria Teresa Rogani sul Web Design d'élite, sulla Brand Identity magnetica e sulla SEO organica d'eccellenza.
+            </p>
+            <div className="flex justify-center items-center gap-2 text-xs font-mono text-outline-variant bg-surface-container/60 border border-outline-variant/15 rounded-full px-5 py-2.5 max-w-sm mx-auto shadow-sm">
+              <CheckCircle size={14} className="text-green-500 animate-pulse" />
+              <span className="uppercase tracking-wider">SEO PRONTO &amp; VALIDATO SCHEMA.ORG</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-6 md:px-16">
         
         {/* Title Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
-          <div>
-            <span className="text-xs font-semibold text-secondary uppercase tracking-widest block mb-1">
-              PENSIERI FELPATI & IDEE
-            </span>
-            <h2 className="font-headline text-3xl md:text-4xl font-semibold text-primary mb-4">
-              Il Taccuino delle Idee
-            </h2>
-            <div className="h-1 w-20 bg-secondary rounded-full mb-3"></div>
-            <p className="font-sans text-base text-on-surface-variant max-w-xl leading-relaxed">
-              Condivido la mia visione sul Web Design sartoriale, sulla Brand Identity felina e su come conquistare Google senza perdere l'eleganza estetica.
-            </p>
+        {!isPageMode && (
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+            <div>
+              <span className="text-xs font-semibold text-secondary uppercase tracking-widest block mb-1">
+                PENSIERI FELPATI & IDEE
+              </span>
+              <h2 className="font-headline text-3xl md:text-4xl font-semibold text-primary mb-4">
+                Il Taccuino delle Idee
+              </h2>
+              <div className="h-1 w-20 bg-secondary rounded-full mb-3"></div>
+              <p className="font-sans text-base text-on-surface-variant max-w-xl leading-relaxed">
+                Condivido la mia visione sul Web Design sartoriale, sulla Brand Identity felina e su come conquistare Google senza perdere l'eleganza estetica.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-mono text-outline border border-outline-variant/20 rounded-full px-4 py-2 bg-background/50 backdrop-blur-sm shadow-sm">
+              <CheckCircle size={14} className="text-green-500 animate-pulse" />
+              <span>SEO PRONTO PER L'INDICIZZAZIONE</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-outline border border-outline-variant/20 rounded-full px-4 py-2 bg-background/50 backdrop-blur-sm shadow-sm">
-            <CheckCircle size={14} className="text-green-500 animate-pulse" />
-            <span>SEO PRONTO PER L'INDICIZZAZIONE</span>
-          </div>
-        </div>
+        )}
 
         {/* Category Filters */}
         <div className="flex flex-wrap gap-3 mb-10 pb-4 border-b border-outline-variant/10 font-sans text-xs md:text-sm font-semibold tracking-wide">

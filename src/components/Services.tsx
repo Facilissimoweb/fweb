@@ -11,12 +11,19 @@ const iconMap: Record<string, any> = {
   MessageCircle,
 };
 
+const serviceImages: Record<string, string> = {
+  'web-design': 'https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&q=80&w=800',
+  'branding': 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=800',
+  'social-lead-generation': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
+  'consulenze': 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800'
+};
+
 const renderFormattedText = (text: string) => {
   const parts = text.split(/(\*\*.*?\*\*)/g);
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       return (
-        <strong key={index} className="font-bold text-primary">
+        <strong key={index} className="font-bold text-[#DDF247]">
           {part.slice(2, -2)}
         </strong>
       );
@@ -169,35 +176,49 @@ export default function Services() {
                   ease: [0.34, 1.56, 0.64, 1],
                 }}
                 onClick={() => setSelectedServiceId(service.id)}
-                className="backdrop-blur-lg bg-white/75 dark:bg-[#1C122C]/75 p-8 rounded-[40px] shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.4)] hover:-translate-y-1.5 transition-all duration-500 group flex flex-col items-start text-left cursor-pointer border-4 border-[#DDF247] relative overflow-hidden"
+                className="p-8 rounded-[40px] shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] hover:-translate-y-1.5 transition-all duration-500 group flex flex-col items-start text-left cursor-pointer border-4 border-[#DDF247] relative overflow-hidden h-full min-h-[460px]"
               >
-                {/* Subtle top bar decorative */}
-                <div className={`absolute top-0 left-0 right-0 h-1.5 ${service.containerColor} opacity-50`} />
+                {/* Background Image */}
+                <img 
+                  src={serviceImages[service.id] || "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=800&q=80"}
+                  alt={service.title}
+                  className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-110 brightness-[0.7] dark:brightness-[0.55] grayscale hover:grayscale-0"
+                  referrerPolicy="no-referrer"
+                />
 
-                <div
-                  className={`w-16 h-16 ${service.containerColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                >
-                  <IconComponent className={`w-8 h-8 ${service.colorClass}`} />
-                </div>
-                
-                <h3 className="font-headline text-xl md:text-2xl font-semibold text-on-surface mb-4">
-                  {service.title}
-                </h3>
-                
-                <div className="space-y-3.5 mb-6 flex-grow w-full">
-                  {service.description.map((block, idx) => (
-                    <p key={idx} className="font-sans text-xs md:text-sm text-on-surface-variant leading-relaxed pl-3 border-l border-outline-variant/30">
-                      {renderFormattedText(block)}
-                    </p>
-                  ))}
-                </div>
+                {/* Overlay: semi-transparent default, very dark on hover */}
+                <div className="absolute inset-0 bg-black/60 dark:bg-[#120a21]/75 backdrop-blur-[2px] group-hover:bg-black/90 dark:group-hover:bg-black/95 transition-all duration-500 z-1" />
 
-                {/* Card CTA Button */}
-                <div className="w-full mt-auto pt-4">
-                  <span className="w-full bg-primary text-on-primary group-hover:bg-secondary group-hover:text-on-secondary text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-lg tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
-                    SCOPRI DI PIÙ
-                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                  </span>
+                {/* Content wrapper with relative z-10 */}
+                <div className="relative z-10 flex flex-col items-start h-full w-full flex-grow">
+                  {/* Subtle top bar decorative */}
+                  <div className={`absolute -top-8 -left-8 -right-8 h-1.5 ${service.containerColor} opacity-70`} />
+
+                  <div
+                    className={`w-16 h-16 bg-white/10 dark:bg-black/30 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <IconComponent className={`w-8 h-8 text-[#DDF247]`} />
+                  </div>
+                  
+                  <h3 className="font-headline text-xl md:text-2xl font-semibold text-white mb-4">
+                    {service.title}
+                  </h3>
+                  
+                  <div className="space-y-3.5 mb-6 flex-grow w-full">
+                    {service.description.map((block, idx) => (
+                      <p key={idx} className="font-sans text-xs md:text-sm text-slate-100 dark:text-slate-200 leading-relaxed pl-3 border-l-2 border-[#DDF247]/50">
+                        {renderFormattedText(block)}
+                      </p>
+                    ))}
+                  </div>
+
+                  {/* Card CTA Button */}
+                  <div className="w-full mt-auto pt-4">
+                    <span className="w-full bg-[#DDF247] text-black group-hover:bg-white group-hover:text-black text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-lg tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                      SCOPRI DI PIÙ
+                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             );

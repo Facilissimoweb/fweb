@@ -108,33 +108,33 @@ export default function Portfolio() {
                 className="masonry-item animate-hover"
                 onClick={() => setSelectedItemId(item.id)}
               >
-                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-[0_0_20px_rgba(221,242,71,0.15)] bg-white/75 dark:bg-[#1C122C]/75 backdrop-blur-lg border-4 border-[#DDF247] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_35px_rgba(221,242,71,0.4)]">
-                  <div className="relative overflow-hidden aspect-[4/3]">
-                    <img
-                      alt={item.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full transform group-hover:scale-105 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] object-cover grayscale contrast-[115%] group-hover:grayscale-0"
-                      src={item.image}
-                      title={item.altText}
-                    />
-                    {/* Visual Indicator Overlay on Hover */}
-                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
+                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] border-4 border-[#DDF247] transition-all duration-500 hover:-translate-y-2 relative min-h-[440px] flex flex-col justify-end">
+                  {/* Background Image */}
+                  <img
+                    alt={item.title}
+                    referrerPolicy="no-referrer"
+                    className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-110 brightness-[0.7] dark:brightness-[0.55] grayscale hover:grayscale-0"
+                    src={item.image}
+                    title={item.altText}
+                  />
+
+                  {/* Darkening Overlay mask */}
+                  <div className="absolute inset-0 bg-black/55 dark:bg-[#120a21]/70 backdrop-blur-[1.5px] group-hover:bg-black/85 dark:group-hover:bg-black/90 transition-all duration-500 z-1" />
 
                   {/* Clean Content & Button Section (Visible on all screens) */}
-                  <div className="p-6 bg-white/40 dark:bg-black/20 backdrop-blur-md border-t border-outline-variant/10 flex flex-col gap-4">
+                  <div className="relative z-10 p-6 flex flex-col gap-4 mt-auto w-full bg-black/10 backdrop-blur-sm">
                     <div>
-                      <span className="font-sans text-[10px] text-secondary dark:text-primary-container font-extrabold tracking-widest uppercase mb-1 block">
+                      <span className="font-sans text-[10px] text-[#DDF247] font-extrabold tracking-widest uppercase mb-1 block">
                         {item.category === 'Web' ? 'Web Experience' : 'Branding & Design'}
                       </span>
-                      <h4 className="font-headline text-lg sm:text-xl font-bold text-on-surface tracking-tight">
+                      <h4 className="font-headline text-lg sm:text-xl font-bold text-white tracking-tight">
                         {item.title}
                       </h4>
                     </div>
 
                     {/* Button Details */}
                     <div className="w-full">
-                      <span className="w-full bg-primary text-on-primary group-hover:bg-secondary group-hover:text-on-secondary text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-lg tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                      <span className="w-full bg-[#DDF247] text-black group-hover:bg-white group-hover:text-black text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-base tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
                         DETTAGLI
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                       </span>

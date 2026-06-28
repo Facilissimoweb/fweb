@@ -418,50 +418,53 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                 transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
                 key={post.id}
                 onClick={() => setSelectedPostId(post.id)}
-                className="group flex flex-col h-full bg-white/75 dark:bg-[#1C122C]/75 backdrop-blur-lg rounded-[32px] overflow-hidden shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.4)] border-4 border-[#DDF247] cursor-pointer transition-all duration-500 hover:-translate-y-2"
+                className="group flex flex-col h-full rounded-[32px] overflow-hidden shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] border-4 border-[#DDF247] cursor-pointer transition-all duration-500 hover:-translate-y-2 relative min-h-[480px]"
               >
-                {/* Card Image */}
-                <div className="relative h-56 w-full overflow-hidden bg-surface-container">
-                  <img
-                    src={post.image}
-                    alt={post.altText}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transform group-hover:scale-108 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] grayscale contrast-[115%] group-hover:grayscale-0"
-                  />
-                  <div className="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">
-                    {post.category}
-                  </div>
-                </div>
+                {/* Background Image */}
+                <img
+                  src={post.image}
+                  alt={post.altText}
+                  referrerPolicy="no-referrer"
+                  className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-110 brightness-[0.7] dark:brightness-[0.55] grayscale hover:grayscale-0"
+                />
 
-                {/* Card Body */}
-                <div className="p-6 md:p-8 flex flex-col flex-1 justify-between gap-6">
+                {/* Overlay: semi-transparent default, extremely dark on hover to leave text perfectly legible */}
+                <div className="absolute inset-0 bg-black/60 dark:bg-[#120a21]/75 backdrop-blur-[2px] group-hover:bg-black/90 dark:group-hover:bg-black/95 transition-all duration-500 z-1" />
+
+                {/* Content wrapper with relative z-10 */}
+                <div className="relative z-10 p-6 md:p-8 flex flex-col flex-1 justify-between gap-6 h-full w-full">
                   <div className="space-y-4">
-                    <div className="flex items-center gap-4 text-xs font-sans text-on-surface-variant/70">
-                      <span className="flex items-center gap-1">
-                        <Calendar size={13} className="text-secondary" />
-                        {post.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock size={13} className="text-secondary" />
-                        {calculateReadingTime(post)}
-                      </span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 text-xs font-sans text-slate-200">
+                        <span className="flex items-center gap-1 bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                          <Calendar size={13} className="text-[#DDF247]" />
+                          {post.date}
+                        </span>
+                        <span className="flex items-center gap-1 bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                          <Clock size={13} className="text-[#DDF247]" />
+                          {calculateReadingTime(post)}
+                        </span>
+                      </div>
+                      <div className="bg-[#DDF247] text-black text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
+                        {post.category}
+                      </div>
                     </div>
 
-                    <h3 className="font-headline text-lg font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+                    <h3 className="font-headline text-lg sm:text-xl font-bold text-white group-hover:text-[#DDF247] transition-colors line-clamp-2 leading-snug">
                       {post.title}
                     </h3>
 
-                    <p className="font-sans text-xs md:text-sm text-on-surface-variant/80 leading-relaxed line-clamp-3">
+                    <p className="font-sans text-xs md:text-sm text-slate-100 dark:text-slate-200 leading-relaxed line-clamp-4">
                       {post.excerpt}
                     </p>
                   </div>
 
                   {/* Card Footer Actions */}
-                  <div className="border-t border-outline-variant/10 pt-4 flex items-center justify-between mt-auto">
+                  <div className="border-t border-[#DDF247]/30 pt-4 flex items-center justify-between mt-auto bg-black/10 backdrop-blur-sm -mx-6 -mb-6 p-4 md:-mx-8 md:-mb-8 md:p-6">
                     {/* Tags Preview */}
                     <div className="flex gap-1.5 overflow-hidden">
                       {post.tags.slice(0, 2).map(tag => (
-                        <span key={tag} className="text-[9px] font-mono font-semibold bg-surface-container text-on-surface-variant px-2 py-1 rounded">
+                        <span key={tag} className="text-[9px] font-mono font-semibold bg-white/10 dark:bg-black/40 text-slate-200 px-2 py-1 rounded">
                           #{tag}
                         </span>
                       ))}
@@ -471,12 +474,12 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                     <div className="flex items-center gap-3">
                       <button 
                         onClick={(e) => handleLike(post.id, e)}
-                        className={`flex items-center gap-1 text-xs cursor-pointer ${likedPosts[post.id] ? 'text-red-500 font-semibold' : 'text-on-surface-variant/70 hover:text-red-500'} transition-colors`}
+                        className={`flex items-center gap-1 text-xs cursor-pointer ${likedPosts[post.id] ? 'text-[#DDF247] font-semibold' : 'text-slate-200 hover:text-[#DDF247]'} transition-colors`}
                       >
-                        <Heart size={14} className={likedPosts[post.id] ? 'fill-current' : ''} />
+                        <Heart size={14} className={likedPosts[post.id] ? 'fill-current text-[#DDF247]' : ''} />
                         <span>{likes[post.id]}</span>
                       </button>
-                      <span className="text-xs font-semibold text-secondary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                      <span className="text-xs font-semibold text-[#DDF247] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                         Leggi <ArrowRight size={13} />
                       </span>
                     </div>

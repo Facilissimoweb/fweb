@@ -128,7 +128,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="font-headline text-[2.6rem] min-[380px]:text-[3.2rem] sm:text-6xl md:text-8xl lg:text-[6.5rem] font-black text-primary tracking-tighter leading-none uppercase break-words select-none"
+          className="font-headline text-[2.6rem] min-[380px]:text-[3.2rem] sm:text-6xl md:text-8xl lg:text-[6.5rem] font-black text-primary tracking-widest leading-none uppercase break-words select-none"
         >
           FACILISSIMO<br />WEB ///
         </motion.h1>

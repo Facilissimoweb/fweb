@@ -434,14 +434,11 @@ export default function Navbar() {
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 onBlur={() => setTimeout(() => setLangDropdownOpen(false), 250)}
-                className="flex items-center gap-1.5 h-10 px-3.5 rounded-full border border-outline-variant/30 bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm text-xs font-extrabold uppercase select-none focus:outline-none"
+                className="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm focus:outline-none"
                 title="Cambia lingua"
               >
-                <span className="text-sm leading-none">
+                <span className="text-base leading-none select-none">
                   {LANGUAGES.find(l => l.code === currentLang)?.flag || '🇮🇹'}
-                </span>
-                <span className="text-[10.5px] font-extrabold tracking-wide text-on-surface">
-                  {currentLang.split('-')[0]}
                 </span>
               </button>
               

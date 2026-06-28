@@ -112,7 +112,7 @@ export default function Hero() {
       >
         <img
           alt="FACILISSIMO WEB Logo"
-          className="w-40 sm:w-56 md:w-96 max-h-[22vh] object-contain drop-shadow-[0_45px_45px_rgba(255,255,255,0.45)] dark:drop-shadow-[0_45px_45px_rgba(185,250,60,0.25)] select-none pointer-events-none hover:brightness-105 transition-all"
+          className="w-40 sm:w-56 md:w-96 max-h-[22vh] object-contain drop-shadow-[0_45px_45px_rgba(255,255,255,0.45)] dark:drop-shadow-[0_45px_45px_rgba(221,242,71,0.25)] select-none pointer-events-none hover:brightness-105 transition-all"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBos-jXdjS_tI-hPLWgL2uWCIJI6jUT2uojWh8eCaDMeP1J4jhLQVAGOn8z-EJKps4SVmpJfSPv50P5w1ThqCBS7XGkwvhxIkofnLulVgXXPV6LKlwJkWvrwoTxcXrYLPxBLMPrZ2PPqMuHxOTy19duxmnqph0L6pX0XsuR9zNWtI-siKPZjsHrHNFG_kAIsHXYgYVdjlz2-4OotE4R-H-eDa8xZiqwDdqYTV25f87_UMQSMuWE-HPYmDL3v9XTZJYePhGQtwDim5o"
         />
       </motion.div>
@@ -122,7 +122,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        className="mt-6 md:mt-10 backdrop-blur-[24px] bg-white/30 dark:bg-white/5 border border-white/45 dark:border-white/10 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-full max-w-sm sm:max-w-2xl md:max-w-3xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-[#B9FA3C]/40"
+        className="mt-6 md:mt-10 backdrop-blur-[24px] bg-white/30 dark:bg-white/5 border border-white/45 dark:border-white/10 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-full max-w-sm sm:max-w-2xl md:max-w-3xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-[#DDF247]/40"
       >
         <motion.h1 
           initial={{ opacity: 0, y: 15 }}

@@ -108,7 +108,7 @@ export default function Portfolio() {
                 className="masonry-item animate-hover"
                 onClick={() => setSelectedItemId(item.id)}
               >
-                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-[0_0_20px_rgba(185,250,60,0.15)] hover:shadow-[0_0_35px_rgba(185,250,60,0.45)] border-2 border-[#B9FA3C] transition-all duration-500 hover:-translate-y-2 relative min-h-[440px] flex flex-col justify-end">
+                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] border-2 border-[#DDF247] transition-all duration-500 hover:-translate-y-2 relative min-h-[440px] flex flex-col justify-end">
                   {/* Background Image */}
                   <img
                     alt={item.title}
@@ -124,7 +124,7 @@ export default function Portfolio() {
                   {/* Clean Content & Button Section (Visible on all screens) */}
                   <div className="relative z-10 p-6 flex flex-col gap-4 mt-auto w-full bg-black/10 backdrop-blur-sm">
                     <div>
-                      <span className="font-sans text-[10px] text-[#B9FA3C] font-extrabold tracking-widest uppercase mb-1 block">
+                      <span className="font-sans text-[10px] text-[#DDF247] font-extrabold tracking-widest uppercase mb-1 block">
                         {item.category === 'Web' ? 'Web Experience' : 'Branding & Design'}
                       </span>
                       <h4 className="font-headline text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -134,7 +134,7 @@ export default function Portfolio() {
 
                     {/* Button Details */}
                     <div className="w-full">
-                      <span className="w-full bg-[#B9FA3C] text-black group-hover:bg-white group-hover:text-black text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-base tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                      <span className="w-full bg-[#DDF247] text-black group-hover:bg-white group-hover:text-black text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-base tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
                         DETTAGLI
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                       </span>

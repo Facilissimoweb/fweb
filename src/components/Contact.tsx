@@ -98,7 +98,7 @@ export default function Contact() {
         >
           <form
             onSubmit={handleSubmit}
-            className="space-y-8 bg-white/75 dark:bg-[#04045E]/75 backdrop-blur-lg p-8 md:p-10 rounded-[40px] shadow-[0_0_30px_-5px_rgba(185,250,60,0.25)] border-2 border-[#B9FA3C]"
+            className="space-y-8 bg-white/75 dark:bg-[#1C122C]/75 backdrop-blur-lg p-8 md:p-10 rounded-[40px] shadow-[0_0_30px_-5px_rgba(221,242,71,0.25)] border-2 border-[#DDF247]"
             id="contact-form"
           >
             {/* Nome Field */}

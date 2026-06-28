@@ -23,7 +23,7 @@ const renderFormattedText = (text: string) => {
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       return (
-        <strong key={index} className="font-bold text-[#B9FA3C]">
+        <strong key={index} className="font-bold text-[#DDF247]">
           {part.slice(2, -2)}
         </strong>
       );
@@ -176,7 +176,7 @@ export default function Services() {
                   ease: [0.34, 1.56, 0.64, 1],
                 }}
                 onClick={() => setSelectedServiceId(service.id)}
-                className="p-8 rounded-[40px] shadow-[0_0_20px_rgba(185,250,60,0.15)] hover:shadow-[0_0_35px_rgba(185,250,60,0.45)] hover:-translate-y-1.5 transition-all duration-500 group flex flex-col items-start text-left cursor-pointer border-2 border-[#B9FA3C] relative overflow-hidden h-full min-h-[460px]"
+                className="p-8 rounded-[40px] shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] hover:-translate-y-1.5 transition-all duration-500 group flex flex-col items-start text-left cursor-pointer border-2 border-[#DDF247] relative overflow-hidden h-full min-h-[460px]"
               >
                 {/* Background Image */}
                 <img 
@@ -197,7 +197,7 @@ export default function Services() {
                   <div
                     className={`w-16 h-16 bg-white/10 dark:bg-black/30 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
                   >
-                    <IconComponent className={`w-8 h-8 text-[#B9FA3C]`} />
+                    <IconComponent className={`w-8 h-8 text-[#DDF247]`} />
                   </div>
                   
                   <h3 className="font-headline text-xl md:text-2xl font-semibold text-white mb-4">
@@ -206,7 +206,7 @@ export default function Services() {
                   
                   <div className="space-y-3.5 mb-6 flex-grow w-full">
                     {service.description.map((block, idx) => (
-                      <p key={idx} className="font-sans text-xs md:text-sm text-slate-100 dark:text-slate-200 leading-relaxed pl-3 border-l-2 border-[#B9FA3C]/50">
+                      <p key={idx} className="font-sans text-xs md:text-sm text-slate-100 dark:text-slate-200 leading-relaxed pl-3 border-l-2 border-[#DDF247]/50">
                         {renderFormattedText(block)}
                       </p>
                     ))}
@@ -214,7 +214,7 @@ export default function Services() {
 
                   {/* Card CTA Button */}
                   <div className="w-full mt-auto pt-4">
-                    <span className="w-full bg-[#B9FA3C] text-black group-hover:bg-white group-hover:text-black text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-lg tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                    <span className="w-full bg-[#DDF247] text-black group-hover:bg-white group-hover:text-black text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-lg tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
                       SCOPRI DI PIÙ
                       <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </span>
@@ -241,7 +241,7 @@ export default function Services() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 40 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="backdrop-blur-xl bg-white/80 dark:bg-[#04045E]/85 rounded-[40px] w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] shadow-[0_0_50px_rgba(185,250,60,0.35)] overflow-hidden flex flex-col relative text-on-surface border-2 border-[#B9FA3C]"
+              className="backdrop-blur-xl bg-white/80 dark:bg-[#1C122C]/85 rounded-[40px] w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] shadow-[0_0_50px_rgba(221,242,71,0.35)] overflow-hidden flex flex-col relative text-on-surface border-2 border-[#DDF247]"
             >
               {/* Top Bar / Close Button */}
               <div className="absolute top-6 right-6 z-20">

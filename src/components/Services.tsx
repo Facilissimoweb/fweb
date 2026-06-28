@@ -169,7 +169,7 @@ export default function Services() {
                   ease: [0.34, 1.56, 0.64, 1],
                 }}
                 onClick={() => setSelectedServiceId(service.id)}
-                className="bg-white p-8 rounded-[40px] shadow-[0_40px_40px_-10px_rgba(113,83,129,0.06)] hover:shadow-[0_60px_60px_-15px_rgba(113,83,129,0.15)] hover:-translate-y-1.5 transition-all duration-500 group flex flex-col items-start text-left cursor-pointer border border-outline-variant/10 relative overflow-hidden"
+                className="bg-white p-8 rounded-[40px] shadow-[0_40px_40px_-10px_rgba(113,83,129,0.06)] hover:shadow-[0_60px_60px_-15px_rgba(113,83,129,0.15)] hover:-translate-y-1.5 transition-all duration-500 group flex flex-col items-start text-left cursor-pointer border-4 border-[#DDF247] relative overflow-hidden"
               >
                 {/* Subtle top bar decorative */}
                 <div className={`absolute top-0 left-0 right-0 h-1.5 ${service.containerColor} opacity-50`} />
@@ -220,7 +220,7 @@ export default function Services() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 40 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="bg-white rounded-[40px] w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] shadow-2xl overflow-hidden flex flex-col relative text-on-surface"
+              className="bg-white rounded-[40px] w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] shadow-2xl overflow-hidden flex flex-col relative text-on-surface border-4 border-[#DDF247]"
             >
               {/* Top Bar / Close Button */}
               <div className="absolute top-6 right-6 z-20">

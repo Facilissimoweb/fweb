@@ -130,11 +130,12 @@ export default function Navbar() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try {
       const saved = localStorage.getItem('erbagatta_theme');
+      if (saved === 'light') return 'light';
       if (saved === 'dark') return 'dark';
     } catch (e) {
       console.warn('localStorage theme read failed:', e);
     }
-    return 'light';
+    return 'dark';
   });
 
   useEffect(() => {

@@ -409,7 +409,7 @@ export default function Navbar() {
 
         {/* Main Navigation Bar */}
         <nav
-          className={`flex items-center justify-between w-full px-6 md:px-16 py-4 transition-all duration-300 pointer-events-auto ${
+          className={`flex items-center justify-between w-full px-6 md:px-16 py-2.5 transition-all duration-300 pointer-events-auto ${
             isScrolled || isOpen
               ? 'bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md shadow-secondary/5 border-b border-outline-variant/10'
               : 'bg-transparent'
@@ -421,26 +421,26 @@ export default function Navbar() {
               setIsOpen(false);
               handleScrollTo('hero');
             }}
-            className="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container transition-all text-on-surface cursor-pointer shadow-sm focus:outline-none"
+            className="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container transition-all text-on-surface cursor-pointer shadow-sm focus:outline-none"
             aria-label="Home"
           >
-            <Home size={18} className="stroke-[2.2]" />
+            <Home size={16} className="stroke-[2.2]" />
           </button>
 
           {/* Right Side Controls */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 onBlur={() => setTimeout(() => setLangDropdownOpen(false), 250)}
-                className="flex items-center gap-1.5 h-12 px-4 rounded-full border border-outline-variant/30 bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm text-xs font-extrabold uppercase select-none focus:outline-none"
+                className="flex items-center gap-1.5 h-10 px-3.5 rounded-full border border-outline-variant/30 bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm text-xs font-extrabold uppercase select-none focus:outline-none"
                 title="Cambia lingua"
               >
-                <span className="text-base leading-none">
+                <span className="text-sm leading-none">
                   {LANGUAGES.find(l => l.code === currentLang)?.flag || '🇮🇹'}
                 </span>
-                <span className="text-[11px] font-extrabold tracking-wide text-on-surface">
+                <span className="text-[10.5px] font-extrabold tracking-wide text-on-surface">
                   {currentLang.split('-')[0]}
                 </span>
               </button>
@@ -476,20 +476,20 @@ export default function Navbar() {
             {/* Theme Toggle Button */}
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              className="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm focus:outline-none"
+              className="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm focus:outline-none"
               aria-label="Cambia tema"
               title={theme === 'light' ? 'Passa alla modalità scura' : 'Passa alla modalità chiara'}
             >
-              {theme === 'light' ? <Moon size={18} className="stroke-[2.2]" /> : <Sun size={18} className="stroke-[2.2]" />}
+              {theme === 'light' ? <Moon size={16} className="stroke-[2.2]" /> : <Sun size={16} className="stroke-[2.2]" />}
             </button>
 
             {/* Hamburger/Close Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="w-12 h-12 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-all cursor-pointer focus:outline-none"
+              className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-all cursor-pointer focus:outline-none"
               aria-label="Toggle Menu"
             >
-              {isOpen ? <X size={24} className="stroke-[2.2]" /> : <Menu size={24} className="stroke-[2.2]" />}
+              {isOpen ? <X size={20} className="stroke-[2.2]" /> : <Menu size={20} className="stroke-[2.2]" />}
             </button>
           </div>
         </nav>
@@ -592,7 +592,7 @@ export default function Navbar() {
       </AnimatePresence>
 
       {/* Elegant Color-Harmonized Bottom Navigation Bar */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-sm h-[56px] flex items-center justify-between px-2 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border border-outline-variant/20 rounded-full shadow-lg shadow-secondary/15 select-none">
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-xs h-[48px] flex items-center justify-between px-1.5 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border border-outline-variant/20 rounded-full shadow-lg shadow-secondary/15 select-none">
         {footerTabs.map((tab) => {
           const Icon = tab.icon;
           return (
@@ -605,8 +605,8 @@ export default function Navbar() {
               className="flex-1 h-full flex items-center justify-center text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors cursor-pointer focus:outline-none"
               aria-label={tab.label}
             >
-              <div className="p-2 rounded-full hover:bg-primary/10 active:bg-primary/20 transition-all duration-200">
-                <Icon size={20} className="stroke-[2.2]" />
+              <div className="p-1.5 rounded-full hover:bg-primary/10 active:bg-primary/20 transition-all duration-200">
+                <Icon size={17} className="stroke-[2.2]" />
               </div>
             </motion.button>
           );

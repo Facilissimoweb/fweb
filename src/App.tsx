@@ -6,7 +6,6 @@ import Hero from './components/Hero';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import About from './components/About';
-import Testimonials from './components/Testimonials';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -28,7 +27,7 @@ export default function App() {
 
   const [isHighContrast, setIsHighContrast] = useState(() => {
     try {
-      return localStorage.getItem('erbagatta_high_contrast') === 'true';
+      return localStorage.getItem('facilissimoweb_high_contrast') === 'true';
     } catch (e) {
       return false;
     }
@@ -64,7 +63,7 @@ export default function App() {
       } else {
         document.documentElement.classList.remove('high-contrast');
       }
-      localStorage.setItem('erbagatta_high_contrast', String(isHighContrast));
+      localStorage.setItem('facilissimoweb_high_contrast', String(isHighContrast));
     } catch (e) {
       console.warn('High contrast write failed:', e);
     }
@@ -91,9 +90,6 @@ export default function App() {
 
           {/* About Section */}
           <About />
-
-          {/* Testimonials Flip Grid */}
-          <Testimonials />
 
           {/* Contact Section */}
           <Contact />

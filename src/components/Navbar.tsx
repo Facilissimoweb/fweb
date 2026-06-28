@@ -129,7 +129,7 @@ export default function Navbar() {
   }, []);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try {
-      const saved = localStorage.getItem('erbagatta_theme');
+      const saved = localStorage.getItem('facilissimoweb_theme');
       if (saved === 'light') return 'light';
       if (saved === 'dark') return 'dark';
     } catch (e) {
@@ -225,7 +225,7 @@ export default function Navbar() {
       } else {
         document.documentElement.classList.remove('dark');
       }
-      localStorage.setItem('erbagatta_theme', theme);
+      localStorage.setItem('facilissimoweb_theme', theme);
     } catch (e) {
       console.warn('theme write failed:', e);
     }
@@ -358,11 +358,11 @@ export default function Navbar() {
       label: 'Proposte', 
       target: 'portfolio',
       subItems: [
-        { label: 'Lux Aura (Web)', id: 'lux-aura', type: 'proposal' },
-        { label: 'Tribal Identity (Logo)', id: 'tribal-identity', type: 'proposal' },
-        { label: 'MindFlow App (UX)', id: 'mindflow-app', type: 'proposal' },
-        { label: 'Agile Motion (Lottie)', id: 'agile-motion', type: 'proposal' },
-        { label: "Social Lead's Gen.", id: 'social-leads-generation', type: 'proposal' }
+        { label: 'Pacchetti CMS (Web)', id: 'lux-aura', type: 'proposal' },
+        { label: 'Identità di Marca (Logo)', id: 'tribal-identity', type: 'proposal' },
+        { label: 'Sviluppo Custom (Web)', id: 'mindflow-app', type: 'proposal' },
+        { label: 'Soluzioni Native (Web)', id: 'agile-motion', type: 'proposal' },
+        { label: 'Lead Generation (Web)', id: 'social-leads-generation', type: 'proposal' }
       ]
     },
     { label: 'Chi Sono', target: 'about' },

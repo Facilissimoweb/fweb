@@ -62,11 +62,11 @@ export default function Portfolio() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div>
             <h2 className="font-headline text-3xl md:text-4xl font-semibold text-primary mb-4">
-              Le Proposte d'Élite
+              PROPOSTE
             </h2>
             <div className="h-1 w-20 bg-secondary rounded-full mb-3"></div>
             <p className="font-sans text-base text-on-surface-variant max-w-lg">
-              Una selezione delle mie proposte e soluzioni digitali d'eccellenza. Clicca su ciascun progetto per rivelare i segreti tecnici e i dettagli dello sviluppo.
+              Le mie modalità operative e soluzioni digitali di altissimo livello, progettate per rispondere in modo trasparente, diretto e performante a ciascuna vostra esigenza.
             </p>
           </div>
 

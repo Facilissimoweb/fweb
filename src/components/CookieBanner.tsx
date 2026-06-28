@@ -13,7 +13,7 @@ export default function CookieBanner({ onOpenPrivacy, onOpenCookie }: CookieBann
   useEffect(() => {
     // Show banner after a short delay if no choice is saved
     try {
-      const consent = localStorage.getItem('erbagatta_cookie_consent');
+      const consent = localStorage.getItem('facilissimoweb_cookie_consent');
       if (!consent) {
         const timer = setTimeout(() => {
           setIsVisible(true);
@@ -32,7 +32,7 @@ export default function CookieBanner({ onOpenPrivacy, onOpenCookie }: CookieBann
 
   const handleAccept = () => {
     try {
-      localStorage.setItem('erbagatta_cookie_consent', 'accepted');
+      localStorage.setItem('facilissimoweb_cookie_consent', 'accepted');
     } catch (e) {
       console.warn('Could not save consent to localStorage:', e);
     }
@@ -41,7 +41,7 @@ export default function CookieBanner({ onOpenPrivacy, onOpenCookie }: CookieBann
 
   const handleDecline = () => {
     try {
-      localStorage.setItem('erbagatta_cookie_consent', 'declined');
+      localStorage.setItem('facilissimoweb_cookie_consent', 'declined');
     } catch (e) {
       console.warn('Could not save consent to localStorage:', e);
     }
@@ -95,7 +95,7 @@ export default function CookieBanner({ onOpenPrivacy, onOpenCookie }: CookieBann
             </button>
             <button
               onClick={handleAccept}
-              className="px-5 py-2 rounded-full bg-primary text-on-primary hover:bg-secondary hover:shadow-md transition-all cursor-pointer cat-pounce"
+              className="px-5 py-2 rounded-full bg-primary text-on-primary hover:bg-secondary hover:shadow-md transition-all cursor-pointer"
             >
               Accetta Tutto
             </button>

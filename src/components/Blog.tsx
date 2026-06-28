@@ -330,7 +330,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
         <div className="max-w-7xl mx-auto px-6 md:px-16 pt-32 pb-4">
           <button
             onClick={() => { window.location.hash = '#hero'; }}
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:text-primary transition-colors cursor-pointer group focus:outline-none"
+            className="inline-flex items-center gap-2.5 text-sm sm:text-base font-extrabold uppercase tracking-widest text-secondary hover:text-primary transition-colors cursor-pointer group focus:outline-none"
           >
             <span className="group-hover:-translate-x-1 transition-transform">←</span> Torna alla Home
           </button>
@@ -636,43 +636,43 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                       {/* Like button inside article */}
                       <button
                         onClick={(e) => handleLike(activePost.id, e)}
-                        className={`flex items-center gap-1 px-4 py-2 rounded-full border text-xs cursor-pointer ${
+                        className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full border text-sm sm:text-base cursor-pointer ${
                           likedPosts[activePost.id]
-                            ? 'bg-red-500/10 border-red-500/25 text-red-500 font-semibold'
-                            : 'bg-background hover:bg-surface-container border-outline-variant/20 text-on-surface-variant'
-                        } transition-colors`}
+                            ? 'bg-red-500/10 border-red-500/25 text-red-500 font-extrabold'
+                            : 'bg-background hover:bg-surface-container border-outline-variant/20 text-on-surface-variant font-bold'
+                        } transition-all duration-200 active:scale-95`}
                       >
-                        <Heart size={14} className={likedPosts[activePost.id] ? 'fill-current' : ''} />
+                        <Heart size={16} className={likedPosts[activePost.id] ? 'fill-current' : ''} />
                         <span>Mi piace ({likes[activePost.id]})</span>
                       </button>
 
                       {/* WhatsApp Share */}
                       <button
                         onClick={(e) => handleShare(activePost.id, 'whatsapp', e)}
-                        className="p-2.5 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] border border-[#25D366]/20 cursor-pointer active:scale-95 transition-all text-xs flex items-center gap-1 font-semibold"
+                        className="px-4 py-2.5 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] border border-[#25D366]/20 cursor-pointer active:scale-95 transition-all text-sm sm:text-base flex items-center gap-1.5 font-extrabold"
                         title="Condividi su WhatsApp"
                       >
-                        <Share2 size={13} />
+                        <Share2 size={15} />
                         <span>WhatsApp</span>
                       </button>
 
                       {/* LinkedIn Share */}
                       <button
                         onClick={(e) => handleShare(activePost.id, 'linkedin', e)}
-                        className="p-2.5 rounded-full bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 text-[#0A66C2] border border-[#0A66C2]/20 cursor-pointer active:scale-95 transition-all text-xs flex items-center gap-1 font-semibold"
+                        className="px-4 py-2.5 rounded-full bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 text-[#0A66C2] border border-[#0A66C2]/20 cursor-pointer active:scale-95 transition-all text-sm sm:text-base flex items-center gap-1.5 font-extrabold"
                         title="Condividi su LinkedIn"
                       >
-                        <Share2 size={13} />
+                        <Share2 size={15} />
                         <span>LinkedIn</span>
                       </button>
 
                       {/* Telegram Share */}
                       <button
                         onClick={(e) => handleShare(activePost.id, 'telegram', e)}
-                        className="p-2.5 rounded-full bg-[#0088cc]/10 hover:bg-[#0088cc]/20 text-[#0088cc] border border-[#0088cc]/20 cursor-pointer active:scale-95 transition-all text-xs flex items-center gap-1 font-semibold"
+                        className="px-4 py-2.5 rounded-full bg-[#0088cc]/10 hover:bg-[#0088cc]/20 text-[#0088cc] border border-[#0088cc]/20 cursor-pointer active:scale-95 transition-all text-sm sm:text-base flex items-center gap-1.5 font-extrabold"
                         title="Condividi su Telegram"
                       >
-                        <Share2 size={13} />
+                        <Share2 size={15} />
                         <span>Telegram</span>
                       </button>
                     </div>
@@ -681,10 +681,10 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                   {/* Custom Freelance CTA button */}
                   <div className="w-full md:w-auto flex flex-col sm:flex-row items-center gap-4 bg-primary/5 dark:bg-primary-container/5 p-4 md:p-6 rounded-3xl border border-secondary/15">
                     <div className="text-center sm:text-left">
-                      <p className="font-headline text-sm font-bold text-primary">
+                      <p className="font-headline text-lg sm:text-xl font-bold text-primary">
                         Progetto da Realizzare?
                       </p>
-                      <p className="font-sans text-xs text-on-surface-variant">
+                      <p className="font-sans text-sm text-on-surface-variant">
                         Sviluppo interfacce d'élite e siti web eleganti.
                       </p>
                     </div>
@@ -693,9 +693,9 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                       href={`https://wa.me/393793603321?text=Ciao%20Maria%20Teresa,%20ho%20letto%20il%20tuo%20articolo%20${encodeURIComponent(activePost.title)}%20e%20vorrei%20consulenza%20per%20un%20progetto`}
                       target="_blank"
                       rel="noreferrer"
-                      className="bg-primary text-on-primary font-bold text-xs px-6 py-3.5 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-95 transition-all cursor-pointer w-full sm:w-auto"
+                      className="bg-primary text-on-primary font-bold text-base px-8 py-4 rounded-full flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg active:scale-95 transition-all cursor-pointer w-full sm:w-auto uppercase tracking-wide"
                     >
-                      <MessageCircle size={16} />
+                      <MessageCircle size={18} />
                       Parla con me su WhatsApp
                     </a>
                   </div>
@@ -706,7 +706,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                 <div className="flex justify-end pt-4 border-t border-outline-variant/10">
                   <button
                     onClick={() => setSelectedPostId(null)}
-                    className="bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs md:text-sm px-6 py-3 rounded-full transition-all cursor-pointer"
+                    className="bg-surface-container hover:bg-surface-container-high text-on-surface font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-full transition-all cursor-pointer uppercase tracking-wider"
                   >
                     Torna all'Archivio
                   </button>

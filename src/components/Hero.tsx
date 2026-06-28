@@ -152,7 +152,7 @@ export default function Hero() {
             whileTap={{ scale: 0.96 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             onClick={handleScrollToServices}
-            className="inline-block bg-primary text-on-primary px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full font-headline text-xs sm:text-sm font-bold shadow-lg cursor-pointer hover:bg-secondary transition-colors relative overflow-hidden group w-full sm:w-auto"
+            className="inline-block bg-primary text-on-primary px-7 py-3 sm:px-9 sm:py-4 rounded-full font-headline text-lg sm:text-xl md:text-2xl font-bold shadow-lg cursor-pointer hover:bg-secondary transition-colors relative overflow-hidden group w-full sm:w-auto"
           >
             <span className="relative z-10 font-bold uppercase tracking-wider">Servizi</span>
             <div className="absolute inset-0 bg-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -163,7 +163,7 @@ export default function Hero() {
             whileTap={{ scale: 0.96 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             onClick={handleScrollToPortfolio}
-            className="inline-block bg-secondary text-on-secondary px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full font-headline text-xs sm:text-sm font-bold shadow-lg cursor-pointer hover:bg-primary transition-colors relative overflow-hidden group w-full sm:w-auto"
+            className="inline-block bg-secondary text-on-secondary px-7 py-3 sm:px-9 sm:py-4 rounded-full font-headline text-lg sm:text-xl md:text-2xl font-bold shadow-lg cursor-pointer hover:bg-primary transition-colors relative overflow-hidden group w-full sm:w-auto"
           >
             <span className="relative z-10 font-bold uppercase tracking-wider">Proposte</span>
             <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -174,7 +174,7 @@ export default function Hero() {
             whileTap={{ scale: 0.96 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             onClick={handleScrollToConsulenze}
-            className="inline-block bg-surface-container border border-outline-variant/30 text-on-surface px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full font-headline text-xs sm:text-sm font-bold shadow-md cursor-pointer hover:bg-primary hover:text-on-primary hover:border-transparent transition-colors relative overflow-hidden group w-full sm:w-auto"
+            className="inline-block bg-surface-container border border-outline-variant/30 text-on-surface px-7 py-3 sm:px-9 sm:py-4 rounded-full font-headline text-lg sm:text-xl md:text-2xl font-bold shadow-md cursor-pointer hover:bg-primary hover:text-on-primary hover:border-transparent transition-colors relative overflow-hidden group w-full sm:w-auto"
           >
             <span className="relative z-10 font-bold uppercase tracking-wider">Consulenze</span>
             <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

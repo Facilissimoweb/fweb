@@ -162,7 +162,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full bg-primary text-on-primary py-4 rounded-full font-headline text-lg font-semibold flex items-center justify-center gap-3 cat-pounce shadow-lg cursor-pointer disabled:opacity-80"
+              className="w-full bg-primary text-on-primary py-4 rounded-full font-headline text-xl md:text-2xl font-bold tracking-wider flex items-center justify-center gap-3 cat-pounce shadow-lg cursor-pointer disabled:opacity-80"
             >
               {status === 'idle' && <span>Invia Messaggio</span>}
               {status === 'loading' && (

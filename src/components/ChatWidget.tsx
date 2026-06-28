@@ -277,7 +277,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}
             transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-            className="fixed inset-0 md:inset-auto md:bottom-[88px] md:right-6 md:w-[410px] md:h-[580px] md:max-h-[calc(100vh-170px)] bg-white/75 dark:bg-[#1C122C]/75 backdrop-blur-lg border-4 border-[#DDF247] rounded-none md:rounded-[32px] shadow-[0_0_30px_rgba(221,242,71,0.25)] z-[120] flex flex-col overflow-hidden text-on-surface"
+            className="fixed inset-0 md:inset-auto md:bottom-[88px] md:right-6 md:w-[410px] md:h-[580px] md:max-h-[calc(100vh-170px)] bg-white/75 dark:bg-[#1C122C]/75 backdrop-blur-lg border-2 border-[#DDF247] rounded-none md:rounded-[32px] shadow-[0_0_30px_rgba(221,242,71,0.25)] z-[120] flex flex-col overflow-hidden text-on-surface"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-primary to-secondary p-4 text-white flex items-center justify-between shadow-md shrink-0">

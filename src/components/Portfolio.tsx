@@ -108,7 +108,7 @@ export default function Portfolio() {
                 className="masonry-item animate-hover"
                 onClick={() => setSelectedItemId(item.id)}
               >
-                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] border-4 border-[#DDF247] transition-all duration-500 hover:-translate-y-2 relative min-h-[440px] flex flex-col justify-end">
+                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] border-2 border-[#DDF247] transition-all duration-500 hover:-translate-y-2 relative min-h-[440px] flex flex-col justify-end">
                   {/* Background Image */}
                   <img
                     alt={item.title}
@@ -162,7 +162,7 @@ export default function Portfolio() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 40 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="bg-white/80 dark:bg-[#1C122C]/85 backdrop-blur-xl rounded-[40px] w-full max-w-3xl max-h-[90vh] md:max-h-[85vh] shadow-[0_0_50px_rgba(221,242,71,0.35)] overflow-hidden flex flex-col relative text-on-surface border-4 border-[#DDF247]"
+              className="bg-white/80 dark:bg-[#1C122C]/85 backdrop-blur-xl rounded-[40px] w-full max-w-3xl max-h-[90vh] md:max-h-[85vh] shadow-[0_0_50px_rgba(221,242,71,0.35)] overflow-hidden flex flex-col relative text-on-surface border-2 border-[#DDF247]"
             >
               {/* Close Button */}
               <div className="absolute top-6 right-6 z-20">

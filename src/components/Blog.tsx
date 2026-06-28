@@ -418,7 +418,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                 transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
                 key={post.id}
                 onClick={() => setSelectedPostId(post.id)}
-                className="group flex flex-col h-full rounded-[32px] overflow-hidden shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] border-4 border-[#DDF247] cursor-pointer transition-all duration-500 hover:-translate-y-2 relative min-h-[480px]"
+                className="group flex flex-col h-full rounded-[32px] overflow-hidden shadow-[0_0_20px_rgba(221,242,71,0.15)] hover:shadow-[0_0_35px_rgba(221,242,71,0.45)] border-2 border-[#DDF247] cursor-pointer transition-all duration-500 hover:-translate-y-2 relative min-h-[480px]"
               >
                 {/* Background Image */}
                 <img
@@ -507,7 +507,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 50 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="bg-white/80 dark:bg-[#1C122C]/85 backdrop-blur-xl rounded-[40px] w-full max-w-4xl max-h-[92vh] md:max-h-[85vh] shadow-[0_0_50px_rgba(221,242,71,0.35)] overflow-hidden flex flex-col relative text-on-surface border-4 border-[#DDF247]"
+              className="bg-white/80 dark:bg-[#1C122C]/85 backdrop-blur-xl rounded-[40px] w-full max-w-4xl max-h-[92vh] md:max-h-[85vh] shadow-[0_0_50px_rgba(221,242,71,0.35)] overflow-hidden flex flex-col relative text-on-surface border-2 border-[#DDF247]"
             >
               {/* Close Button sticky top right */}
               <div className="absolute top-6 right-6 z-20">

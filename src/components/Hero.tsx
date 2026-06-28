@@ -133,15 +133,6 @@ export default function Hero() {
           FACILISSIMO<br />WEB ///
         </motion.h1>
         
-        <motion.p 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
-          className="font-sans text-sm sm:text-lg md:text-xl text-on-surface-variant max-w-md mx-auto lowercase tracking-wide font-medium"
-        >
-          freelance web designer
-        </motion.p>
-
         <motion.div 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}

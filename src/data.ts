@@ -125,21 +125,21 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
 
 export const SKILLS: Skill[] = [
   {
-    id: 'creative-direction',
-    name: 'Direzione Creativa',
-    percentage: 95,
+    id: 'brand-identity',
+    name: 'Grafica Pubblicitaria & Brand Identity',
+    percentage: 85,
     colorClass: 'bg-primary'
   },
   {
-    id: 'web-development',
-    name: 'Sviluppo Web',
-    percentage: 88,
+    id: 'visual-ux',
+    name: 'Comunicazione Visiva & UX Design',
+    percentage: 80,
     colorClass: 'bg-secondary'
   },
   {
-    id: 'digital-illustration',
-    name: 'Illustrazione Digitale',
-    percentage: 92,
+    id: 'lead-ads',
+    name: 'Lead Generation & Social Ads',
+    percentage: 75,
     colorClass: 'bg-tertiary'
   }
 ];

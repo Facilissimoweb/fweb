@@ -37,13 +37,10 @@ export default function About() {
           </h2>
           <div className="font-sans text-base text-on-surface-variant mb-8 space-y-4 leading-relaxed">
             <p className="font-medium text-lg text-primary">
-              Buongiorno, sono M.Teresa Rogani.
+              Sono M. Teresa Rogani.
             </p>
             <p>
-              Diplomata in <strong>grafica pubblicitaria</strong>, laureata in <strong>comunicazione visiva</strong> e certificata come <strong>Social Lead's Manager (200 ore)</strong>. Aiuto microimprese e liberi professionisti a costruire una presenza online strategica. Lavoro esclusivamente con realtà agili e ambiziose, per garantire a ciascuna la massima attenzione e soluzioni su misura.
-            </p>
-            <p>
-              La mia formazione è il fondamento del mio lavoro. Ho iniziato con il diploma in grafica pubblicitaria, dove ho appreso le basi tecniche del design visivo. Ho proseguito con la laurea in comunicazione visiva, approfondendo la strategia del messaggio e l'esperienza utente. Infine, ho completato il percorso con la certificazione come Social Lead's Manager, specializzandomi nella gestione strategica dei processi di acquisizione lead. Questo percorso mi permette di offrire non solo siti web, ma strumenti integrati che comunicano, convertono e generano risultati concreti per la vostra attività.
+              Diplomata in <strong>grafica pubblicitaria</strong>, laureata in <strong>comunicazione visiva</strong> e certificata come <strong>Social Lead's Manager (200 ore)</strong>. Aiuto microimprese e liberi professionisti a strutturare una presenza online d'eccellenza, unendo design strategico e canali di acquisizione clienti concreti.
             </p>
           </div>
 

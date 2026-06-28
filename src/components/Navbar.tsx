@@ -410,7 +410,7 @@ export default function Navbar() {
 
         {/* Main Navigation Bar */}
         <nav
-          className={`flex items-center justify-between w-full px-6 md:px-16 py-2.5 transition-all duration-300 pointer-events-auto border-b-2 ${
+          className={`flex items-center justify-between w-full px-6 md:px-16 py-2.5 transition-all duration-300 pointer-events-auto border-y-2 ${
             isScrolled || isOpen
               ? 'bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md shadow-secondary/5 border-[#DDF247]'
               : 'bg-transparent border-transparent'
@@ -422,7 +422,7 @@ export default function Navbar() {
               setIsOpen(false);
               handleScrollTo('hero');
             }}
-            className="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container transition-all text-on-surface cursor-pointer shadow-sm focus:outline-none"
+            className="w-10 h-10 rounded-full border-2 border-[#DDF247] flex items-center justify-center bg-surface hover:bg-surface-container transition-all text-on-surface cursor-pointer shadow-sm focus:outline-none"
             aria-label="Home"
           >
             <Home size={16} className="stroke-[2.2]" />
@@ -435,7 +435,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 onBlur={() => setTimeout(() => setLangDropdownOpen(false), 250)}
-                className="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm focus:outline-none"
+                className="w-10 h-10 rounded-full border-2 border-[#DDF247] flex items-center justify-center bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm focus:outline-none"
                 title="Cambia lingua"
               >
                 <span className="text-base leading-none select-none">
@@ -474,7 +474,7 @@ export default function Navbar() {
             {/* Theme Toggle Button */}
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              className="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm focus:outline-none"
+              className="w-10 h-10 rounded-full border-2 border-[#DDF247] flex items-center justify-center bg-surface hover:bg-surface-container text-on-surface transition-all cursor-pointer shadow-sm focus:outline-none"
               aria-label="Cambia tema"
               title={theme === 'light' ? 'Passa alla modalità scura' : 'Passa alla modalità chiara'}
             >
@@ -484,7 +484,7 @@ export default function Navbar() {
             {/* Hamburger/Close Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-all cursor-pointer focus:outline-none"
+              className="w-10 h-10 rounded-full border-2 border-[#DDF247] flex items-center justify-center text-on-surface hover:bg-surface-container transition-all cursor-pointer focus:outline-none"
               aria-label="Toggle Menu"
             >
               {isOpen ? <X size={20} className="stroke-[2.2]" /> : <Menu size={20} className="stroke-[2.2]" />}

@@ -5,9 +5,9 @@ export const SERVICES: Service[] = [
     id: 'web-design',
     title: 'Web Design',
     description: [
-      '**Architettura web** d\'élite e design d\'impatto cucito su misura per il tuo brand.',
+      '**Architettura web** d\'élite e design d\'impatto cucito su misura per il vostro brand.',
       '**Codice performante** studiato per garantire velocità estrema e posizionamento SEO.',
-      '**Interfaccia immersiva** focalizzata sulla conversione strategica dei tuoi visitatori.'
+      '**Interfaccia immersiva** focalizzata sulla conversione strategica dei vostri visitatori.'
     ],
     iconName: 'Globe',
     colorClass: 'text-primary',
@@ -18,7 +18,7 @@ export const SERVICES: Service[] = [
     id: 'branding',
     title: 'Branding',
     description: [
-      '**DNA di marca** definito per rendere il tuo posizionamento unico sul mercato.',
+      '**DNA di marca** definito per rendere il vostro posizionamento unico sul mercato.',
       '**Simbologia iconica** e sistemi visivi coerenti che esprimono assoluta autorevolezza.',
       '**Brand Manual** esclusivo per guidare ogni futura espansione di comunicazione.'
     ],
@@ -44,7 +44,7 @@ export const SERVICES: Service[] = [
     id: 'consulenze',
     title: 'Consulenze',
     description: [
-      '**Primo incontro** di 20 minuti completamente **gratuito** per inquadrare la tua idea.',
+      '**Primo incontro** di 20 minuti completamente **gratuito** per inquadrare la vostra idea.',
       '**Analisi avanzata** e rigorosa del progetto, che richiede un compenso professionale.',
       '**Algoritmo proprietario** e software nativo specializzato per una diagnosi di precisione.'
     ],

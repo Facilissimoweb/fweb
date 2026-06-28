@@ -22,7 +22,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: 'Ciao! Sono l\'Assistente AI di FACILISSIMO WEB. Come posso aiutarti oggi a far conoscere la tua attività online in modo semplice ed efficace?',
+      content: 'Buongiorno! Sono l\'Assistente AI di FACILISSIMO WEB. Come posso aiutarvi oggi a strutturare la vostra presenza online e far conoscere la vostra attività in modo semplice ed efficace?',
     },
   ]);
   const [inputValue, setInputValue] = useState('');

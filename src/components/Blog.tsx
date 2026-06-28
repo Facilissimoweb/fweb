@@ -27,7 +27,7 @@ interface BlogPost {
 const BLOG_ARTICLES: BlogPost[] = [
   {
     id: 'brand-identity-power',
-    title: 'IL POTERE DELLA BRAND IDENTITY FELINA: COME CREARE UNA TRIBÙ INTORNO AL TUO MARCHIO',
+    title: 'IL POTERE DELLA BRAND IDENTITY STRATEGICA: COME CREARE UNA TRIBÙ INTORNO AL VOSTRO MARCHIO',
     excerpt: 'Non basta avere un logo grazioso per emergere. Un brand di successo ha bisogno di una personalità magnetica capace di attrarre una nicchia specifica e fedele.',
     date: '18 Giugno 2026',
     readTime: '4 min lettura',
@@ -38,15 +38,15 @@ const BLOG_ARTICLES: BlogPost[] = [
     contentBlocks: [
       {
         type: 'heading',
-        text: 'IL LOGO NON È IL TUO BRAND: È SOLO LA PUNTA DELL\'ICEBERG'
+        text: 'IL LOGO NON È IL VOSTRO BRAND: È SOLO LA PUNTA DELL\'ICEBERG'
       },
       {
         type: 'paragraph',
-        text: 'Moltissimi piccoli business commettono l\'errore di pensare che avere un logo carino significhi possedere una **Brand Identity**. In realtà, il logo rappresenta solo l\'elemento visivo finale di un processo molto più profondo. **LA TUA IDENTITÀ DI MARCA È L\'ANIMA E LA PERSONALITÀ DEL TUO PROGETTO**.'
+        text: 'Moltissimi piccoli business commettono l\'errore di pensare che avere un logo carino significhi possedere una **Brand Identity**. In realtà, il logo rappresenta solo l\'elemento visivo finale di un processo molto più profondo. **LA VOSTRA IDENTITÀ DI MARCA È L\'ANIMA E LA PERSONALITÀ DEL VOSTRO PROGETTO**.'
       },
       {
         type: 'paragraph',
-        text: 'Come freelance, quando disegno un marchio per i miei clienti, non mi limito a tracciare linee su un foglio digitale: vado alla ricerca dei loro valori fondamentali. Chi è il tuo cliente ideale? Quale emozione provano quando interagiscono con te? La Brand Identity è la risposta visiva a queste domande fondamentali.'
+        text: 'Come freelance, quando disegno un marchio per i miei clienti, non mi limito a tracciare linee su un foglio digitale: vado alla ricerca dei loro valori fondamentali. Chi è il vostro cliente ideale? Quale emozione provano quando interagiscono con Voi? La Brand Identity è la risposta visiva a queste domande fondamentali.'
       },
       {
         type: 'heading',
@@ -54,11 +54,11 @@ const BLOG_ARTICLES: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Per costruire fiducia e attrarre la tua "tribù", la coerenza è la tua arma segreta. Dalla palette cromatica alle scelte tipografiche, ogni elemento deve parlare la stessa lingua. **UN DESIGN COERENTE CREA UN SENSO DI FAMILIARITÀ E PROFESSIONALITÀ**.'
+        text: 'Per costruire fiducia e attrarre la vostra "tribù", la coerenza è la vostra arma segreta. Dalla palette cromatica alle scelte tipografiche, ogni elemento deve parlare la stessa lingua. **UN DESIGN COERENTE CREA UN SENSO DI FAMILIARITÀ E PROFESSIONALITÀ**.'
       },
       {
         type: 'highlight',
-        text: 'RICORDA: UN UTENTE IMPIEGA MENO DI 3 SECONDI PER FARSI UN\'OPINIONE SULLA PROFESSIONALITÀ DEL TUO SITO. LA COERENZA VISIVA COMUNICA IMMEDIATAMENTE CHE TI PRENDI CURA DEI DETTAGLI.'
+        text: 'RICORDATE: UN UTENTE IMPIEGA MENO DI 3 SECONDI PER FARSI UN\'OPINIONE SULLA PROFESSIONALITÀ DEL VOSTRO SITO. LA COERENZA VISIVA COMUNICA IMMEDIATAMENTE CHE VI PRENDETE CURA DEI DETTAGLI.'
       },
       {
         type: 'paragraph',
@@ -79,7 +79,7 @@ const BLOG_ARTICLES: BlogPost[] = [
     ],
     seo: {
       title: 'Brand Identity per Piccoli Business: Come Creare un Brand Forte | Facilissimo Web',
-      description: 'Scopri l\'importanza della Brand Identity e come creare una personalità visiva coerente ed elegante per il tuo business. Consigli della freelance Maria Teresa Rogani.',
+      description: 'Scoprite l\'importanza della Brand Identity e come creare una personalità visiva coerente ed elegante per il vostro business. Consigli della freelance Maria Teresa Rogani.',
       focusKeywords: ['Brand Identity', 'Loghi su misura', 'Visual Design', 'Freelance Branding'],
       slug: 'brand-identity-felina-creare-tribu'
     }
@@ -105,7 +105,7 @@ const BLOG_ARTICLES: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Quando affolliamo una pagina web con testi infiniti, banner colorati e animazioni caotiche, distruggiamo la soglia di attenzione del visitatore. Lo spazio negativo, al contrario, agisce come una guida silenziosa. **IL VUOTO COSTRINGE L\'OCCHIO DEL VISITATORE A POSARSI ESATTAMENTE DOVE VOGLIO IO: SUL TUO PRODOTTO O SULLA TUA CTA**.'
+        text: 'Quando affolliamo una pagina web con testi infiniti, banner colorati e animazioni caotiche, distruggiamo la soglia di attenzione del visitatore. Lo spazio negativo, al contrario, agisce come una guida silenziosa. **IL VUOTO COSTRINGE L\'OCCHIO DEL VISITATORE A POSARSI ESATTAMENTE DOVE DESIDERO: SUL VOSTRO PRODOTTO O SULLA VOSTRA CTA**.'
       },
       {
         type: 'heading',
@@ -150,7 +150,7 @@ const BLOG_ARTICLES: BlogPost[] = [
   {
     id: 'seo-for-designers',
     title: 'SEO STRATEGICA PER CREATIVI: COME SCALARE I MOTORI DI RICERCA SENZA PERDERE L\'ESTETICA',
-    excerpt: 'La SEO non deve per forza rovinare il tuo stile visivo unico. Impara a coniugare ottimizzazione tecnica e design d\'impatto per conquistare Google.',
+    excerpt: 'La SEO non deve per forza rovinare il vostro stile visivo unico. Imparate a coniugare ottimizzazione tecnica e design d\'impatto per conquistare Google.',
     date: '24 Giugno 2026',
     readTime: '5 min lettura',
     category: 'SEO',
@@ -164,7 +164,7 @@ const BLOG_ARTICLES: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Molti designer caricano immagini non compresse ad altissima risoluzione per preservare ogni singolo pixel del loro portfolio. Questo è il modo migliore per distruggere il posizionamento SEO del tuo sito. **LA SEO RICHIEDE IMMAGINI COPRESSE, LEGGERE E IN FORMATO MODERNO COME WEBP**.'
+        text: 'Molti designer caricano immagini non compresse ad altissima risoluzione per preservare ogni singolo pixel del loro portfolio. Questo è il modo migliore per distruggere il posizionamento SEO del vostro sito. **LA SEO RICHIEDE IMMAGINI COMPRESSE, LEGGERE E IN FORMATO MODERNO COME WEBP**.'
       },
       {
         type: 'paragraph',
@@ -192,7 +192,7 @@ const BLOG_ARTICLES: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Un codice pulito e semanticamente corretto è il miglior regalo che puoi fare alla SEO. Utilizzare tag semantici HTML5 come `<nav>`, `<section>`, `<article>`, e `<footer>` permette a Google di comprendere la gerarchia del sito all\'istante.'
+        text: 'Un codice pulito e semanticamente corretto è il miglior regalo che si possa fare alla SEO. Utilizzare tag semantici HTML5 come `<nav>`, `<section>`, `<article>`, e `<footer>` permette a Google di comprendere la gerarchia del sito all\'istante.'
       },
       {
         type: 'paragraph',

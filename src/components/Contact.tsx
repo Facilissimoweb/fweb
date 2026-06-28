@@ -39,10 +39,10 @@ export default function Contact() {
           className="flex flex-col justify-center"
         >
           <h2 className="font-headline text-3xl md:text-4xl font-semibold text-primary mb-6">
-            Pronto a Partire?
+            Siete Pronti a Partire?
           </h2>
           <p className="font-sans text-base md:text-lg text-on-surface-variant mb-12 leading-relaxed">
-            Hai un progetto in mente o vuoi semplicemente fare un saluto? Scrivimi e semplifichiamo insieme la tua presenza sul web.
+            Avete un progetto in mente o desiderate semplicemente ricevere informazioni dettagliate? Scriveteci per semplificare e strutturare insieme la vostra presenza sul web.
           </p>
 
           <div className="space-y-6">

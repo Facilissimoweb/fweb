@@ -287,18 +287,18 @@ export default function Portfolio() {
                 <div className="border-t border-outline-variant/15 pt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
                   <div className="text-center sm:text-left">
                     <p className="font-headline text-xs md:text-sm font-bold text-on-surface">
-                      Ti piace questo approccio tecnico?
+                      Vi piace questo approccio tecnico?
                     </p>
                     <p className="font-sans text-xs text-on-surface-variant/70">
-                      Parla del tuo progetto e ottieni soluzioni su misura.
+                      Parliamo del vostro progetto per strutturare soluzioni su misura.
                     </p>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                     <a
                       href={activeItem.id === 'social-leads-generation'
-                        ? "https://wa.me/393793603321?text=Ciao%20M.Teresa,%20vorrei%20maggiori%20informazioni%20sulla%20strategia%20di%20Social%20Lead%20Generation"
-                        : `https://wa.me/393793603321?text=Ciao%20M.Teresa,%20ho%20visto%20la%20tua%20proposta%20${encodeURIComponent(activeItem.title)}%20e%20vorrei%20informazioni%20per%20un%20servizio%20simile`
+                        ? "https://wa.me/393793603321?text=Buongiorno%20M.Teresa,%20vorrei%20maggiori%20informazioni%20sulla%20strategia%20di%20Social%20Lead%20Generation"
+                        : `https://wa.me/393793603321?text=Buongiorno%20M.Teresa,%20ho%20visto%20il%20progetto%20${encodeURIComponent(activeItem.title)}%20e%20vorrei%20informazioni%20per%20un%20servizio%20simile`
                       }
                       target="_blank"
                       rel="noreferrer"

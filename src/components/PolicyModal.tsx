@@ -47,7 +47,7 @@ export default function PolicyModal({ isOpen, onClose, type }: PolicyModalProps)
 
                 <div className="text-sm md:text-base leading-relaxed text-on-surface-variant space-y-4">
                   <p>
-                    Benvenuto su <strong>FACILISSIMO WEB</strong>. La tua privacy è estremamente importante per noi. Questa Informativa sulla Privacy descrive come raccogliamo, utilizziamo, proteggiamo e condividiamo i tuoi dati personali in conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR) dell'Unione Europea.
+                    Benvenuto su <strong>FACILISSIMO WEB</strong>. La vostra privacy è estremamente importante per noi. Questa Informativa sulla Privacy descrive come raccogliamo, utilizziamo, proteggiamo e condividiamo i vostri dati personali in conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR) dell'Unione Europea.
                   </p>
 
                   <h4 className="font-headline text-lg font-bold text-primary mt-6">
@@ -77,10 +77,10 @@ export default function PolicyModal({ isOpen, onClose, type }: PolicyModalProps)
                     3. Finalità del Trattamento
                   </h4>
                   <p>
-                    I tuoi dati personali sono trattati esclusivamente per le seguenti finalità:
+                    I vostri dati personali sono trattati esclusivamente per le seguenti finalità:
                   </p>
                   <ul className="list-disc pl-6 space-y-2">
-                    <li>Rispondere alle tue richieste di preventivo, informazione o collaborazione inviate tramite il modulo di contatto o email.</li>
+                    <li>Rispondere alle vostre richieste di preventivo, informazione o collaborazione inviate tramite il modulo di contatto o email.</li>
                     <li>Analizzare in forma anonima e aggregata le visite al sito per migliorarne le performance, l'usabilità e la navigazione.</li>
                     <li>Garantire la sicurezza del sito web e prevenire attività fraudolente o dannose.</li>
                   </ul>
@@ -89,21 +89,21 @@ export default function PolicyModal({ isOpen, onClose, type }: PolicyModalProps)
                     4. Base Giuridica del Trattamento
                   </h4>
                   <p>
-                    Trattiamo i tuoi dati sulla base del tuo esplicito consenso (es. compilando il modulo di contatto e selezionando la casella di accettazione) o per l'esecuzione di misure precontrattuali adottate su tua richiesta (es. richiesta di preventivo).
+                    Trattiamo i vostri dati sulla base del vostro esplicito consenso (es. compilando il modulo di contatto e selezionando la casella di accettazione) o per l'esecuzione di misure precontrattuali adottate su vostra richiesta (es. richiesta di preventivo).
                   </p>
 
                   <h4 className="font-headline text-lg font-bold text-primary mt-6">
                     5. Periodo di Conservazione dei Dati
                   </h4>
                   <p>
-                    I dati forniti tramite il modulo di contatto saranno conservati solo per il tempo strettamente necessario a gestire la tua richiesta e per l'eventuale successiva gestione del rapporto professionale, salvo obblighi di legge o richieste di cancellazione anticipata da parte tua.
+                    I dati forniti tramite il modulo di contatto saranno conservati solo per il tempo strettamente necessario a gestire la vostra richiesta e per l'eventuale successiva gestione del rapporto professionale, salvo obblighi di legge o richieste di cancellazione anticipata da parte vostra.
                   </p>
 
                   <h4 className="font-headline text-lg font-bold text-primary mt-6">
-                    6. I Tuoi Diritti
+                    6. I Vostri Diritti
                   </h4>
                   <p>
-                    In base al GDPR, hai il diritto di accedere ai tuoi dati personali, chiederne la rettifica o la cancellazione, limitarne il trattamento, opporti al trattamento o richiedere la portabilità dei dati. Puoi esercitare questi diritti in qualsiasi momento inviando una email a <a href="mailto:facilissimoweb.mc@gmail.com" className="text-secondary hover:underline">facilissimoweb.mc@gmail.com</a>.
+                    In base al GDPR, avete il diritto di accedere ai vostri dati personali, chiederne la rettifica o la cancellazione, limitarne il trattamento, opporti al trattamento o richiedere la portabilità dei dati. Potete esercitare questi diritti in qualsiasi momento inviando una email a <a href="mailto:facilissimoweb.mc@gmail.com" className="text-secondary hover:underline">facilissimoweb.mc@gmail.com</a>.
                   </p>
                 </div>
               </div>
@@ -148,14 +148,14 @@ export default function PolicyModal({ isOpen, onClose, type }: PolicyModalProps)
                     3. Consenso e Gestione delle Preferenze
                   </h4>
                   <p>
-                    Al primo accesso al sito, ti viene mostrato un banner informativo che ti permette di accettare l'uso dei cookie o di personalizzare le tue preferenze. Puoi revocare o modificare il tuo consenso in qualsiasi momento cancellando la cache del browser o modificando le impostazioni dei cookie nel tuo browser web.
+                    Al primo accesso al sito, vi viene mostrato un banner informativo che vi permette di accettare l'uso dei cookie o di personalizzare le vostre preferenze. Potete revocare o modificare il vostro consenso in qualsiasi momento cancellando la cache del browser o modificando le impostazioni dei cookie nel vostro browser web.
                   </p>
 
                   <h4 className="font-headline text-lg font-bold text-primary mt-6">
                     4. Come disattivare i Cookie tramite browser
                   </h4>
                   <p>
-                    La maggior parte dei browser è configurata per accettare i cookie. Tuttavia, puoi disabilitare o bloccare i cookie modificando direttamente le preferenze del tuo browser (Chrome, Firefox, Safari, Edge, ecc.). Tieni presente che la disattivazione dei cookie tecnici potrebbe compromettere la corretta visualizzazione di alcune parti del sito.
+                    La maggior parte dei browser è configurata per accettare i cookie. Tuttavia, potete disabilitare o bloccare i cookie modificando direttamente le preferenze del vostro browser (Chrome, Firefox, Safari, Edge, ecc.). Tieni presente che la disattivazione dei cookie tecnici potrebbe compromettere la corretta visualizzazione di alcune parti del sito.
                   </p>
                 </div>
               </div>

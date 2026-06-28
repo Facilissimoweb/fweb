@@ -45,58 +45,58 @@ interface ServiceDetail {
 const SERVICE_DETAILS: Record<string, ServiceDetail> = {
   'web-design': {
     tagline: 'Siti web reattivi, fluidi e ottimizzati per convertire.',
-    detailedIntro: 'Progetto e sviluppo siti web ed e-commerce su misura, combinando un\'estetica raffinata con prestazioni fulminee. Ogni sito è ottimizzato per i motori di ricerca (SEO), completamente accessibile e strutturato per guidare il visitatore in modo naturale verso l\'azione.',
+    detailedIntro: 'Progetto e sviluppo siti web ed e-commerce su misura, combinando un\'estetica raffinata con prestazioni fulminee. Offro due modalità operative distinte: i Pacchetti Chiavi in Mano (CMS) per la massima autonomia immediata di gestione dei contenuti, e lo Sviluppo Custom Code (in Abbonamento annuale rinnovabile) per funzioni su misura e prestazioni estreme. Ogni sito è ottimizzato per i motori di ricerca (SEO), completamente accessibile e strutturato per guidare il visitatore in modo naturale verso l\'azione.',
     features: [
+      'Modalità 1: Pacchetti Chiavi in Mano su CMS (WordPress o simili con pannello di controllo)',
+      'Modalità 2: Sviluppo Custom Code (Abbonamento annuale comprensivo di hosting, manutenzione e assistenza)',
       'Design Responsive di altissimo livello (Mobile-First)',
-      'Ottimizzazione SEO On-Page & Velocità di Caricamento eccezionale',
-      'Integrazione di sistemi di pagamento e gestione e-commerce sicuri',
-      'Architettura dell\'informazione pulita e accessibile',
-      'Pannello di gestione intuitivo per aggiornare i tuoi contenuti in autonomia'
+      'Ottimizzazione SEO On-Page & Velocità di Caricamento d\'eccellenza',
+      'Formazione dedicata per la gestione del sito in completa autonomia'
     ],
-    process: 'Analisi iniziale degli obiettivi, progettazione dei wireframe ed esperienza utente, sviluppo del codice pulito e ottimizzato, test di velocità ed accessibilità, e infine messa online con monitoraggio post-lancio.',
-    ctaText: 'Progetta il tuo sito web su WhatsApp',
+    process: 'Analisi iniziale delle esigenze, progettazione dei wireframe ed esperienza utente, sviluppo del codice pulito e ottimizzato, test di velocità ed accessibilità, e infine messa online con monitoraggio post-lancio.',
+    ctaText: 'Progettate il vostro sito web su WhatsApp',
     ctaLink: 'https://wa.me/393793603321?text=Ciao%20M.Teresa,%20vorrei%20informazioni%20sulla%20creazione%20di%20un%20sito%20web%20professionale'
   },
   'branding': {
     tagline: 'Identità visive memorabili, d\'impatto e su misura.',
-    detailedIntro: 'Il brand non è solo un logo: è la personalità, l\'anima e il volto del tuo business. Creo identità visive forti, coerenti e iconiche che ti permettono di emergere nel mercato, ispirando fiducia e affinità emotiva con la tua clientela ideale.',
+    detailedIntro: 'Il brand non è solo un logo: è la personalità, l\'anima e il volto del vostro business. Creo identità visive forti, coerenti e iconiche che vi permettono di emergere nel mercato, ispirando fiducia e affinità emotiva con la vostra clientela ideale.',
     features: [
       'Progettazione Logo iconico, versatile e senza tempo',
       'Studio della Brand Identity completa (Color Palette, Tipografia coordinata)',
       'Brand Guidelines (Manuale d\'uso) per mantenere la coerenza visiva nel tempo',
       'Kit grafico coordinato per social media e canali di comunicazione',
-      'Biglietti da visita, carta intestata e packaging su richiesta'
+      'Biglietti da visita, carta intestata e packaging personalizzato'
     ],
     process: 'Briefing e studio del posizionamento dei competitor, esplorazione concettuale tramite bozze a mano libera, digitalizzazione geometrica, raffinamento delle palette cromatiche e consegna del brand manual pronto all\'uso.',
-    ctaText: 'Crea l\'identità del tuo brand su WhatsApp',
+    ctaText: 'Create l\'identità del vostro brand su WhatsApp',
     ctaLink: 'https://wa.me/393793603321?text=Ciao%20M.Teresa,%20vorrei%20informazioni%20sullo%20studio%20del%20branding%20e%20della%20brand%20identity'
   },
   'social-lead-generation': {
     tagline: 'Campagne mirate per catturare contatti qualificati e ottimizzare le conversioni.',
-    detailedIntro: 'Attiro l\'attenzione del tuo pubblico target con funnel di marketing performanti e strategie social mirate. Creo campagne pubblicitarie ottimizzate che trasformano la curiosità degli utenti in contatti reali e contratti commerciali.',
+    detailedIntro: 'Attiro l\'attenzione del vostro pubblico target con funnel di marketing performanti e strategie social mirate. Come Social Lead\'s Manager certificata, creo campagne pubblicitarie ottimizzate che trasformano la curiosità degli utenti in contatti reali e contratti commerciali per il vostro business.',
     features: [
-      'Strategie di Social Media Marketing per Facebook, Instagram e LinkedIn',
+      'Strategie di Social Media Marketing certificate per Facebook, Instagram e LinkedIn',
       'Sviluppo di Lead Magnet ad altissimo valore aggiunto (guide, cataloghi, sconti)',
       'Landing Page di conversione ottimizzate (struttura persuasiva e mobile-first)',
-      'Scrittura di testi persuasivi (Copywriting orientato all\'azione)',
+      'Scrittura di testi persuasivi (Copywriting orientato all\'azione strategica)',
       'Analisi e tracciamento continuo delle metriche di performance con report chiari'
     ],
     process: 'Analisi approfondita del cliente tipo (Buyer Persona), definizione dell\'offerta esca (Lead Magnet), creazione dei materiali visivi e testuali, configurazione tecnica dei pixel di tracciamento, lancio e ottimizzazione continua del budget.',
-    ctaText: 'Attiva la tua campagna su WhatsApp',
+    ctaText: 'Attivate la vostra campagna su WhatsApp',
     ctaLink: 'https://wa.me/393793603321?text=Ciao%20M.Teresa,%20vorrei%20informazioni%20sulle%20strategie%20di%20social%20lead%20generation'
   },
   'consulenze': {
     tagline: 'Strategia, diagnosi e soluzioni digitali di precisione.',
-    detailedIntro: 'Per comprendere a fondo la direzione di un progetto e strutturare una presenza online di successo, offro un servizio di consulenza strategica personalizzata. La prima sessione conoscitiva di 20 minuti è completamente gratuita: un dialogo diretto per inquadrare le tue necessità. Tuttavia, le consulenze avanzate non si limitano a consigli generici: richiedono un esame scientifico e dettagliato tramite un software analitico specializzato di mia proprietà intellettuale. Per questo motivo, le sessioni successive di analisi approfondita sono regolate come servizi professionali a pagamento.',
+    detailedIntro: 'Per comprendere a fondo la direzione di un progetto e strutturare una presenza online di successo, offro un servizio di consulenza strategica personalizzato suddiviso in due fasi chiare. La prima sessione conoscitiva di 20 minuti è completamente gratuita: un dialogo diretto per inquadrare le vostre necessità. Tuttavia, la Sessione di Codifica Esigenze da 45-60 minuti è a pagamento ed è supportata anche dal mio software diagnostico nativo proprietario, permettendoci di analizzare scientificamente i dati e rilasciare un piano di progetto dettagliato.',
     features: [
-      'Primo incontro conoscitivo di 20 minuti gratuito per inquadrare l\'idea',
-      'Analisi tecnica approfondita del tuo posizionamento digitale attuale',
+      'Fase 1: Call Conoscitiva di 20 minuti gratuita per conoscerci ed inquadrare l\'idea',
+      'Fase 2: Sessione di Codifica Esigenze di 45-60 minuti (servizio a pagamento)',
+      'Analisi tecnica approfondita del vostro posizionamento digitale attuale',
       'Audit condotto con il mio software di diagnostica proprietario e nativo',
-      'Report dettagliato con punti critici evidenziati e piano d\'azione concreto',
-      'Consulenza strategica one-to-one mirata alle conversioni reali'
+      'Report dettagliato con punti critici evidenziati e piano d\'azione e roadmap concreti'
     ],
     process: 'Incontro conoscitivo gratuito di 20 minuti, analisi metodica tramite software diagnostico nativo proprietario, redazione del report strategico personalizzato e sessione di restituzione strategica con la roadmap d\'azione.',
-    ctaText: 'Prenota la tua consulenza gratuita su WhatsApp',
+    ctaText: 'Prenotate la vostra consulenza gratuita su WhatsApp',
     ctaLink: 'https://wa.me/393793603321?text=Ciao%20M.Teresa,%20vorrei%20prenotare%20la%20prima%20consulenza%20gratuita%20di%2020%20minuti'
   }
 };
@@ -156,7 +156,7 @@ export default function Services() {
           </h2>
           <div className="h-1 w-20 bg-secondary mx-auto rounded-full mb-3"></div>
           <p className="font-sans text-sm md:text-base text-on-surface-variant max-w-xl mx-auto lowercase tracking-wide">
-            clicca su una scheda per svelare l'approccio nel dettaglio ed attivare il servizio.
+            cliccate su una scheda per svelare l'approccio nel dettaglio ed attivare il servizio.
           </p>
         </div>
 
@@ -324,10 +324,10 @@ export default function Services() {
                 <div className="border-t border-outline-variant/15 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
                   <div className="text-center sm:text-left">
                     <p className="font-headline text-sm font-bold text-on-surface">
-                      Pronto a fare un salto di qualità?
+                      Siete pronti a strutturare il vostro progetto online?
                     </p>
                     <p className="font-sans text-xs text-on-surface-variant/70">
-                      Parla direttamente con M.Teresa Rogani per un preventivo personalizzato e gratuito.
+                      Contattate direttamente M.Teresa Rogani per un preventivo personalizzato e gratuito.
                     </p>
                   </div>
                   

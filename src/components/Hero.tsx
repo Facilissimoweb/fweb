@@ -122,7 +122,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        className="mt-6 md:mt-10 backdrop-blur-md bg-surface/70 dark:bg-surface-container-low/70 border border-outline-variant/15 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.1)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-full max-w-sm sm:max-w-xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-primary/20"
+        className="mt-6 md:mt-10 backdrop-blur-[24px] bg-[#E8DEE8]/30 dark:bg-[#dec4fc]/15 border border-[#E8DEE8]/45 dark:border-[#dec4fc]/20 shadow-[0_24px_60px_-15px_rgba(113,83,129,0.15)] p-5 sm:p-8 md:p-10 rounded-3xl md:rounded-[36px] w-full max-w-sm sm:max-w-xl mx-auto space-y-3 md:space-y-4 z-10 transition-all duration-300 hover:border-[#DDF247]/40"
       >
         <motion.h1 
           initial={{ opacity: 0, y: 15 }}

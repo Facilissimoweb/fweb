@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
+import heroBg from '../assets/images/hero_urban_bg_1782650227937.jpg';
 
 export default function Hero() {
   const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
@@ -71,7 +72,7 @@ export default function Hero() {
       {/* Parallax Background Cover with Gradient Blend & Subtle Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <img 
-          src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1920&q=80"
+          src={heroBg}
           alt="Facilissimo Web Design Hero Background"
           className="absolute inset-0 w-full h-[120%] object-cover object-center transition-transform duration-75 ease-out grayscale contrast-[120%]"
           style={{

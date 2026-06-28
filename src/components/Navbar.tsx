@@ -500,17 +500,17 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-surface/98 dark:bg-surface-dim/98 backdrop-blur-xl z-40 overflow-y-auto px-6 sm:px-12 pt-36 pb-32 flex flex-col justify-start"
+            className="fixed inset-0 bg-surface/98 dark:bg-surface-dim/98 backdrop-blur-xl z-40 overflow-y-auto px-6 sm:px-12 pt-24 pb-16 flex flex-col justify-start"
           >
-            <div className="max-w-xl mx-auto w-full flex flex-col gap-4 mt-8">
+            <div className="max-w-xl mx-auto w-full flex flex-col gap-1.5 mt-4">
               {navLinks.map((link) => {
                 const hasSub = !!link.subItems;
                 const isExpanded = !!mobileExpanded[link.target];
                 const isActive = activeSection === link.target;
 
                 return (
-                  <div key={link.target} className="flex flex-col border-b border-outline-variant/15 pb-2">
-                    <div className="flex items-center justify-between py-3">
+                  <div key={link.target} className="flex flex-col border-b border-outline-variant/15 pb-1">
+                    <div className="flex items-center justify-between py-1.5">
                       <button
                         onClick={() => {
                           if (hasSub) {
@@ -519,7 +519,7 @@ export default function Navbar() {
                             handleScrollTo(link.target);
                           }
                         }}
-                        className={`text-left text-lg sm:text-xl font-bold tracking-tight font-headline transition-colors select-none cursor-pointer focus:outline-none flex-grow ${
+                        className={`text-left text-2xl sm:text-3xl font-black tracking-wide font-headline uppercase transition-colors select-none cursor-pointer focus:outline-none flex-grow ${
                           isActive ? 'text-primary' : 'text-on-surface hover:text-primary'
                         }`}
                       >
@@ -529,11 +529,11 @@ export default function Navbar() {
                       {hasSub && (
                         <button
                           onClick={() => setMobileExpanded(prev => ({ ...prev, [link.target]: !prev[link.target] }))}
-                          className="p-3 text-on-surface hover:text-primary rounded-full hover:bg-surface-container transition-colors cursor-pointer focus:outline-none"
+                          className="p-1.5 text-on-surface hover:text-primary rounded-full hover:bg-surface-container transition-colors cursor-pointer focus:outline-none"
                           aria-label={`Espandi sotto-menù ${link.label}`}
                         >
                           <ChevronDown 
-                            size={22} 
+                            size={20} 
                             className={`transition-transform duration-250 ${
                               isExpanded ? 'rotate-180 text-primary' : 'text-on-surface-variant/60'
                             }`} 
@@ -550,11 +550,11 @@ export default function Navbar() {
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.2, ease: 'easeOut' }}
-                            className="overflow-hidden pl-6 pr-4 flex flex-col gap-3 ml-2 mb-4 mt-1 border-l-2 border-primary/20"
+                            className="overflow-hidden pl-4 pr-3 flex flex-col gap-2 ml-1 mb-3 mt-1 border-l-2 border-primary/20"
                           >
                             <button
                               onClick={() => handleScrollTo(link.target)}
-                              className="text-left py-2 px-3 rounded-xl text-sm font-bold text-primary hover:bg-surface-container transition-colors cursor-pointer"
+                              className="text-left py-1.5 px-2.5 rounded-xl text-xs font-bold text-primary hover:bg-surface-container transition-colors cursor-pointer uppercase tracking-wider"
                             >
                               Mostra tutto {link.label}
                             </button>
@@ -562,7 +562,7 @@ export default function Navbar() {
                               <button
                                 key={sub.id}
                                 onClick={() => handleSubItemClick(sub.id, sub.type, link.target)}
-                                className="text-left py-2.5 px-3 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all cursor-pointer"
+                                className="text-left py-1.5 px-2.5 rounded-xl text-xs font-semibold text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all cursor-pointer uppercase tracking-wide"
                               >
                                 {sub.label}
                               </button>
@@ -575,10 +575,10 @@ export default function Navbar() {
                 );
               })}
 
-              <div className="mt-8 mb-4">
+              <div className="mt-4 mb-2">
                 <button
                   onClick={() => handleScrollTo('contact')}
-                  className="w-full bg-[#11052C] dark:bg-[#1C103F] text-white text-center py-5 rounded-[32px] font-headline font-bold text-lg tracking-wide hover:opacity-95 active:scale-[0.99] transition-all shadow-lg shadow-primary/10 cursor-pointer"
+                  className="w-full bg-[#11052C] dark:bg-[#1C103F] text-white text-center py-3.5 rounded-[32px] font-headline font-bold text-lg tracking-wide hover:opacity-95 active:scale-[0.99] transition-all shadow-lg shadow-primary/10 cursor-pointer uppercase"
                 >
                   Contattami
                 </button>

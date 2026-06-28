@@ -426,7 +426,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                     src={post.image}
                     alt={post.altText}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transform group-hover:scale-108 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                    className="w-full h-full object-cover transform group-hover:scale-108 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] grayscale contrast-[115%] group-hover:grayscale-0"
                   />
                   <div className="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">
                     {post.category}
@@ -555,7 +555,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                   <img
                     alt={activePost.altText}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover grayscale contrast-[115%] hover:grayscale-0 transition-all duration-300"
                     src={activePost.image}
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white/90 text-xs italic">

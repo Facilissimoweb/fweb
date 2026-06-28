@@ -15,7 +15,7 @@ export default function About() {
             className="w-64 h-64 md:w-80 md:h-80 rounded-full border-8 border-white shadow-2xl overflow-hidden relative z-10"
           >
             <img
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover grayscale contrast-[115%] hover:grayscale-0 transition-all duration-300"
               alt="Portrait of M.Teresa Rogani - Facilissimo Web"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8EFj_RiG0Ti-3DFb8yfU67PqeCHwxxG9MXiYEPtaXyWZHvQaKNbEI9PjlL45SxLvhzoH0j2a5jiKWuE7IJimy5HcouumXPZS1PLaauCG0LBQoU4CHR0c7UH6i1hFu-z2kl3h2z2afLzDw_68DR2EqQBN0dLg8zanboa14Rpx3cDWk96l2ZKKlVJMJAD6qgk_lFxfmCybGoxF0pGNBYOFkdjEag2rVJE5oNg0o2rkfTuxTqRNU4CIe6lLz-8gWGtRDXITSw4P_N_E"
             />

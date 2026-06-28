@@ -73,7 +73,7 @@ export default function Hero() {
         <img 
           src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1920&q=80"
           alt="Facilissimo Web Design Hero Background"
-          className="absolute inset-0 w-full h-[120%] object-cover object-center transition-transform duration-75 ease-out"
+          className="absolute inset-0 w-full h-[120%] object-cover object-center transition-transform duration-75 ease-out grayscale contrast-[120%]"
           style={{
             transform: `translateY(${scrollY * 0.15}px) translateZ(0)`,
           }}

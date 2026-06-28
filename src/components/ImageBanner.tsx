@@ -36,7 +36,7 @@ export default function ImageBanner({
               src={imgUrl}
               alt="Galleria di Design e Comunicazione"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 grayscale contrast-[115%] group-hover:grayscale-0"
               loading="lazy"
             />
             {/* Elegant glassmorphism overlay on hover */}

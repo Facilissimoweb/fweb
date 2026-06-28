@@ -113,7 +113,7 @@ export default function Portfolio() {
                     <img
                       alt={item.title}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] object-cover"
+                      className="w-full h-full transform group-hover:scale-105 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] object-cover grayscale contrast-[115%] group-hover:grayscale-0"
                       src={item.image}
                       title={item.altText}
                     />
@@ -192,7 +192,7 @@ export default function Portfolio() {
                   <img
                     alt={activeItem.title}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover grayscale contrast-[115%] hover:grayscale-0 transition-all duration-300"
                     src={activeItem.image}
                   />
                   <div className="absolute top-4 left-4 bg-black/50 text-white text-[11px] font-sans font-medium px-3 py-1 rounded-full backdrop-blur-sm">

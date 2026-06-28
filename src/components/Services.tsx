@@ -194,7 +194,7 @@ export default function Services() {
 
                 {/* Card CTA Button */}
                 <div className="w-full mt-auto pt-4">
-                  <span className="w-full bg-[#11052C] dark:bg-[#1C103F] group-hover:bg-primary text-white text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-lg tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                  <span className="w-full bg-primary text-on-primary group-hover:bg-secondary group-hover:text-on-secondary text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-lg tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
                     SCOPRI DI PIÙ
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </span>

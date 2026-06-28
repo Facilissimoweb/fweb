@@ -134,7 +134,7 @@ export default function Portfolio() {
 
                     {/* Button Details */}
                     <div className="w-full">
-                      <span className="w-full bg-[#11052C] dark:bg-[#1C103F] group-hover:bg-primary text-white text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-lg tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
+                      <span className="w-full bg-primary text-on-primary group-hover:bg-secondary group-hover:text-on-secondary text-center py-3.5 px-6 rounded-2xl font-headline font-semibold text-lg tracking-wider uppercase transition-all duration-300 shadow-sm flex items-center justify-center gap-1.5">
                         DETTAGLI
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                       </span>

@@ -578,7 +578,7 @@ export default function Navbar() {
               <div className="mt-4 mb-2">
                 <button
                   onClick={() => handleScrollTo('contact')}
-                  className="w-full bg-[#11052C] dark:bg-[#1C103F] text-white text-center py-3.5 rounded-[32px] font-headline font-bold text-lg tracking-wide hover:opacity-95 active:scale-[0.99] transition-all shadow-lg shadow-primary/10 cursor-pointer uppercase"
+                  className="w-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary text-center py-3.5 rounded-[32px] font-headline font-bold text-lg tracking-wide active:scale-[0.99] transition-all shadow-lg shadow-primary/10 cursor-pointer uppercase"
                 >
                   Contattami
                 </button>

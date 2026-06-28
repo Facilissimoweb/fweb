@@ -1,185 +1,119 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
-import { Mail, Phone, Camera, Loader2, Check } from 'lucide-react';
+import { Mail, Phone, Camera } from 'lucide-react';
+import ProjectWizard from './ProjectWizard';
 
 export default function Contact() {
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [messaggio, setMessaggio] = useState('');
-
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!nome || !email || !messaggio) return;
-
-    setStatus('loading');
-
-    setTimeout(() => {
-      setStatus('success');
-      setNome('');
-      setEmail('');
-      setMessaggio('');
-
-      setTimeout(() => {
-        setStatus('idle');
-      }, 3000);
-    }, 2000);
-  };
-
   return (
     <section id="contact" className="py-24 bg-surface-container-highest scroll-mt-[110px]">
-      <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-20">
-        {/* Left Column: Info */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col justify-center"
-        >
-          <h2 className="font-headline text-3xl md:text-4xl font-semibold text-primary mb-6">
-            Siete Pronti a Partire?
-          </h2>
-          <p className="font-sans text-base md:text-lg text-on-surface-variant mb-12 leading-relaxed">
-            Avete un progetto in mente o desiderate semplicemente ricevere informazioni dettagliate? Scriveteci per semplificare e strutturare insieme la vostra presenza sul web.
-          </p>
-
-          <div className="space-y-6">
-            {/* Email contact */}
-            <a
-              href="mailto:facilissimoweb.mc@gmail.com"
-              className="flex items-center gap-4 group cursor-pointer"
-            >
-              <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary-container/30 transition-all duration-300">
-                <Mail size={20} />
-              </div>
-              <span className="font-sans text-sm md:text-base font-semibold text-on-surface group-hover:text-secondary transition-colors">
-                facilissimoweb.mc@gmail.com
-              </span>
-            </a>
-
-            {/* Phone contact */}
-            <a
-              href="tel:+393793603321"
-              className="flex items-center gap-4 group cursor-pointer"
-            >
-              <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary-container/30 transition-all duration-300">
-                <Phone size={20} />
-              </div>
-              <span className="font-sans text-sm md:text-base font-semibold text-on-surface group-hover:text-secondary transition-colors">
-                +39 379 360 3321
-              </span>
-            </a>
-
-            {/* Instagram contact */}
-            <a
-              href="https://instagram.com/facilissimoweb"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-4 group cursor-pointer"
-            >
-              <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-secondary group-hover:scale-110 group-hover:bg-secondary-container/30 transition-all duration-300">
-                <Camera size={20} />
-              </div>
-              <span className="font-sans text-sm md:text-base font-semibold text-on-surface group-hover:text-secondary transition-colors">
-                @facilissimoweb
-              </span>
-            </a>
-          </div>
-        </motion.div>
-
-        {/* Right Column: Interactive Form */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-8 bg-white/75 dark:bg-[#1C122C]/75 backdrop-blur-lg p-8 md:p-10 rounded-[40px] shadow-[0_0_30px_-5px_rgba(221,242,71,0.25)] border-2 border-[#DDF247]"
-            id="contact-form"
+      <div className="max-w-7xl mx-auto px-6 md:px-16">
+        
+        {/* Centered Header from Photo */}
+        <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="px-5 py-1.5 rounded-full bg-primary/10 border border-[#DDF247]/30 text-[#DDF247] font-mono text-[10px] font-bold tracking-widest uppercase mb-4"
           >
-            {/* Nome Field */}
-            <div className="relative floating-label">
-              <input
-                id="name"
-                type="text"
-                required
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
-                placeholder=" "
-                className="w-full bg-surface-container border-none rounded-2xl py-4 px-6 font-sans text-base text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all peer outline-none"
-              />
-              <label
-                htmlFor="name"
-                className="absolute left-6 top-4 text-on-surface-variant transition-all pointer-events-none font-sans text-base peer-focus:translate-y-[-24px] peer-focus:scale-[0.85] peer-focus:text-tertiary peer-[:not(:placeholder-shown)]:translate-y-[-24px] peer-[:not(:placeholder-shown)]:scale-[0.85] peer-[:not(:placeholder-shown)]:text-tertiary origin-top-left"
-              >
-                Nome
-              </label>
-            </div>
+            Inizia Ora
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-headline text-3xl md:text-5xl font-black text-primary tracking-tight uppercase leading-tight mb-4"
+          >
+            Parliamo del Vostro Progetto
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="font-sans text-sm md:text-base text-on-surface-variant max-w-xl leading-relaxed"
+          >
+            Compilate il modulo qui sotto. Riceveremo i vostri dati e vi ricontatteremo per fissare una breve chiamata gratuita.
+          </motion.p>
+        </div>
 
-            {/* Email Field */}
-            <div className="relative floating-label">
-              <input
-                id="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder=" "
-                className="w-full bg-surface-container border-none rounded-2xl py-4 px-6 font-sans text-base text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all peer outline-none"
-              />
-              <label
-                htmlFor="email"
-                className="absolute left-6 top-4 text-on-surface-variant transition-all pointer-events-none font-sans text-base peer-focus:translate-y-[-24px] peer-focus:scale-[0.85] peer-focus:text-tertiary peer-[:not(:placeholder-shown)]:translate-y-[-24px] peer-[:not(:placeholder-shown)]:scale-[0.85] peer-[:not(:placeholder-shown)]:text-tertiary origin-top-left"
-              >
-                Email
-              </label>
-            </div>
+        {/* Form & Info Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Left Column: Direct Contacts */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-4 flex flex-col justify-center h-full"
+          >
+            <h3 className="font-headline text-xl md:text-2xl font-bold text-primary mb-6">
+              Contatti Diretti
+            </h3>
+            <p className="font-sans text-xs md:text-sm text-on-surface-variant mb-8 leading-relaxed">
+              Preferite un contatto immediato? Sentitevi liberi di scriverci direttamente o di seguirci sui canali social ufficiali.
+            </p>
 
-            {/* Messaggio Field */}
-            <div className="relative floating-label">
-              <textarea
-                id="message"
-                required
-                rows={4}
-                value={messaggio}
-                onChange={(e) => setMessaggio(e.target.value)}
-                placeholder=" "
-                className="w-full bg-surface-container border-none rounded-2xl py-4 px-6 font-sans text-base text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all peer outline-none resize-none"
-              />
-              <label
-                htmlFor="message"
-                className="absolute left-6 top-4 text-on-surface-variant transition-all pointer-events-none font-sans text-base peer-focus:translate-y-[-24px] peer-focus:scale-[0.85] peer-focus:text-tertiary peer-[:not(:placeholder-shown)]:translate-y-[-24px] peer-[:not(:placeholder-shown)]:scale-[0.85] peer-[:not(:placeholder-shown)]:text-tertiary origin-top-left"
+            <div className="space-y-4">
+              {/* Email contact */}
+              <a
+                href="mailto:facilissimoweb.mc@gmail.com"
+                className="flex items-center gap-4 group cursor-pointer"
               >
-                Messaggio
-              </label>
-            </div>
+                <div className="w-10 h-10 bg-white dark:bg-[#1C122C]/50 rounded-full shadow-sm border border-outline-variant/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary-container/30 transition-all duration-300">
+                  <Mail size={16} />
+                </div>
+                <span className="font-sans text-xs md:text-sm font-semibold text-on-surface group-hover:text-secondary transition-colors">
+                  facilissimoweb.mc@gmail.com
+                </span>
+              </a>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={status === 'loading'}
-              className="w-full bg-primary text-on-primary py-4 rounded-full font-headline text-xl md:text-2xl font-bold tracking-wider flex items-center justify-center gap-3 cat-pounce shadow-lg cursor-pointer disabled:opacity-80"
-            >
-              {status === 'idle' && <span>Invia Messaggio</span>}
-              {status === 'loading' && (
-                <>
-                  <span>Invio in corso...</span>
-                  <Loader2 className="animate-spin w-5 h-5" />
-                </>
-              )}
-              {status === 'success' && (
-                <>
-                  <span>Messaggio Inviato!</span>
-                  <Check className="w-5 h-5 text-emerald-300" />
-                </>
-              )}
-            </button>
-          </form>
-        </motion.div>
+              {/* Phone contact */}
+              <a
+                href="tel:+393793603321"
+                className="flex items-center gap-4 group cursor-pointer"
+              >
+                <div className="w-10 h-10 bg-white dark:bg-[#1C122C]/50 rounded-full shadow-sm border border-outline-variant/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary-container/30 transition-all duration-300">
+                  <Phone size={16} />
+                </div>
+                <span className="font-sans text-xs md:text-sm font-semibold text-on-surface group-hover:text-secondary transition-colors">
+                  +39 379 360 3321
+                </span>
+              </a>
+
+              {/* Instagram contact */}
+              <a
+                href="https://instagram.com/facilissimoweb"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-4 group cursor-pointer"
+              >
+                <div className="w-10 h-10 bg-white dark:bg-[#1C122C]/50 rounded-full shadow-sm border border-outline-variant/10 flex items-center justify-center text-secondary group-hover:scale-110 group-hover:bg-secondary-container/30 transition-all duration-300">
+                  <Camera size={16} />
+                </div>
+                <span className="font-sans text-xs md:text-sm font-semibold text-on-surface group-hover:text-secondary transition-colors">
+                  @facilissimoweb
+                </span>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right Column: 3-step Interactive ProjectWizard */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-8 w-full"
+          >
+            <ProjectWizard />
+          </motion.div>
+          
+        </div>
       </div>
     </section>
   );

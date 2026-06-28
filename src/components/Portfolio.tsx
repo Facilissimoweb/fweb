@@ -108,7 +108,7 @@ export default function Portfolio() {
                 className="masonry-item animate-hover"
                 onClick={() => setSelectedItemId(item.id)}
               >
-                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-md bg-white dark:bg-surface-dim border border-outline-variant/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(113,83,129,0.2)] hover:border-primary/20 dark:hover:border-primary-container/30">
+                <div className="group relative overflow-hidden rounded-[32px] cursor-pointer shadow-[0_0_20px_rgba(221,242,71,0.15)] bg-white/75 dark:bg-[#1C122C]/75 backdrop-blur-lg border-4 border-[#DDF247] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_35px_rgba(221,242,71,0.4)]">
                   <div className="relative overflow-hidden aspect-[4/3]">
                     <img
                       alt={item.title}
@@ -122,7 +122,7 @@ export default function Portfolio() {
                   </div>
 
                   {/* Clean Content & Button Section (Visible on all screens) */}
-                  <div className="p-6 bg-white dark:bg-surface-container border-t border-outline-variant/10 flex flex-col gap-4">
+                  <div className="p-6 bg-white/40 dark:bg-black/20 backdrop-blur-md border-t border-outline-variant/10 flex flex-col gap-4">
                     <div>
                       <span className="font-sans text-[10px] text-secondary dark:text-primary-container font-extrabold tracking-widest uppercase mb-1 block">
                         {item.category === 'Web' ? 'Web Experience' : 'Branding & Design'}
@@ -162,7 +162,7 @@ export default function Portfolio() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 40 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="bg-white rounded-[40px] w-full max-w-3xl max-h-[90vh] md:max-h-[85vh] shadow-2xl overflow-hidden flex flex-col relative text-on-surface"
+              className="bg-white/80 dark:bg-[#1C122C]/85 backdrop-blur-xl rounded-[40px] w-full max-w-3xl max-h-[90vh] md:max-h-[85vh] shadow-[0_0_50px_rgba(221,242,71,0.35)] overflow-hidden flex flex-col relative text-on-surface border-4 border-[#DDF247]"
             >
               {/* Close Button */}
               <div className="absolute top-6 right-6 z-20">

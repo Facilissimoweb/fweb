@@ -49,7 +49,7 @@ export default function Testimonials() {
               >
                 <div className="flip-card-inner relative w-full h-full shadow-lg rounded-[40px]">
                   {/* Front Side */}
-                  <div className="flip-card-front absolute inset-0 bg-white p-10 flex flex-col justify-center items-center rounded-[40px] text-center">
+                  <div className="flip-card-front absolute inset-0 bg-white/75 dark:bg-[#1C122C]/75 backdrop-blur-lg p-10 flex flex-col justify-center items-center rounded-[40px] text-center border-4 border-[#DDF247] shadow-[0_0_20px_rgba(221,242,71,0.15)] group-hover:shadow-[0_0_30px_rgba(221,242,71,0.35)] transition-all duration-300">
                     <Quote className="text-secondary-fixed-dim w-12 h-12 mb-4 rotate-180" />
                     <p className="font-sans italic text-on-surface-variant text-sm md:text-base leading-relaxed">
                       {t.quote}
@@ -61,7 +61,7 @@ export default function Testimonials() {
 
                   {/* Back Side */}
                   <div
-                    className={`flip-card-back absolute inset-0 ${t.colorClass} p-10 flex flex-col justify-center items-center rounded-[40px] text-center`}
+                    className={`flip-card-back absolute inset-0 ${t.colorClass} bg-opacity-85 dark:bg-opacity-85 backdrop-blur-lg p-10 flex flex-col justify-center items-center rounded-[40px] text-center border-4 border-[#DDF247] shadow-[0_0_20px_rgba(221,242,71,0.15)]`}
                   >
                     <h4 className="font-headline text-xl md:text-2xl font-bold mb-2">
                       {t.author}

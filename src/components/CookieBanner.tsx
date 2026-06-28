@@ -56,7 +56,7 @@ export default function CookieBanner({ onOpenPrivacy, onOpenCookie }: CookieBann
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.95 }}
           transition={{ type: 'spring', damping: 25, stiffness: 150, delay: 0.2 }}
-          className="fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-[420px] bg-white border border-outline-variant/30 rounded-[28px] p-6 shadow-2xl z-[90] text-on-surface"
+          className="fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-[420px] bg-white/75 dark:bg-[#1C122C]/75 backdrop-blur-lg border-4 border-[#DDF247] rounded-[28px] p-6 shadow-[0_0_30px_rgba(221,242,71,0.25)] z-[90] text-on-surface"
         >
           <div className="flex gap-4 items-start">
             <div className="w-10 h-10 rounded-xl bg-secondary-container/50 flex items-center justify-center text-secondary shrink-0">

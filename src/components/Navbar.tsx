@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone, MessageSquare, PersonStanding } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useSpring, useMotionValueEvent } from 'motion/react';
 
 interface SubMenuItem {
   label: string;
@@ -100,7 +100,15 @@ export default function Navbar() {
       }, 150);
     }
   };
-  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Performance Optimization: Use motion values for scroll tracking to avoid React re-renders on every scroll event
+  const { scrollYProgress, scrollY } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   const [activeSection, setActiveSection] = useState('hero');
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
@@ -142,35 +150,26 @@ export default function Navbar() {
     lastScrollYRef.current = window.scrollY;
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 50);
-      
-      // Se si scrolla verso l'alto o si è vicini all'inizio, mostra la Top Bar
-      if (currentScrollY <= 50) {
-        setShowTopBar(true);
-      } else if (currentScrollY > lastScrollYRef.current + 8) {
-        // Scroll verso il basso di almeno 8px -> nascondi
-        setShowTopBar(false);
-      } else if (currentScrollY < lastScrollYRef.current - 8) {
-        // Scroll verso l'alto di almeno 8px -> mostra
-        setShowTopBar(true);
-      }
+  // Use useMotionValueEvent to handle scroll-dependent state toggles.
+  // This ensures React only re-renders when the boolean state actually changes,
+  // rather than on every single scroll pixel.
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const isCurrentlyScrolled = latest > 50;
+    if (isCurrentlyScrolled !== isScrolled) {
+      setIsScrolled(isCurrentlyScrolled);
+    }
 
-      lastScrollYRef.current = Math.max(0, currentScrollY);
-      
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const progress = (currentScrollY / totalHeight) * 100;
-        setScrollProgress(progress);
-      } else {
-        setScrollProgress(0);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    // Handle Top Bar visibility (hide on scroll down, show on scroll up)
+    if (latest <= 50) {
+      if (!showTopBar) setShowTopBar(true);
+    } else if (latest > lastScrollYRef.current + 8) {
+      if (showTopBar) setShowTopBar(false);
+    } else if (latest < lastScrollYRef.current - 8) {
+      if (!showTopBar) setShowTopBar(true);
+    }
+
+    lastScrollYRef.current = Math.max(0, latest);
+  });
 
   useEffect(() => {
     const handleHashCheck = () => {
@@ -379,11 +378,11 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Subtle Reading Progress Bar */}
+      {/* Subtle Reading Progress Bar - Optimized with Framer Motion Springs */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-primary/10 dark:bg-primary-container/10 z-[100] pointer-events-none">
-        <div 
-          className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-75 ease-out rounded-r-full shadow-[0_1px_6px_rgba(255,255,255,0.4)]" 
-          style={{ width: `${scrollProgress}%` }}
+        <motion.div
+          className="h-full bg-gradient-to-r from-primary to-secondary rounded-r-full shadow-[0_1px_6px_rgba(255,255,255,0.4)] origin-left"
+          style={{ scaleX }}
         />
       </div>
 

@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { motion } from 'motion/react';
 import { SKILLS } from '../data';
 
-export default function About() {
+const About = memo(function About() {
   return (
     <section id="about" className="py-24 bg-surface-container overflow-hidden scroll-mt-[110px]">
       <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -71,4 +72,6 @@ export default function About() {
       </div>
     </section>
   );
-}
+});
+
+export default About;

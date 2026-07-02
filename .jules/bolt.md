@@ -1,0 +1,3 @@
+## 2025-05-15 - [React Performance: Bypassing Render Cycle for High-Frequency Events]
+**Learning:** Using React state for scroll and mouse-move interactions in a complex component (like the Hero section) causes excessive re-renders, impacting CPU and battery. Framer Motion's `useMotionValue`, `useTransform`, and `useSpring` hooks allow updating DOM properties directly, bypassing the React reconciliation process for a significant performance gain (smoother 60fps+ animations).
+**Action:** Always prefer MotionValues for parallax, tilt, or cursor-follow effects instead of `useState` coupled with event listeners.

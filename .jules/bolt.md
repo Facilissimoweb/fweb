@@ -1,0 +1,3 @@
+## 2025-05-15 - [Bypassing React for High-Frequency UI Interactions]
+**Learning:** React state updates for scroll and mouse events trigger frequent re-renders of the entire component tree, causing main-thread bottlenecks. Using Framer Motion's `MotionValues` (`useScroll`, `useMotionValue`, `useSpring`) allows these updates to run outside the React render cycle, significantly improving responsiveness. Normalized coordinates (0-1) should be used for interactive transforms to maintain consistency across breakpoints.
+**Action:** Always prefer `motion/react` hooks over `useState` + `useEffect` for high-frequency animations like parallax, scroll progress, and mouse-following tilt.

@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone, MessageSquare, PersonStanding } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 
 interface SubMenuItem {
   label: string;
@@ -59,7 +59,7 @@ const WhatsAppIcon = ({ size = 20, className = "" }: { size?: number; className?
   </svg>
 );
 
-export default function Navbar() {
+const Navbar = memo(function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showTopBar, setShowTopBar] = useState(true);
@@ -100,7 +100,14 @@ export default function Navbar() {
       }, 150);
     }
   };
-  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   const [activeSection, setActiveSection] = useState('hero');
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
@@ -159,14 +166,6 @@ export default function Navbar() {
       }
 
       lastScrollYRef.current = Math.max(0, currentScrollY);
-      
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const progress = (currentScrollY / totalHeight) * 100;
-        setScrollProgress(progress);
-      } else {
-        setScrollProgress(0);
-      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -380,12 +379,10 @@ export default function Navbar() {
   return (
     <>
       {/* Subtle Reading Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-[3px] bg-primary/10 dark:bg-primary-container/10 z-[100] pointer-events-none">
-        <div 
-          className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-75 ease-out rounded-r-full shadow-[0_1px_6px_rgba(255,255,255,0.4)]" 
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary to-secondary z-[100] origin-left pointer-events-none"
+        style={{ scaleX }}
+      />
 
       <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full pointer-events-none">
         {/* Top Info Bar */}
@@ -615,4 +612,6 @@ export default function Navbar() {
       <div id="google_translate_element" className="opacity-0 pointer-events-none absolute -z-50 w-1 h-1 overflow-hidden" />
     </>
   );
-}
+});
+
+export default Navbar;

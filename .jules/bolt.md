@@ -1,0 +1,3 @@
+## 2025-05-15 - [React Performance: MotionValues vs State for High-Frequency UI Updates]
+**Learning:** Using React state (`useState`) to handle high-frequency interactions like parallax scrolling or 3D mouse tilt causes a re-render of the entire component subtree on every tick (up to 60+ times per second). This can lead to main-thread congestion and stuttering animations. Framer Motion's `MotionValues` (via `useScroll`, `useTransform`, `useSpring`) allow updating DOM elements directly through the animation loop, bypassing React's reconciliation process entirely.
+**Action:** Always prefer `MotionValues` and hooks like `useTransform` for any UI element that needs to update in response to scroll or mouse events.

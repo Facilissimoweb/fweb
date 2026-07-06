@@ -1,0 +1,3 @@
+## 2026-07-06 - Optimized Hero Animations with Renderless Hooks
+**Learning:** Using React `useState` to track high-frequency events like `window.scrollY` or `mousemove` triggers a full component re-render on every update (up to 60-120 times per second). This consumes significant main-thread resources for simple visual transforms.
+**Action:** Use Framer Motion's "renderless" hooks (`useScroll`, `useTransform`, `useMotionValue`, `useSpring`) to handle high-frequency animations. These hooks update the DOM directly via the compositor thread, bypassing the React reconciliation cycle and maintaining 60fps even under heavy load.

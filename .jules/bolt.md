@@ -1,0 +1,3 @@
+## 2025-05-15 - [Framer Motion vs React State for High-Frequency Events]
+**Learning:** Using React state (useState) to track high-frequency events like window scroll or mouse movement triggers a component re-render on every update (e.g., 60+ times per second). In complex landing pages, this creates a significant main-thread bottleneck.
+**Action:** Always prefer Framer Motion hooks (useScroll, useTransform, useMotionValue) for these interactions. They allow updates to bypass the React render cycle and sync directly with the browser's animation frame or compositor, reducing main-thread load and preventing unnecessary re-renders of the component tree.

@@ -1,0 +1,3 @@
+## 2025-05-15 - Optimize Hero animations with Framer Motion hooks
+**Learning:** Using React state (`useState`) for high-frequency interactions like scroll parallax and mouse-tilt effects causes the entire component to re-render on every event, leading to main-thread congestion. Replacing React state with Framer Motion hooks (`useScroll`, `useMotionValue`, `useSpring`) offloads animations to the compositor and reduces React re-renders to zero during these interactions.
+**Action:** Always prefer Framer Motion hooks (useScroll, useTransform, useSpring) over React state for high-frequency UI updates to maintain 60fps performance and avoid unnecessary render cycles.

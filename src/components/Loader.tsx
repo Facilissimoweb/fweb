@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 
-export default function Loader() {
+const Loader = memo(function Loader() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMounted, setIsMounted] = useState(true);
 
@@ -62,4 +62,6 @@ export default function Loader() {
       `}</style>
     </div>
   );
-}
+});
+
+export default Loader;

@@ -1,0 +1,3 @@
+## 2025-05-15 - [Optimization: High-Frequency UI Updates]
+**Learning:** Using React state (`useState`) for high-frequency interactions like scroll parallax and mouse-tilt in the `Hero` and `Navbar` components triggered up to 60 re-renders per second, consuming significant main-thread resources and potentially causing jank.
+**Action:** Replace React state with Framer Motion hooks (`useScroll`, `useMotionValue`, `useSpring`, `useTransform`). These hooks update DOM properties directly via the compositor, bypassing React's reconciliation process and reducing re-renders to zero for these interactions.

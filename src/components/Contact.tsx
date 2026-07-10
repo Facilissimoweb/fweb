@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, Camera } from 'lucide-react';
 import ProjectWizard from './ProjectWizard';
 
-export default function Contact() {
+const Contact = memo(function Contact() {
   return (
     <section id="contact" className="py-24 bg-surface-container-highest scroll-mt-[110px]">
       <div className="max-w-7xl mx-auto px-6 md:px-16">
@@ -117,4 +117,6 @@ export default function Contact() {
       </div>
     </section>
   );
-}
+});
+
+export default Contact;

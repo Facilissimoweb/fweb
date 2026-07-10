@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Calendar, Clock, Share2, Tag, ArrowRight, MessageCircle, Heart, Search, CheckCircle } from 'lucide-react';
 
@@ -225,7 +225,7 @@ export const calculateReadingTime = (post: BlogPost): string => {
   return `${minutes} min lettura`;
 };
 
-export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
+const Blog = memo(function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const [activeCategoryFilter, setActiveCategoryFilter] = useState<string>('Tutti');
   const [likes, setLikes] = useState<Record<string, number>>({
@@ -723,4 +723,6 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
 
     </section>
   );
-}
+});
+
+export default Blog;

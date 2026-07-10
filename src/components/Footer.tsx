@@ -1,10 +1,12 @@
+import { memo } from 'react';
+
 interface FooterProps {
   onOpenPrivacy: () => void;
   onOpenCookie: () => void;
   onOpenSitemap: () => void;
 }
 
-export default function Footer({ onOpenPrivacy, onOpenCookie, onOpenSitemap }: FooterProps) {
+const Footer = memo(function Footer({ onOpenPrivacy, onOpenCookie, onOpenSitemap }: FooterProps) {
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -134,4 +136,6 @@ export default function Footer({ onOpenPrivacy, onOpenCookie, onOpenSitemap }: F
       </div>
     </footer>
   );
-}
+});
+
+export default Footer;

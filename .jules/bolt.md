@@ -1,0 +1,3 @@
+## 2025-03-30 - Offload Mouse-Tilt and Parallax Scroll to Framer Motion Values
+**Learning:** Updating React component state on `mousemove` or `scroll` events causes the component and its children to re-render up to 60+ times per second. By offloading transforms to Framer Motion's `useScroll`, `useMotionValue`, `useTransform`, and `useSpring` hooks, style updates bypass React's render loop completely and run directly on motion values.
+**Action:** Always replace `useState` + `window.addEventListener('scroll' / 'mousemove')` with Framer Motion hooks when building interactive high-frequency animations.

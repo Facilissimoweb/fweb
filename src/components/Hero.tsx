@@ -1,41 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import React from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
 import heroBg from '../assets/images/hero_urban_bg_1782650227937.jpg';
 
+/**
+ * Hero Component - Optimized with Framer Motion hooks.
+ *
+ * Performance Optimization:
+ * Replaced high-frequency React `useState` scroll and mousemove state updates with
+ * Framer Motion motion values (`useScroll`, `useMotionValue`, `useSpring`, `useTransform`).
+ * This bypasses React component re-renders completely during scroll and mouse movements,
+ * offloading animations directly to GPU/compositor layers.
+ */
 export default function Hero() {
-  const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
-  const [scrollY, setScrollY] = useState(0);
+  // Parallax background offset using direct scroll binding (0 React re-renders on scroll)
+  const { scrollY } = useScroll();
+  const bgParallaxY = useTransform(scrollY, (y) => y * 0.15);
 
-  // Parallax scroll listener
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // 3D Tilt interaction for logo using MotionValues and Springs (0 React re-renders on mousemove)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rawScale = useMotionValue(1);
+
+  const springConfig = { stiffness: 300, damping: 20 };
+  const rawRotateX = useTransform(mouseY, [-0.5, 0.5], [-15, 15]);
+  const rawRotateY = useTransform(mouseX, [-0.5, 0.5], [15, -15]);
+
+  const rotateX = useSpring(rawRotateX, springConfig);
+  const rotateY = useSpring(rawRotateY, springConfig);
+  const logoScale = useSpring(rawScale, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    // Normalize coordinates relative to element dimensions [-0.5, 0.5]
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
-
-    setTiltStyle({
-      transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`,
-    });
+    mouseX.set(x);
+    mouseY.set(y);
+    rawScale.set(1.05);
   };
 
   const handleMouseLeave = () => {
-    setTiltStyle({
-      transform: 'rotateX(0deg) rotateY(0deg) scale(1)',
-      transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    });
+    mouseX.set(0);
+    mouseY.set(0);
+    rawScale.set(1);
   };
 
   const handleScrollToServices = () => {
@@ -71,12 +79,13 @@ export default function Hero() {
     >
       {/* Parallax Background Cover with Gradient Blend & Subtle Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-        <img 
+        <motion.img
           src={heroBg}
           alt="Facilissimo Web Design Hero Background"
-          className="absolute inset-0 w-full h-[120%] object-cover object-center transition-transform duration-75 ease-out grayscale contrast-[120%]"
+          className="absolute inset-0 w-full h-[120%] object-cover object-center grayscale contrast-[120%]"
           style={{
-            transform: `translateY(${scrollY * 0.15}px) translateZ(0)`,
+            translateY: bgParallaxY,
+            translateZ: 0,
           }}
           referrerPolicy="no-referrer"
         />
@@ -89,15 +98,13 @@ export default function Hero() {
 
       {/* 3D Tilting tribal mascot floating gracefully */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.85 }}
+        initial={{ opacity: 0 }}
         animate={{ 
           opacity: 1, 
-          scale: 1, 
           y: [0, -10, 0] 
         }}
         transition={{
           opacity: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
-          scale: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
           y: {
             repeat: Infinity,
             repeatType: 'reverse',
@@ -105,10 +112,14 @@ export default function Hero() {
             ease: 'easeInOut'
           }
         }}
-        className="relative cursor-pointer transition-transform duration-200 ease-out perspective-1000 z-10"
+        className="relative cursor-pointer perspective-1000 z-10"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={tiltStyle}
+        style={{
+          rotateX,
+          rotateY,
+          scale: logoScale,
+        }}
       >
         <img
           alt="FACILISSIMO WEB Logo"

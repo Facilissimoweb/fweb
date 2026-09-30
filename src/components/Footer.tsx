@@ -1,10 +1,13 @@
+import { memo } from 'react';
+
 interface FooterProps {
   onOpenPrivacy: () => void;
   onOpenCookie: () => void;
   onOpenSitemap: () => void;
 }
 
-export default function Footer({ onOpenPrivacy, onOpenCookie, onOpenSitemap }: FooterProps) {
+// Memoized to prevent unnecessary re-renders when parent App state updates
+function Footer({ onOpenPrivacy, onOpenCookie, onOpenSitemap }: FooterProps) {
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -135,3 +138,5 @@ export default function Footer({ onOpenPrivacy, onOpenCookie, onOpenSitemap }: F
     </footer>
   );
 }
+
+export default memo(Footer);

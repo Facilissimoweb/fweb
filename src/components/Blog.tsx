@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Calendar, Clock, Share2, Tag, ArrowRight, MessageCircle, Heart, Search, CheckCircle } from 'lucide-react';
 
@@ -237,6 +237,15 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
 
   const activePost = BLOG_ARTICLES.find(post => post.id === selectedPostId);
 
+  // Memoize reading time calculations for all articles to avoid redundant string manipulation on render
+  const readingTimes = useMemo(() => {
+    const map: Record<string, string> = {};
+    BLOG_ARTICLES.forEach((post) => {
+      map[post.id] = calculateReadingTime(post);
+    });
+    return map;
+  }, []);
+
   const filteredPosts = BLOG_ARTICLES.filter((post) => {
     if (activeCategoryFilter === 'Tutti') return true;
     return post.category === activeCategoryFilter;
@@ -442,7 +451,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                         </span>
                         <span className="flex items-center gap-1 bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
                           <Clock size={13} className="text-[#DDF247]" />
-                          {calculateReadingTime(post)}
+                          {readingTimes[post.id] || calculateReadingTime(post)}
                         </span>
                       </div>
                       <div className="bg-[#DDF247] text-black text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
@@ -535,7 +544,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
                     </span>
                     <span className="flex items-center gap-1 ml-2 bg-secondary/10 text-secondary border border-secondary/10 px-2 py-0.5 rounded-full text-[10px] font-semibold">
                       <Clock size={11} />
-                      {calculateReadingTime(activePost)}
+                      {readingTimes[activePost.id] || calculateReadingTime(activePost)}
                     </span>
                   </div>
 

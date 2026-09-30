@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { motion } from 'motion/react';
 import heroBg from '../assets/images/hero_urban_bg_1782650227937.jpg';
 
-export default function Hero() {
+// Memoized to prevent unnecessary re-renders when parent App state updates
+function Hero() {
   const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
   const [scrollY, setScrollY] = useState(0);
 
@@ -180,3 +181,5 @@ export default function Hero() {
     </section>
   );
 }
+
+export default memo(Hero);

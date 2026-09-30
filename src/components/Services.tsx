@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SERVICES } from '../data';
 import { Globe, Eye, TrendingUp, LayoutGrid, X, Check, ArrowRight, MessageCircle } from 'lucide-react';
@@ -101,7 +101,8 @@ const SERVICE_DETAILS: Record<string, ServiceDetail> = {
   }
 };
 
-export default function Services() {
+// Memoized to prevent unnecessary re-renders when parent App state updates
+function Services() {
   const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
 
   // Handle body scroll locking when modal is open
@@ -359,3 +360,5 @@ export default function Services() {
     </section>
   );
 }
+
+export default memo(Services);

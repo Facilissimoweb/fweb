@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PORTFOLIO_ITEMS } from '../data';
 import { X, Calendar, User, Cpu, ArrowRight, MessageCircle, Eye, Globe, TrendingUp, Sparkles, CheckCircle } from 'lucide-react';
 
 type CategoryFilter = 'Tutti' | 'Web' | 'Logo';
 
-export default function Portfolio() {
+// Memoized to prevent unnecessary re-renders when parent App state updates
+function Portfolio() {
   const [activeFilter, setActiveFilter] = useState<CategoryFilter>('Tutti');
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
@@ -345,3 +346,5 @@ export default function Portfolio() {
     </section>
   );
 }
+
+export default memo(Portfolio);

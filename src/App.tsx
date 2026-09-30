@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Accessibility } from 'lucide-react';
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
@@ -20,6 +20,11 @@ export default function App() {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isCookieOpen, setIsCookieOpen] = useState(false);
   const [isSitemapOpen, setIsSitemapOpen] = useState(false);
+
+  // Stable callback references to prevent re-rendering memoized components
+  const handleOpenPrivacy = useCallback(() => setIsPrivacyOpen(true), []);
+  const handleOpenCookie = useCallback(() => setIsCookieOpen(true), []);
+  const handleOpenSitemap = useCallback(() => setIsSitemapOpen(true), []);
 
   const [currentView, setCurrentView] = useState<'home' | 'blog'>(() => {
     return typeof window !== 'undefined' && window.location.hash.startsWith('#blog') ? 'blog' : 'home';
@@ -101,9 +106,9 @@ export default function App() {
 
       {/* Footer Section with regulatory details */}
       <Footer
-        onOpenPrivacy={() => setIsPrivacyOpen(true)}
-        onOpenCookie={() => setIsCookieOpen(true)}
-        onOpenSitemap={() => setIsSitemapOpen(true)}
+        onOpenPrivacy={handleOpenPrivacy}
+        onOpenCookie={handleOpenCookie}
+        onOpenSitemap={handleOpenSitemap}
       />
 
       {/* Interactive Floating Chatbot Widget */}
@@ -113,8 +118,8 @@ export default function App() {
 
       {/* Automated Cookie Consent Overlay Banner */}
       <CookieBanner
-        onOpenPrivacy={() => setIsPrivacyOpen(true)}
-        onOpenCookie={() => setIsCookieOpen(true)}
+        onOpenPrivacy={handleOpenPrivacy}
+        onOpenCookie={handleOpenCookie}
       />
 
       {/* Privacy Policy Modal */}

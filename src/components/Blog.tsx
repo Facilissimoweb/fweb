@@ -212,8 +212,16 @@ const BLOG_ARTICLES: BlogPost[] = [
   }
 ];
 
-// Dynamically calculates the estimated reading time based on word count
+// Pre-calculated static categories at module scope
+const BLOG_CATEGORIES = ['Tutti', ...Array.from(new Set(BLOG_ARTICLES.map(post => post.category)))];
+
+// Cache for estimated reading time to avoid recalculating string operations on re-renders
+const READING_TIME_CACHE = new Map<string, string>();
+
 export const calculateReadingTime = (post: BlogPost): string => {
+  if (READING_TIME_CACHE.has(post.id)) {
+    return READING_TIME_CACHE.get(post.id)!;
+  }
   const text = [
     post.title,
     post.excerpt,
@@ -222,10 +230,12 @@ export const calculateReadingTime = (post: BlogPost): string => {
   const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
   // Average reading speed: 200 words per minute
   const minutes = Math.max(1, Math.ceil(words / 200));
-  return `${minutes} min lettura`;
+  const result = `${minutes} min lettura`;
+  READING_TIME_CACHE.set(post.id, result);
+  return result;
 };
 
-export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
+function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const [activeCategoryFilter, setActiveCategoryFilter] = useState<string>('Tutti');
   const [likes, setLikes] = useState<Record<string, number>>({
@@ -388,7 +398,7 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
 
         {/* Category Filters */}
         <div className="flex flex-wrap gap-3 mb-10 pb-4 border-b border-outline-variant/10 font-sans text-xs md:text-sm font-semibold tracking-wide">
-          {['Tutti', ...Array.from(new Set(BLOG_ARTICLES.map(post => post.category)))].map((category) => {
+          {BLOG_CATEGORIES.map((category) => {
             const isActive = activeCategoryFilter === category;
             return (
               <button
@@ -724,3 +734,5 @@ export default function Blog({ isPageMode = false }: { isPageMode?: boolean }) {
     </section>
   );
 }
+
+export default React.memo(Blog);

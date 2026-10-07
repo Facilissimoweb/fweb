@@ -1,0 +1,3 @@
+## 2026-10-07 - Offload high-frequency scroll and mouse movement to Framer Motion values
+**Learning:** React components handling continuous events like scroll or 3D tilt via state setters (`useState`) trigger up to 60+ component re-renders per second, causing layout thrashing and main-thread lag. Replacing state setters with Framer Motion hooks (`useScroll`, `useTransform`, `useMotionValue`, `useSpring`) keeps animation state outside the React render lifecycle and eliminates re-renders during mouse move and scroll interactions.
+**Action:** Always prefer Framer Motion's `useScroll` / `useMotionValue` / `useSpring` over React state for scroll parallax or element tracking effects.

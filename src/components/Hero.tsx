@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
 import heroBg from '../assets/images/hero_urban_bg_1782650227937.jpg';
 
 export default function Hero() {
-  const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
-  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Parallax scroll listener
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // ⚡ Performance optimization: Use Framer Motion's useScroll and useTransform for parallax background scroll.
+  // This bypasses React re-renders on scroll events completely, executing transforms directly via Motion values.
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, (y) => y * 0.15);
+
+  // ⚡ Performance optimization: Use Framer Motion MotionValues + useSpring for 3D logo tilt interactions.
+  // Updating MotionValues during high-frequency mousemove events eliminates React state updates and re-renders.
+  const rawRotateX = useMotionValue(0);
+  const rawRotateY = useMotionValue(0);
+  const rawScale = useMotionValue(1);
+
+  // Spring physics for smooth hover motion and graceful reset on mouse leave
+  const springConfig = { stiffness: 300, damping: 20 };
+  const rotateX = useSpring(rawRotateX, springConfig);
+  const rotateY = useSpring(rawRotateY, springConfig);
+  const scale = useSpring(rawScale, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -23,19 +30,18 @@ export default function Hero() {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
+    const rx = (y - centerY) / 10;
+    const ry = (centerX - x) / 10;
 
-    setTiltStyle({
-      transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`,
-    });
+    rawRotateX.set(rx);
+    rawRotateY.set(ry);
+    rawScale.set(1.05);
   };
 
   const handleMouseLeave = () => {
-    setTiltStyle({
-      transform: 'rotateX(0deg) rotateY(0deg) scale(1)',
-      transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    });
+    rawRotateX.set(0);
+    rawRotateY.set(0);
+    rawScale.set(1);
   };
 
   const handleScrollToServices = () => {
@@ -66,17 +72,18 @@ export default function Hero() {
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 text-center relative pt-20 pb-8 md:pt-32 md:pb-20 overflow-hidden scroll-mt-[110px]"
     >
       {/* Parallax Background Cover with Gradient Blend & Subtle Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-        <img 
+        <motion.img
           src={heroBg}
           alt="Facilissimo Web Design Hero Background"
-          className="absolute inset-0 w-full h-[120%] object-cover object-center transition-transform duration-75 ease-out grayscale contrast-[120%]"
+          className="absolute inset-0 w-full h-[120%] object-cover object-center grayscale contrast-[120%]"
           style={{
-            transform: `translateY(${scrollY * 0.15}px) translateZ(0)`,
+            y: bgY,
           }}
           referrerPolicy="no-referrer"
         />
@@ -105,10 +112,14 @@ export default function Hero() {
             ease: 'easeInOut'
           }
         }}
-        className="relative cursor-pointer transition-transform duration-200 ease-out perspective-1000 z-10"
+        className="relative cursor-pointer perspective-1000 z-10"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={tiltStyle}
+        style={{
+          rotateX,
+          rotateY,
+          scale,
+        }}
       >
         <img
           alt="FACILISSIMO WEB Logo"

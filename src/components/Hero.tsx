@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import heroBg from '../assets/images/hero_urban_bg_1782650227937.jpg';
 
 export default function Hero() {
   const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
-  const [scrollY, setScrollY] = useState(0);
 
-  // Parallax scroll listener
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Performance Optimization (Bolt):
+  // Replace React scroll state re-renders with Framer Motion hooks (useScroll & useTransform).
+  // This bypasses React's render pipeline during scrolling, offloading parallax transform updates directly to Motion values.
+  const { scrollY } = useScroll();
+  const backgroundY = useTransform(scrollY, (value) => value * 0.15);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -71,12 +67,12 @@ export default function Hero() {
     >
       {/* Parallax Background Cover with Gradient Blend & Subtle Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-        <img 
+        <motion.img
           src={heroBg}
           alt="Facilissimo Web Design Hero Background"
-          className="absolute inset-0 w-full h-[120%] object-cover object-center transition-transform duration-75 ease-out grayscale contrast-[120%]"
+          className="absolute inset-0 w-full h-[120%] object-cover object-center grayscale contrast-[120%]"
           style={{
-            transform: `translateY(${scrollY * 0.15}px) translateZ(0)`,
+            y: backgroundY,
           }}
           referrerPolicy="no-referrer"
         />

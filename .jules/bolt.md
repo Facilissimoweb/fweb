@@ -1,0 +1,3 @@
+## 2026-10-10 - Motion scroll hooks eliminate React re-renders in Hero component
+**Learning:** Using React state listener (`window.addEventListener('scroll')`) to animate background elements causes ~60 React component re-renders per second during scrolling. Replacing `useState` scroll tracking with Framer Motion's `useScroll` and `useTransform` hooks offloads updates directly to Motion values and bypasses the React render tree completely.
+**Action:** Always prefer Framer Motion's `useScroll` and `useTransform` (or `useSpring`) over custom React scroll state listeners for smooth scroll-linked visual effects.

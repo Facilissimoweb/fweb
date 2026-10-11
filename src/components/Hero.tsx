@@ -1,41 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import React from 'react';
+import { motion, useMotionValue, useTransform, useSpring, useScroll } from 'motion/react';
 import heroBg from '../assets/images/hero_urban_bg_1782650227937.jpg';
 
 export default function Hero() {
-  const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
-  const [scrollY, setScrollY] = useState(0);
+  // Parallax scroll driven by Framer Motion useScroll hook to prevent React re-renders on scroll
+  const { scrollY } = useScroll();
+  const backgroundY = useTransform(scrollY, (value) => value * 0.15);
 
-  // Parallax scroll listener
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Mouse tilt tracked via Framer Motion motion values to offload continuous mousemove events off React state
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { stiffness: 150, damping: 15 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [-15, 15]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [15, -15]), springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
-
-    setTiltStyle({
-      transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`,
-    });
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
   };
 
   const handleMouseLeave = () => {
-    setTiltStyle({
-      transform: 'rotateX(0deg) rotateY(0deg) scale(1)',
-      transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    });
+    mouseX.set(0);
+    mouseY.set(0);
   };
 
   const handleScrollToServices = () => {
@@ -71,12 +61,12 @@ export default function Hero() {
     >
       {/* Parallax Background Cover with Gradient Blend & Subtle Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-        <img 
+        <motion.img
           src={heroBg}
           alt="Facilissimo Web Design Hero Background"
-          className="absolute inset-0 w-full h-[120%] object-cover object-center transition-transform duration-75 ease-out grayscale contrast-[120%]"
+          className="absolute inset-0 w-full h-[120%] object-cover object-center grayscale contrast-[120%]"
           style={{
-            transform: `translateY(${scrollY * 0.15}px) translateZ(0)`,
+            y: backgroundY,
           }}
           referrerPolicy="no-referrer"
         />
@@ -105,10 +95,14 @@ export default function Hero() {
             ease: 'easeInOut'
           }
         }}
-        className="relative cursor-pointer transition-transform duration-200 ease-out perspective-1000 z-10"
+        className="relative cursor-pointer perspective-1000 z-10"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={tiltStyle}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: 'preserve-3d',
+        }}
       >
         <img
           alt="FACILISSIMO WEB Logo"

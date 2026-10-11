@@ -1,0 +1,3 @@
+## 2025-05-18 - Offload High-Frequency Hero Hover and Scroll State to Framer Motion Hooks
+**Learning:** Using React `useState` to update tilt styles (`tiltStyle`) on every `mousemove` frame and parallax `scrollY` on every `scroll` frame caused up to 60+ full component re-renders per second in `Hero.tsx`. Replacing `useState` with `useMotionValue`, `useTransform`, `useSpring`, and `useScroll` bypasses React's render loop completely by applying animated transforms directly to the DOM node / compositor.
+**Action:** Always prefer Framer Motion hooks (`useMotionValue`, `useTransform`, `useScroll`) over React state (`useState`) for tracking cursor movements, tilt effects, or scroll positions.

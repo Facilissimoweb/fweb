@@ -1,0 +1,3 @@
+## 2025-02-23 - Offload Navbar Scroll Progress Animation to Framer Motion
+**Learning:** Updating React component state (`setState`) on high-frequency `window.onscroll` events causes full component re-renders on every scroll tick (~60-120fps). Using Framer Motion's `useScroll` hook (`scrollYProgress`) and binding it to `<motion.div style={{ scaleX: scrollYProgress }}>` updates the DOM element on the compositor thread without triggering React re-renders.
+**Action:** Always prefer `useScroll` with motion transforms (`scaleX` / `translateY`) over React state for scroll-driven animations or progress indicators.

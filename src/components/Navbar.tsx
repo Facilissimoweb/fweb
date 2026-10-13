@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Sun, Moon, ChevronDown, Languages, Home, Mail, Phone, MessageSquare, PersonStanding } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll } from 'motion/react';
 
 interface SubMenuItem {
   label: string;
@@ -60,6 +60,7 @@ const WhatsAppIcon = ({ size = 20, className = "" }: { size?: number; className?
 );
 
 export default function Navbar() {
+  const { scrollYProgress } = useScroll();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showTopBar, setShowTopBar] = useState(true);
@@ -100,7 +101,6 @@ export default function Navbar() {
       }, 150);
     }
   };
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('hero');
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
@@ -159,14 +159,6 @@ export default function Navbar() {
       }
 
       lastScrollYRef.current = Math.max(0, currentScrollY);
-      
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const progress = (currentScrollY / totalHeight) * 100;
-        setScrollProgress(progress);
-      } else {
-        setScrollProgress(0);
-      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -381,9 +373,9 @@ export default function Navbar() {
     <>
       {/* Subtle Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-primary/10 dark:bg-primary-container/10 z-[100] pointer-events-none">
-        <div 
-          className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-75 ease-out rounded-r-full shadow-[0_1px_6px_rgba(255,255,255,0.4)]" 
-          style={{ width: `${scrollProgress}%` }}
+        <motion.div
+          className="h-full bg-gradient-to-r from-primary to-secondary rounded-r-full shadow-[0_1px_6px_rgba(255,255,255,0.4)] origin-left"
+          style={{ scaleX: scrollYProgress }}
         />
       </div>
 

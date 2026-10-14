@@ -1,0 +1,3 @@
+## 2025-05-18 - Framer Motion MotionValues vs React State for Scroll & Mouse Events
+**Learning:** Updating React state on high-frequency events like `scroll` or `mousemove` causes continuous re-renders of the component tree (~60-120 re-renders/sec). Replacing `useState` with Framer Motion hooks (`useScroll`, `useTransform`, `useMotionValue`, `useSpring`) offloads animation updates directly to motion values without triggering React component re-renders.
+**Action:** Always use Framer Motion `useMotionValue`, `useTransform`, or `useScroll` for scroll parallax or cursor movement effects instead of React component state.

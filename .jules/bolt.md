@@ -1,0 +1,3 @@
+## 2025-05-18 - Hardware-Accelerated Scroll Progress Bar in Navbar
+**Learning:** React state updates inside scroll event listeners cause high-frequency re-renders of navigation components on every scroll frame. Framer Motion's `useScroll` and `useSpring` hooks bind scroll progress directly to CSS transforms (`scaleX`) on the compositor thread without triggering React re-renders.
+**Action:** When implementing scroll-linked progress bars or indicator animations, use `useScroll` (`scrollYProgress`) and `useSpring` with `<motion.div style={{ scaleX }}>` instead of React `useState` scroll handlers.

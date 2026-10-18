@@ -1,0 +1,3 @@
+## 2025-02-18 - Replacing Scroll Progress React State with Framer Motion `useScroll`
+**Learning:** Updating React component state on every scroll frame (e.g. for a progress bar) triggers continuous component re-renders (~60 FPS) and layout thrashing. Using Framer Motion's `useScroll` (`scrollYProgress`) and binding it to `<motion.div style={{ scaleX: scrollYProgress, transformOrigin: '0%' }} />` completely bypasses React's render loop and drives progress bar animations via Framer Motion's MotionValues.
+**Action:** Always prefer Framer Motion `useScroll` or `useTransform` over React `useState` when building scroll progress or scroll position indicators.
